@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_files("/home/diya/rover_urdf_ws/src/rover_description" FILES "/opt/ros/lyrical/share/ament_cmake_core/cmake/environment_hooks/environment/path.sh" "DESTINATION" "share/rover_description/environment")

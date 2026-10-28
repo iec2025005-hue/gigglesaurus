@@ -1,0 +1,2727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="hex_tele_rover">
+
+  <material name="anodized_black">
+    <color rgba="0.20 0.20 0.22 1.0"/>
+  </material>
+  <material name="anodized_blue">
+    <color rgba="0.10 0.35 0.85 1.0"/>
+  </material>
+  <material name="anodized_orange">
+    <color rgba="0.90 0.50 0.10 1.0"/>
+  </material>
+  <material name="anodized_red">
+    <color rgba="0.85 0.15 0.15 1.0"/>
+  </material>
+  <material name="anodized_silver">
+    <color rgba="0.75 0.75 0.78 1.0"/>
+  </material>
+  <material name="bright_alu">
+    <color rgba="0.75 0.75 0.80 1.0"/>
+  </material>
+  <material name="chrome_gold">
+    <color rgba="0.85 0.75 0.30 1.0"/>
+  </material>
+  <material name="dark_chassis">
+    <color rgba="0.30 0.32 0.35 1.0"/>
+  </material>
+  <material name="dark_steel">
+    <color rgba="0.25 0.25 0.30 1.0"/>
+  </material>
+  <material name="matte_black">
+    <color rgba="0.10 0.10 0.12 1.0"/>
+  </material>
+  <material name="nylon_white">
+    <color rgba="0.90 0.90 0.92 1.0"/>
+  </material>
+  <material name="polished_steel">
+    <color rgba="0.70 0.70 0.75 1.0"/>
+  </material>
+  <material name="rubber_black">
+    <color rgba="0.15 0.15 0.15 1.0"/>
+  </material>
+  <material name="steel_silver">
+    <color rgba="0.65 0.65 0.70 1.0"/>
+  </material>
+
+  <!-- ═════════ BASE FOOTPRINT & BASE LINK ═════════ -->
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.0004 0.0127 0.2422" rpy="0 0 0"/>
+      <mass value="10.2504"/>
+      <inertia ixx="3.949622e-01" ixy="-6.642575e-04" ixz="5.127376e-05"
+               iyy="1.761286e-01" iyz="4.711014e-03" izz="3.696233e-01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/fixed.stl"/>
+      </geometry>
+      <material name="dark_chassis"/>
+    </visual>
+    <collision>
+      <origin xyz="0.0004 0.0127 0.2422" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.4200 0.7700 0.3260"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- ═════════ LEG FL ═════════ -->
+  <link name="legFL_input">
+    <inertial>
+      <origin xyz="-0.0000 0.0001 0.0002" rpy="0 0 0"/>
+      <mass value="0.0085"/>
+      <inertia ixx="1.000000e-06" ixy="6.751120e-17" ixz="1.194119e-16"
+               iyy="1.000000e-06" iyz="1.793020e-09" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_input.stl"/>
+      </geometry>
+      <material name="anodized_black"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_input_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="legFL_input"/>
+    <origin xyz="-0.2380 0.3100 0.1290" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legFL_upper">
+    <inertial>
+      <origin xyz="0.0000 -0.0161 -0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="2.574921e-18" ixz="1.046062e-18"
+               iyy="2.303423e-05" iyz="-8.046627e-19" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_upper.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_upper_joint" type="revolute">
+    <parent link="legFL_input"/>
+    <child link="legFL_upper"/>
+    <origin xyz="0.0000 0.0150 -0.0440" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legFL_lower">
+    <inertial>
+      <origin xyz="-0.0000 -0.0161 -0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="-6.437302e-19" ixz="4.827976e-19"
+               iyy="2.303423e-05" iyz="0.000000e+00" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_lower.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_lower_joint" type="revolute">
+    <parent link="legFL_input"/>
+    <child link="legFL_lower"/>
+    <origin xyz="0.0000 0.0150 -0.0690" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legFL_shockbody">
+    <inertial>
+      <origin xyz="0.0000 -0.0258 -0.0123" rpy="0 0 0"/>
+      <mass value="0.0462"/>
+      <inertia ixx="1.071236e-05" ixy="1.596977e-14" ixz="6.947561e-15"
+               iyy="2.952120e-06" iyz="-3.702109e-06" izz="8.948986e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_shockbody.stl"/>
+      </geometry>
+      <material name="steel_silver"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_shockbody_joint" type="revolute">
+    <parent link="legFL_upper"/>
+    <child link="legFL_shockbody"/>
+    <origin xyz="0.0510 0.0100 0.0060" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.2"/>
+    <limit lower="-0.2" upper="0.2" effort="200.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legFL_shockrod">
+    <inertial>
+      <origin xyz="0.0000 0.0079 0.0038" rpy="0 0 0"/>
+      <mass value="0.0088"/>
+      <inertia ixx="1.082835e-06" ixy="-2.976406e-15" ixz="-4.074413e-15"
+               iyy="1.000000e-06" iyz="-3.875421e-07" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_shockrod.stl"/>
+      </geometry>
+      <material name="chrome_gold"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_shockrod_joint" type="prismatic">
+    <parent link="legFL_shockbody"/>
+    <child link="legFL_shockrod"/>
+    <origin xyz="-0.0000 -0.0650 -0.0310" rpy="0 0 0"/>
+    <axis xyz="0 -0.9027 -0.4303"/>
+    <dynamics damping="50.0" friction="2.0"/>
+    <limit lower="-0.02" upper="0.02" effort="1000.0" velocity="1.0"/>
+  </joint>
+
+  <link name="legFL_steer">
+    <inertial>
+      <origin xyz="0.0034 0.0174 -0.0137" rpy="0 0 0"/>
+      <mass value="0.1727"/>
+      <inertia ixx="1.950651e-04" ixy="-2.493425e-05" ixz="8.271365e-06"
+               iyy="1.551939e-04" iyz="6.189275e-05" izz="2.095866e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_steer.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_steer_joint" type="revolute">
+    <parent link="legFL_input"/>
+    <child link="legFL_steer"/>
+    <origin xyz="0.0000 -0.0400 -0.0060" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="1.0" friction="0.1"/>
+    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+  </joint>
+
+  <link name="legFL_carrier">
+    <inertial>
+      <origin xyz="-0.0168 0.0484 -0.0779" rpy="0 0 0"/>
+      <mass value="0.5717"/>
+      <inertia ixx="1.001731e-03" ixy="2.653805e-06" ixz="-5.874822e-05"
+               iyy="7.568398e-04" iyz="1.254067e-04" izz="1.415345e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_carrier.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_carrier_joint" type="fixed">
+    <parent link="legFL_steer"/>
+    <child link="legFL_carrier"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legFL_drive">
+    <inertial>
+      <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+      <mass value="0.0080"/>
+      <inertia ixx="1.000000e-06" ixy="-9.647102e-11" ixz="2.924353e-20"
+               iyy="1.000000e-06" iyz="-1.462176e-20" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_drive.stl"/>
+      </geometry>
+      <material name="dark_steel"/>
+    </visual>
+  </link>
+
+  <joint name="legFL_drive_joint" type="continuous">
+    <parent link="legFL_steer"/>
+    <child link="legFL_drive"/>
+    <origin xyz="-0.0540 0.0820 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+
+  <link name="legFL_wheel">
+    <inertial>
+      <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+      <mass value="0.1697"/>
+      <inertia ixx="1.327413e-04" ixy="0.000000e+00" ixz="-2.622604e-19"
+               iyy="8.488907e-05" iyz="-7.867813e-19" izz="8.488907e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFL_wheel.stl"/>
+      </geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5707963 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.080"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="legFL_wheel_joint" type="continuous">
+    <parent link="legFL_steer"/>
+    <child link="legFL_wheel"/>
+    <origin xyz="-0.0006 -0.0000 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
+  </joint>
+
+  <!-- ═════════ LEG FR ═════════ -->
+  <link name="legFR_input">
+    <inertial>
+      <origin xyz="-0.0000 0.0001 0.0002" rpy="0 0 0"/>
+      <mass value="0.0085"/>
+      <inertia ixx="1.000000e-06" ixy="6.743073e-17" ixz="1.192912e-16"
+               iyy="1.000000e-06" iyz="1.793020e-09" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_input.stl"/>
+      </geometry>
+      <material name="anodized_black"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_input_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="legFR_input"/>
+    <origin xyz="0.2380 0.3100 0.1290" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legFR_upper">
+    <inertial>
+      <origin xyz="-0.0000 -0.0161 -0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="-2.253056e-18" ixz="-8.851290e-19"
+               iyy="2.303423e-05" iyz="-3.218651e-19" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_upper.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_upper_joint" type="revolute">
+    <parent link="legFR_input"/>
+    <child link="legFR_upper"/>
+    <origin xyz="0.0000 0.0150 -0.0440" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legFR_lower">
+    <inertial>
+      <origin xyz="-0.0000 -0.0161 -0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="-2.253056e-18" ixz="-5.632639e-19"
+               iyy="2.303423e-05" iyz="0.000000e+00" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_lower.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_lower_joint" type="revolute">
+    <parent link="legFR_input"/>
+    <child link="legFR_lower"/>
+    <origin xyz="0.0000 0.0150 -0.0690" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legFR_shockbody">
+    <inertial>
+      <origin xyz="0.0000 -0.0258 -0.0123" rpy="0 0 0"/>
+      <mass value="0.0462"/>
+      <inertia ixx="1.071236e-05" ixy="1.596931e-14" ixz="6.947093e-15"
+               iyy="2.952120e-06" iyz="-3.702109e-06" izz="8.948986e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_shockbody.stl"/>
+      </geometry>
+      <material name="steel_silver"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_shockbody_joint" type="revolute">
+    <parent link="legFR_upper"/>
+    <child link="legFR_shockbody"/>
+    <origin xyz="0.0510 0.0100 0.0060" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.2"/>
+    <limit lower="-0.2" upper="0.2" effort="200.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legFR_shockrod">
+    <inertial>
+      <origin xyz="0.0000 0.0079 0.0038" rpy="0 0 0"/>
+      <mass value="0.0088"/>
+      <inertia ixx="1.082835e-06" ixy="-2.976289e-15" ixz="-4.074413e-15"
+               iyy="1.000000e-06" iyz="-3.875421e-07" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_shockrod.stl"/>
+      </geometry>
+      <material name="chrome_gold"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_shockrod_joint" type="prismatic">
+    <parent link="legFR_shockbody"/>
+    <child link="legFR_shockrod"/>
+    <origin xyz="-0.0000 -0.0650 -0.0310" rpy="0 0 0"/>
+    <axis xyz="0 -0.9027 -0.4303"/>
+    <dynamics damping="50.0" friction="2.0"/>
+    <limit lower="-0.02" upper="0.02" effort="1000.0" velocity="1.0"/>
+  </joint>
+
+  <link name="legFR_steer">
+    <inertial>
+      <origin xyz="0.0034 0.0174 -0.0137" rpy="0 0 0"/>
+      <mass value="0.1727"/>
+      <inertia ixx="1.950651e-04" ixy="-2.493425e-05" ixz="8.271365e-06"
+               iyy="1.551939e-04" iyz="6.189275e-05" izz="2.095866e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_steer.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_steer_joint" type="revolute">
+    <parent link="legFR_input"/>
+    <child link="legFR_steer"/>
+    <origin xyz="0.0000 -0.0400 -0.0060" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="1.0" friction="0.1"/>
+    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+  </joint>
+
+  <link name="legFR_carrier">
+    <inertial>
+      <origin xyz="-0.0168 0.0484 -0.0779" rpy="0 0 0"/>
+      <mass value="0.5717"/>
+      <inertia ixx="1.001731e-03" ixy="2.653805e-06" ixz="-5.874822e-05"
+               iyy="7.568398e-04" iyz="1.254067e-04" izz="1.415345e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_carrier.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_carrier_joint" type="fixed">
+    <parent link="legFR_steer"/>
+    <child link="legFR_carrier"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legFR_drive">
+    <inertial>
+      <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+      <mass value="0.0080"/>
+      <inertia ixx="1.000000e-06" ixy="-9.647102e-11" ixz="-1.462176e-20"
+               iyy="1.000000e-06" iyz="1.462176e-20" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_drive.stl"/>
+      </geometry>
+      <material name="dark_steel"/>
+    </visual>
+  </link>
+
+  <joint name="legFR_drive_joint" type="continuous">
+    <parent link="legFR_steer"/>
+    <child link="legFR_drive"/>
+    <origin xyz="-0.0540 0.0820 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+
+  <link name="legFR_wheel">
+    <inertial>
+      <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+      <mass value="0.1697"/>
+      <inertia ixx="1.327413e-04" ixy="-1.049042e-17" ixz="-1.311302e-18"
+               iyy="8.488907e-05" iyz="-7.867813e-19" izz="8.488907e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legFR_wheel.stl"/>
+      </geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5707963 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.080"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="legFR_wheel_joint" type="continuous">
+    <parent link="legFR_steer"/>
+    <child link="legFR_wheel"/>
+    <origin xyz="-0.0006 0.0000 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
+  </joint>
+
+  <!-- ═════════ LEG BL ═════════ -->
+  <link name="legBL_input">
+    <inertial>
+      <origin xyz="0.0000 -0.0001 0.0002" rpy="0 0 0"/>
+      <mass value="0.0085"/>
+      <inertia ixx="1.000000e-06" ixy="6.904006e-17" ixz="-1.194119e-16"
+               iyy="1.000000e-06" iyz="-1.793020e-09" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_input.stl"/>
+      </geometry>
+      <material name="anodized_black"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_input_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="legBL_input"/>
+    <origin xyz="-0.2380 -0.3100 0.1290" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legBL_upper">
+    <inertial>
+      <origin xyz="-0.0000 0.0161 -0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="9.655952e-19" ixz="3.218651e-19"
+               iyy="2.303423e-05" iyz="1.609325e-19" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_upper.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_upper_joint" type="revolute">
+    <parent link="legBL_input"/>
+    <child link="legBL_upper"/>
+    <origin xyz="0.0000 -0.0150 -0.0440" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legBL_lower">
+    <inertial>
+      <origin xyz="0.0000 0.0161 -0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="-1.609325e-18" ixz="4.827976e-19"
+               iyy="2.303423e-05" iyz="4.023314e-19" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_lower.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_lower_joint" type="revolute">
+    <parent link="legBL_input"/>
+    <child link="legBL_lower"/>
+    <origin xyz="0.0000 -0.0150 -0.0690" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legBL_shockbody">
+    <inertial>
+      <origin xyz="0.0000 0.0258 -0.0123" rpy="0 0 0"/>
+      <mass value="0.0462"/>
+      <inertia ixx="1.071236e-05" ixy="1.597211e-14" ixz="-6.948964e-15"
+               iyy="2.952120e-06" iyz="3.702109e-06" izz="8.948986e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_shockbody.stl"/>
+      </geometry>
+      <material name="steel_silver"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_shockbody_joint" type="revolute">
+    <parent link="legBL_upper"/>
+    <child link="legBL_shockbody"/>
+    <origin xyz="-0.0510 -0.0100 0.0060" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.2"/>
+    <limit lower="-0.2" upper="0.2" effort="200.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legBL_shockrod">
+    <inertial>
+      <origin xyz="0.0000 -0.0079 0.0038" rpy="0 0 0"/>
+      <mass value="0.0088"/>
+      <inertia ixx="1.082835e-06" ixy="-2.976289e-15" ixz="4.074413e-15"
+               iyy="1.000000e-06" iyz="3.875421e-07" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_shockrod.stl"/>
+      </geometry>
+      <material name="chrome_gold"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_shockrod_joint" type="prismatic">
+    <parent link="legBL_shockbody"/>
+    <child link="legBL_shockrod"/>
+    <origin xyz="0.0000 0.0650 -0.0310" rpy="0 0 0"/>
+    <axis xyz="0 0.9027 -0.4303"/>
+    <dynamics damping="50.0" friction="2.0"/>
+    <limit lower="-0.02" upper="0.02" effort="1000.0" velocity="1.0"/>
+  </joint>
+
+  <link name="legBL_steer">
+    <inertial>
+      <origin xyz="-0.0034 -0.0174 -0.0137" rpy="0 0 0"/>
+      <mass value="0.1727"/>
+      <inertia ixx="1.950651e-04" ixy="-2.493425e-05" ixz="-8.271365e-06"
+               iyy="1.551939e-04" iyz="-6.189275e-05" izz="2.095866e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_steer.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_steer_joint" type="revolute">
+    <parent link="legBL_input"/>
+    <child link="legBL_steer"/>
+    <origin xyz="0.0000 0.0400 -0.0060" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="1.0" friction="0.1"/>
+    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+  </joint>
+
+  <link name="legBL_carrier">
+    <inertial>
+      <origin xyz="0.0168 -0.0484 -0.0779" rpy="0 0 0"/>
+      <mass value="0.5717"/>
+      <inertia ixx="1.001731e-03" ixy="2.653805e-06" ixz="5.874822e-05"
+               iyy="7.568398e-04" iyz="-1.254067e-04" izz="1.415345e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_carrier.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_carrier_joint" type="fixed">
+    <parent link="legBL_steer"/>
+    <child link="legBL_carrier"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legBL_drive">
+    <inertial>
+      <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+      <mass value="0.0080"/>
+      <inertia ixx="1.000000e-06" ixy="-9.647102e-11" ixz="1.462176e-20"
+               iyy="1.000000e-06" iyz="1.462176e-20" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_drive.stl"/>
+      </geometry>
+      <material name="dark_steel"/>
+    </visual>
+  </link>
+
+  <joint name="legBL_drive_joint" type="continuous">
+    <parent link="legBL_steer"/>
+    <child link="legBL_drive"/>
+    <origin xyz="0.0540 -0.0820 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+
+  <link name="legBL_wheel">
+    <inertial>
+      <origin xyz="0.0000 0.0000 -0.0000" rpy="0 0 0"/>
+      <mass value="0.1697"/>
+      <inertia ixx="1.327413e-04" ixy="8.392334e-18" ixz="-2.622604e-19"
+               iyy="8.488907e-05" iyz="0.000000e+00" izz="8.488907e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBL_wheel.stl"/>
+      </geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5707963 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.080"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="legBL_wheel_joint" type="continuous">
+    <parent link="legBL_steer"/>
+    <child link="legBL_wheel"/>
+    <origin xyz="0.0006 0.0000 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
+  </joint>
+
+  <!-- ═════════ LEG BR ═════════ -->
+  <link name="legBR_input">
+    <inertial>
+      <origin xyz="0.0000 -0.0001 0.0002" rpy="0 0 0"/>
+      <mass value="0.0085"/>
+      <inertia ixx="1.000000e-06" ixy="6.574094e-17" ixz="-1.190096e-16"
+               iyy="1.000000e-06" iyz="-1.793020e-09" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_input.stl"/>
+      </geometry>
+      <material name="anodized_black"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_input_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="legBR_input"/>
+    <origin xyz="0.2380 -0.3100 0.1290" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legBR_upper">
+    <inertial>
+      <origin xyz="-0.0000 0.0161 0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="2.253056e-18" ixz="-8.851290e-19"
+               iyy="2.303423e-05" iyz="6.437302e-19" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_upper.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_upper_joint" type="revolute">
+    <parent link="legBR_input"/>
+    <child link="legBR_upper"/>
+    <origin xyz="0.0000 -0.0150 -0.0440" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legBR_lower">
+    <inertial>
+      <origin xyz="0.0000 0.0161 -0.0000" rpy="0 0 0"/>
+      <mass value="0.0282"/>
+      <inertia ixx="1.101170e-05" ixy="3.540516e-18" ixz="-2.413988e-19"
+               iyy="2.303423e-05" iyz="5.632639e-19" izz="3.369058e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_lower.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_lower_joint" type="revolute">
+    <parent link="legBR_input"/>
+    <child link="legBR_lower"/>
+    <origin xyz="0.0000 -0.0150 -0.0690" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.5"/>
+    <limit lower="-0.25" upper="0.25" effort="250.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legBR_shockbody">
+    <inertial>
+      <origin xyz="0.0000 0.0258 -0.0123" rpy="0 0 0"/>
+      <mass value="0.0462"/>
+      <inertia ixx="1.071236e-05" ixy="1.596743e-14" ixz="-6.946625e-15"
+               iyy="2.952120e-06" iyz="3.702109e-06" izz="8.948986e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_shockbody.stl"/>
+      </geometry>
+      <material name="steel_silver"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_shockbody_joint" type="revolute">
+    <parent link="legBR_upper"/>
+    <child link="legBR_shockbody"/>
+    <origin xyz="-0.0510 -0.0100 0.0060" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="5.0" friction="0.2"/>
+    <limit lower="-0.2" upper="0.2" effort="200.0" velocity="2.0"/>
+  </joint>
+
+  <link name="legBR_shockrod">
+    <inertial>
+      <origin xyz="0.0000 -0.0079 0.0038" rpy="0 0 0"/>
+      <mass value="0.0088"/>
+      <inertia ixx="1.082835e-06" ixy="-2.976289e-15" ixz="4.074384e-15"
+               iyy="1.000000e-06" iyz="3.875421e-07" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_shockrod.stl"/>
+      </geometry>
+      <material name="chrome_gold"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_shockrod_joint" type="prismatic">
+    <parent link="legBR_shockbody"/>
+    <child link="legBR_shockrod"/>
+    <origin xyz="0.0000 0.0650 -0.0310" rpy="0 0 0"/>
+    <axis xyz="0 0.9027 -0.4303"/>
+    <dynamics damping="50.0" friction="2.0"/>
+    <limit lower="-0.02" upper="0.02" effort="1000.0" velocity="1.0"/>
+  </joint>
+
+  <link name="legBR_steer">
+    <inertial>
+      <origin xyz="-0.0034 -0.0174 -0.0137" rpy="0 0 0"/>
+      <mass value="0.1727"/>
+      <inertia ixx="1.950651e-04" ixy="-2.493425e-05" ixz="-8.271365e-06"
+               iyy="1.551939e-04" iyz="-6.189275e-05" izz="2.095866e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_steer.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_steer_joint" type="revolute">
+    <parent link="legBR_input"/>
+    <child link="legBR_steer"/>
+    <origin xyz="0.0000 0.0400 -0.0060" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="1.0" friction="0.1"/>
+    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+  </joint>
+
+  <link name="legBR_carrier">
+    <inertial>
+      <origin xyz="0.0168 -0.0484 -0.0779" rpy="0 0 0"/>
+      <mass value="0.5717"/>
+      <inertia ixx="1.001731e-03" ixy="2.653805e-06" ixz="5.874822e-05"
+               iyy="7.568398e-04" iyz="-1.254067e-04" izz="1.415345e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_carrier.stl"/>
+      </geometry>
+      <material name="anodized_blue"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_carrier_joint" type="fixed">
+    <parent link="legBR_steer"/>
+    <child link="legBR_carrier"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="legBR_drive">
+    <inertial>
+      <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+      <mass value="0.0080"/>
+      <inertia ixx="1.000000e-06" ixy="-9.647102e-11" ixz="-1.462176e-20"
+               iyy="1.000000e-06" iyz="7.310882e-20" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_drive.stl"/>
+      </geometry>
+      <material name="dark_steel"/>
+    </visual>
+  </link>
+
+  <joint name="legBR_drive_joint" type="continuous">
+    <parent link="legBR_steer"/>
+    <child link="legBR_drive"/>
+    <origin xyz="0.0540 -0.0820 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.02" friction="0.01"/>
+  </joint>
+
+  <link name="legBR_wheel">
+    <inertial>
+      <origin xyz="0.0000 0.0000 -0.0000" rpy="0 0 0"/>
+      <mass value="0.1697"/>
+      <inertia ixx="1.327413e-04" ixy="0.000000e+00" ixz="-5.245209e-19"
+               iyy="8.488907e-05" iyz="1.573563e-18" izz="8.488907e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/legBR_wheel.stl"/>
+      </geometry>
+      <material name="rubber_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5707963 0"/>
+      <geometry>
+        <cylinder radius="0.040" length="0.080"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="legBR_wheel_joint" type="continuous">
+    <parent link="legBR_steer"/>
+    <child link="legBR_wheel"/>
+    <origin xyz="0.0006 -0.0000 -0.0830" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
+  </joint>
+
+  <!-- ═════════ TELESCOPIC CHASSIS ═════════ -->
+  <link name="telL1">
+    <inertial>
+      <origin xyz="0.0000 0.0026 0.0002" rpy="0 0 0"/>
+      <mass value="0.5561"/>
+      <inertia ixx="2.089278e-03" ixy="-1.490135e-05" ixz="2.073291e-06"
+               iyy="1.806280e-03" iyz="8.102403e-06" izz="2.737515e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telL1.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telL1_joint" type="prismatic">
+    <parent link="base_link"/>
+    <child link="telL1"/>
+    <origin xyz="-0.1135 0.0000 0.2300" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telL2">
+    <inertial>
+      <origin xyz="0.0000 -0.0009 0.0632" rpy="0 0 0"/>
+      <mass value="1.2000"/>
+      <inertia ixx="4.123278e-02" ixy="2.266694e-05" ixz="7.887964e-04"
+               iyy="7.024756e-03" iyz="-7.560731e-05" izz="4.053384e-02"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telL2.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telL2_joint" type="prismatic">
+    <parent link="telL1"/>
+    <child link="telL2"/>
+    <origin xyz="-0.0442 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telL3">
+    <inertial>
+      <origin xyz="0.0000 0.0022 0.0003" rpy="0 0 0"/>
+      <mass value="0.3650"/>
+      <inertia ixx="5.835760e-04" ixy="-9.085601e-06" ixz="1.923323e-06"
+               iyy="1.052372e-03" iyz="4.788600e-06" izz="1.169791e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telL3.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telL3_joint" type="prismatic">
+    <parent link="telL2"/>
+    <child link="telL3"/>
+    <origin xyz="-0.0236 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telL4">
+    <inertial>
+      <origin xyz="0.0000 0.0045 -0.0148" rpy="0 0 0"/>
+      <mass value="3.7231"/>
+      <inertia ixx="2.442887e-01" ixy="-3.815089e-04" ixz="-1.890798e-03"
+               iyy="3.712080e-02" iyz="-2.428779e-03" izz="2.229200e-01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telL4.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telL4_joint" type="prismatic">
+    <parent link="telL3"/>
+    <child link="telL4"/>
+    <origin xyz="-0.0484 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telL5">
+    <inertial>
+      <origin xyz="0.0000 0.0007 0.0566" rpy="0 0 0"/>
+      <mass value="0.4341"/>
+      <inertia ixx="1.677265e-03" ixy="-9.864736e-06" ixz="9.792395e-05"
+               iyy="2.623093e-03" iyz="-1.094985e-05" izz="1.026288e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telL5.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telL5_joint" type="prismatic">
+    <parent link="telL4"/>
+    <child link="telL5"/>
+    <origin xyz="-0.0387 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telL6">
+    <inertial>
+      <origin xyz="0.0000 0.0006 0.1551" rpy="0 0 0"/>
+      <mass value="0.0949"/>
+      <inertia ixx="2.046387e-05" ixy="-1.806457e-06" ixz="1.484700e-05"
+               iyy="1.299935e-04" iyz="5.207738e-07" izz="1.287912e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telL6.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telL6_joint" type="prismatic">
+    <parent link="telL5"/>
+    <child link="telL6"/>
+    <origin xyz="-0.0162 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telR1">
+    <inertial>
+      <origin xyz="0.0000 0.0026 0.0002" rpy="0 0 0"/>
+      <mass value="0.5561"/>
+      <inertia ixx="2.089278e-03" ixy="1.490139e-05" ixz="-2.073287e-06"
+               iyy="1.806280e-03" iyz="8.102410e-06" izz="2.737514e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telR1.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telR1_joint" type="prismatic">
+    <parent link="base_link"/>
+    <child link="telR1"/>
+    <origin xyz="0.1135 0.0000 0.2300" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telR2">
+    <inertial>
+      <origin xyz="0.0000 -0.0009 0.0632" rpy="0 0 0"/>
+      <mass value="1.2000"/>
+      <inertia ixx="4.123278e-02" ixy="-2.266694e-05" ixz="-7.887964e-04"
+               iyy="7.024756e-03" iyz="-7.560731e-05" izz="4.053384e-02"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telR2.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telR2_joint" type="prismatic">
+    <parent link="telR1"/>
+    <child link="telR2"/>
+    <origin xyz="0.0442 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telR3">
+    <inertial>
+      <origin xyz="0.0000 0.0022 0.0003" rpy="0 0 0"/>
+      <mass value="0.3650"/>
+      <inertia ixx="5.835760e-04" ixy="9.085620e-06" ixz="-1.923319e-06"
+               iyy="1.052372e-03" iyz="4.788603e-06" izz="1.169791e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telR3.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telR3_joint" type="prismatic">
+    <parent link="telR2"/>
+    <child link="telR3"/>
+    <origin xyz="0.0236 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telR4">
+    <inertial>
+      <origin xyz="0.0000 0.0045 -0.0143" rpy="0 0 0"/>
+      <mass value="3.7255"/>
+      <inertia ixx="2.447818e-01" ixy="2.558483e-04" ixz="2.038043e-03"
+               iyy="3.751470e-02" iyz="-2.419100e-03" izz="2.230227e-01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telR4.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telR4_joint" type="prismatic">
+    <parent link="telR3"/>
+    <child link="telR4"/>
+    <origin xyz="0.0484 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telR5">
+    <inertial>
+      <origin xyz="0.0000 0.0007 0.0566" rpy="0 0 0"/>
+      <mass value="0.4341"/>
+      <inertia ixx="1.677265e-03" ixy="9.864736e-06" ixz="-9.792395e-05"
+               iyy="2.623093e-03" iyz="-1.094985e-05" izz="1.026288e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telR5.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telR5_joint" type="prismatic">
+    <parent link="telR4"/>
+    <child link="telR5"/>
+    <origin xyz="0.0387 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <link name="telR6">
+    <inertial>
+      <origin xyz="0.0000 0.0006 0.1551" rpy="0 0 0"/>
+      <mass value="0.0949"/>
+      <inertia ixx="2.046387e-05" ixy="1.806457e-06" ixz="-1.484700e-05"
+               iyy="1.299935e-04" iyz="5.207738e-07" izz="1.287912e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/telR6.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="telR6_joint" type="prismatic">
+    <parent link="telR5"/>
+    <child link="telR6"/>
+    <origin xyz="0.0162 0.0000 0.0000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0" friction="2.0"/>
+    <limit lower="0.0" upper="0.05" effort="150.0" velocity="0.2"/>
+  </joint>
+
+  <!-- ═════════ PAN/TILT CAMERA ═════════ -->
+  <link name="VISION_camera_yoke">
+    <inertial>
+      <origin xyz="0.0000 0.0000 0.0001" rpy="0 0 0"/>
+      <mass value="0.0421"/>
+      <inertia ixx="1.009517e-05" ixy="1.396984e-21" ixz="-3.046783e-20"
+               iyy="4.128776e-05" iyz="1.072884e-18" izz="3.769618e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/VISION_camera_yoke.stl"/>
+      </geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+
+  <joint name="camera_pan_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="VISION_camera_yoke"/>
+    <origin xyz="0.0000 0.1600 0.4540" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1" friction="0.02"/>
+    <limit lower="-3.1415" upper="3.1415" effort="10.0" velocity="3.0"/>
+  </joint>
+
+  <link name="VISION_tilt_cradle">
+    <inertial>
+      <origin xyz="-0.0000 0.0000 0.0000" rpy="0 0 0"/>
+      <mass value="0.0162"/>
+      <inertia ixx="1.729104e-06" ixy="2.357410e-21" ixz="4.092726e-22"
+               iyy="5.052032e-06" iyz="0.000000e+00" izz="6.731508e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/VISION_tilt_cradle.stl"/>
+      </geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+
+  <joint name="camera_tilt_joint" type="revolute">
+    <parent link="VISION_camera_yoke"/>
+    <child link="VISION_tilt_cradle"/>
+    <origin xyz="0.0000 0.0000 0.0280" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.1" friction="0.02"/>
+    <limit lower="-1.5707" upper="0.7854" effort="10.0" velocity="3.0"/>
+  </joint>
+
+  <link name="camera_optical_frame"/>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="VISION_tilt_cradle"/>
+    <child link="camera_optical_frame"/>
+    <origin xyz="0 0.04 0" rpy="-1.5707963 0 -1.5707963"/>
+  </joint>
+
+  <!-- ═════════ IMU SENSOR ═════════ -->
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ═════════ GUIDE RAILS, PULLEYS & REMAINING COMPONENTS ═════════ -->
+  <link name="armBL">
+    <inertial>
+      <origin xyz="-0.2337 -0.1248 0.3020" rpy="0 0 0"/>
+      <mass value="0.0566"/>
+      <inertia ixx="3.270361e-04" ixy="-9.631910e-06" ixz="0.000000e+00"
+               iyy="2.244538e-06" iyz="-6.437302e-19" izz="3.291296e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/armBL.stl"/>
+      </geometry>
+      <material name="anodized_silver"/>
+    </visual>
+  </link>
+
+  <joint name="armBL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="armBL"/>
+    <origin xyz="0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="armBR">
+    <inertial>
+      <origin xyz="0.2337 -0.1248 0.3020" rpy="0 0 0"/>
+      <mass value="0.0566"/>
+      <inertia ixx="3.270361e-04" ixy="9.631910e-06" ixz="3.218651e-18"
+               iyy="2.244538e-06" iyz="-9.655952e-19" izz="3.291296e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/armBR.stl"/>
+      </geometry>
+      <material name="anodized_silver"/>
+    </visual>
+  </link>
+
+  <joint name="armBR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="armBR"/>
+    <origin xyz="-0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="armFL">
+    <inertial>
+      <origin xyz="-0.2337 0.1248 0.2940" rpy="0 0 0"/>
+      <mass value="0.0566"/>
+      <inertia ixx="3.270361e-04" ixy="9.631910e-06" ixz="0.000000e+00"
+               iyy="2.244538e-06" iyz="0.000000e+00" izz="3.291296e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/armFL.stl"/>
+      </geometry>
+      <material name="anodized_silver"/>
+    </visual>
+  </link>
+
+  <joint name="armFL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="armFL"/>
+    <origin xyz="0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="armFR">
+    <inertial>
+      <origin xyz="0.2337 0.1248 0.2940" rpy="0 0 0"/>
+      <mass value="0.0566"/>
+      <inertia ixx="3.270361e-04" ixy="-9.631910e-06" ixz="-1.931190e-18"
+               iyy="2.244538e-06" iyz="-9.655952e-19" izz="3.291296e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/armFR.stl"/>
+      </geometry>
+      <material name="anodized_silver"/>
+    </visual>
+  </link>
+
+  <joint name="armFR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="armFR"/>
+    <origin xyz="-0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideL_-240_1">
+    <inertial>
+      <origin xyz="-0.1317 -0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.3174"/>
+      <inertia ixx="1.091729e-04" ixy="-3.743172e-18" ixz="2.644252e-06"
+               iyy="7.367733e-04" iyz="-3.743172e-18" izz="7.380570e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideL_-240_1.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideL_-240_1_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="guideL_-240_1"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideL_-240_2">
+    <inertial>
+      <origin xyz="-0.1518 -0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.2572"/>
+      <inertia ixx="5.853373e-05" ixy="-3.743172e-18" ixz="2.145093e-06"
+               iyy="5.830215e-04" iyz="-1.871586e-18" izz="5.838699e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideL_-240_2.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideL_-240_2_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="guideL_-240_2"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideL_-240_3">
+    <inertial>
+      <origin xyz="-0.2131 -0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.1969"/>
+      <inertia ixx="2.664333e-05" ixy="-1.871586e-18" ixz="1.645945e-06"
+               iyy="4.385791e-04" iyz="0.000000e+00" izz="4.390786e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideL_-240_3.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideL_-240_3_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="guideL_-240_3"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideL_240_1">
+    <inertial>
+      <origin xyz="-0.1317 0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.3174"/>
+      <inertia ixx="1.091729e-04" ixy="-5.614758e-18" ixz="2.644252e-06"
+               iyy="7.367733e-04" iyz="1.122952e-17" izz="7.380570e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideL_240_1.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideL_240_1_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="guideL_240_1"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideL_240_2">
+    <inertial>
+      <origin xyz="-0.1518 0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.2572"/>
+      <inertia ixx="5.853373e-05" ixy="5.614758e-18" ixz="2.145093e-06"
+               iyy="5.830215e-04" iyz="-1.871586e-18" izz="5.838699e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideL_240_2.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideL_240_2_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="guideL_240_2"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideL_240_3">
+    <inertial>
+      <origin xyz="-0.2131 0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.1969"/>
+      <inertia ixx="2.664333e-05" ixy="9.357929e-18" ixz="1.645945e-06"
+               iyy="4.385791e-04" iyz="1.871586e-18" izz="4.390786e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideL_240_3.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideL_240_3_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="guideL_240_3"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideR_-240_1">
+    <inertial>
+      <origin xyz="0.1317 -0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.3174"/>
+      <inertia ixx="1.091729e-04" ixy="1.871586e-18" ixz="-2.644252e-06"
+               iyy="7.367733e-04" iyz="-3.743172e-18" izz="7.380570e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideR_-240_1.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideR_-240_1_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="guideR_-240_1"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideR_-240_2">
+    <inertial>
+      <origin xyz="0.1929 -0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.2572"/>
+      <inertia ixx="5.853373e-05" ixy="1.310110e-17" ixz="-2.145093e-06"
+               iyy="5.830215e-04" iyz="0.000000e+00" izz="5.838699e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideR_-240_2.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideR_-240_2_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="guideR_-240_2"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideR_-240_3">
+    <inertial>
+      <origin xyz="0.2131 -0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.1969"/>
+      <inertia ixx="2.664333e-05" ixy="3.743172e-18" ixz="-1.645945e-06"
+               iyy="4.385791e-04" iyz="5.614758e-18" izz="4.390786e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideR_-240_3.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideR_-240_3_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="guideR_-240_3"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideR_240_1">
+    <inertial>
+      <origin xyz="0.1317 0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.3174"/>
+      <inertia ixx="1.091729e-04" ixy="5.614758e-18" ixz="-2.644252e-06"
+               iyy="7.367733e-04" iyz="1.497269e-17" izz="7.380570e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideR_240_1.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideR_240_1_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="guideR_240_1"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideR_240_2">
+    <inertial>
+      <origin xyz="0.1929 0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.2572"/>
+      <inertia ixx="5.853373e-05" ixy="-1.310110e-17" ixz="-2.145093e-06"
+               iyy="5.830215e-04" iyz="3.743172e-18" izz="5.838699e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideR_240_2.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideR_240_2_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="guideR_240_2"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="guideR_240_3">
+    <inertial>
+      <origin xyz="0.2131 0.2400 0.2298" rpy="0 0 0"/>
+      <mass value="0.1969"/>
+      <inertia ixx="2.664333e-05" ixy="-9.357929e-18" ixz="-1.645945e-06"
+               iyy="4.385791e-04" iyz="-5.614758e-18" izz="4.390786e-04"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/guideR_240_3.stl"/>
+      </geometry>
+      <material name="polished_steel"/>
+    </visual>
+  </link>
+
+  <joint name="guideR_240_3_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="guideR_240_3"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hex_follower_BL">
+    <inertial>
+      <origin xyz="-0.1090 -0.0540 0.3680" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-5.029142e-21" ixz="4.400499e-21"
+               iyy="1.000000e-06" iyz="-2.514571e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hex_follower_BL.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="hex_follower_BL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="hex_follower_BL"/>
+    <origin xyz="-0.0083 -0.3250 -0.1700" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hex_follower_BR">
+    <inertial>
+      <origin xyz="0.1090 -0.0540 0.3680" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="1.257285e-21" ixz="1.885928e-21"
+               iyy="1.000000e-06" iyz="-3.143214e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hex_follower_BR.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="hex_follower_BR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="hex_follower_BR"/>
+    <origin xyz="0.0083 -0.3250 -0.1700" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hex_follower_FL">
+    <inertial>
+      <origin xyz="-0.1090 0.0540 0.3560" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-6.286427e-22" ixz="-5.657785e-21"
+               iyy="1.000000e-06" iyz="1.885928e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hex_follower_FL.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="hex_follower_FL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="hex_follower_FL"/>
+    <origin xyz="-0.0083 0.3250 -0.1700" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hex_follower_FR">
+    <inertial>
+      <origin xyz="0.1090 0.0540 0.3560" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-3.771856e-21" ixz="6.286427e-22"
+               iyy="1.000000e-06" iyz="-1.885928e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hex_follower_FR.stl"/>
+      </geometry>
+      <material name="bright_alu"/>
+    </visual>
+  </link>
+
+  <joint name="hex_follower_FR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="hex_follower_FR"/>
+    <origin xyz="0.0083 0.3250 -0.1700" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexarmBL">
+    <inertial>
+      <origin xyz="-0.3064 -0.1934 0.4297" rpy="0 0 0"/>
+      <mass value="0.1928"/>
+      <inertia ixx="2.793580e-03" ixy="-1.099445e-04" ixz="-8.507555e-06"
+               iyy="3.850584e-04" iyz="-6.279132e-08" izz="3.177479e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexarmBL.stl"/>
+      </geometry>
+      <material name="anodized_red"/>
+    </visual>
+  </link>
+
+  <joint name="hexarmBL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="hexarmBL"/>
+    <origin xyz="0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexarmBR">
+    <inertial>
+      <origin xyz="0.3064 -0.1934 0.4297" rpy="0 0 0"/>
+      <mass value="0.1928"/>
+      <inertia ixx="2.793580e-03" ixy="1.099445e-04" ixz="8.507555e-06"
+               iyy="3.850584e-04" iyz="-6.279132e-08" izz="3.177479e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexarmBR.stl"/>
+      </geometry>
+      <material name="anodized_red"/>
+    </visual>
+  </link>
+
+  <joint name="hexarmBR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="hexarmBR"/>
+    <origin xyz="-0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexarmFL">
+    <inertial>
+      <origin xyz="-0.3064 0.1934 0.4177" rpy="0 0 0"/>
+      <mass value="0.1928"/>
+      <inertia ixx="2.793580e-03" ixy="1.099445e-04" ixz="-8.507555e-06"
+               iyy="3.850584e-04" iyz="6.279132e-08" izz="3.177479e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexarmFL.stl"/>
+      </geometry>
+      <material name="anodized_red"/>
+    </visual>
+  </link>
+
+  <joint name="hexarmFL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="hexarmFL"/>
+    <origin xyz="0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexarmFR">
+    <inertial>
+      <origin xyz="0.3064 0.1934 0.4177" rpy="0 0 0"/>
+      <mass value="0.1928"/>
+      <inertia ixx="2.793580e-03" ixy="-1.099445e-04" ixz="8.507555e-06"
+               iyy="3.850584e-04" iyz="6.279132e-08" izz="3.177479e-03"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexarmFR.stl"/>
+      </geometry>
+      <material name="anodized_red"/>
+    </visual>
+  </link>
+
+  <joint name="hexarmFR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="hexarmFR"/>
+    <origin xyz="-0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexrotL240">
+    <inertial>
+      <origin xyz="-0.2000 0.0260 0.3820" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-2.607703e-21" ixz="0.000000e+00"
+               iyy="1.000000e-06" iyz="0.000000e+00" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexrotL240.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="hexrotL240_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="hexrotL240"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexrotL350">
+    <inertial>
+      <origin xyz="-0.3100 0.0260 0.3820" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="2.607703e-21" ixz="-2.086163e-20"
+               iyy="1.000000e-06" iyz="-2.607703e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexrotL350.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="hexrotL350_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="hexrotL350"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexrotR240">
+    <inertial>
+      <origin xyz="0.2000 0.0260 0.3820" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="2.607703e-21" ixz="1.043081e-20"
+               iyy="1.000000e-06" iyz="-1.955777e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexrotR240.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="hexrotR240_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="hexrotR240"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="hexrotR350">
+    <inertial>
+      <origin xyz="0.3100 0.0260 0.3820" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-2.607703e-21" ixz="4.172325e-20"
+               iyy="1.000000e-06" iyz="2.607703e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/hexrotR350.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="hexrotR350_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="hexrotR350"/>
+    <origin xyz="0.0000 0.0000 0.0000" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL0_145">
+    <inertial>
+      <origin xyz="-0.1450 0.0920 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="1.043081e-20" ixz="5.215406e-21"
+               iyy="1.000000e-06" iyz="-3.911555e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL0_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL0_145_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL0_145"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL0_15">
+    <inertial>
+      <origin xyz="-0.0150 0.1210 0.2300" rpy="0 0 0"/>
+      <mass value="0.0162"/>
+      <inertia ixx="4.333021e-06" ixy="-9.923390e-10" ixz="-1.569130e-11"
+               iyy="1.041812e-06" iyz="-1.280806e-09" izz="4.332979e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL0_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL0_15_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL0_15"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL1_145">
+    <inertial>
+      <origin xyz="-0.1790 -0.0750 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="1.564622e-20" ixz="0.000000e+00"
+               iyy="1.000000e-06" iyz="7.823110e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL1_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL1_145_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL1_145"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL1_15">
+    <inertial>
+      <origin xyz="-0.0490 -0.0750 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="5.215406e-21" ixz="1.303852e-21"
+               iyy="1.000000e-06" iyz="6.519258e-22" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL1_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL1_15_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL1_15"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL2_145">
+    <inertial>
+      <origin xyz="-0.2130 0.0600 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="1.043081e-20" ixz="-2.086163e-20"
+               iyy="1.000000e-06" iyz="2.607703e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL2_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL2_145_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="rotL2_145"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL2_15">
+    <inertial>
+      <origin xyz="-0.0830 0.0600 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="1.564622e-20" ixz="0.000000e+00"
+               iyy="1.000000e-06" iyz="3.259629e-22" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL2_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL2_15_joint" type="fixed">
+    <parent link="telL2"/>
+    <child link="rotL2_15"/>
+    <origin xyz="0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL3_145">
+    <inertial>
+      <origin xyz="-0.2470 -0.0450 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-5.215406e-21" ixz="-1.043081e-20"
+               iyy="1.000000e-06" iyz="5.215406e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL3_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL3_145_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL3_145"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL3_15">
+    <inertial>
+      <origin xyz="-0.1170 -0.0450 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="0.000000e+00" ixz="5.215406e-21"
+               iyy="1.000000e-06" iyz="0.000000e+00" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL3_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL3_15_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL3_15"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL4_145">
+    <inertial>
+      <origin xyz="-0.2810 0.0300 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="0.000000e+00" ixz="0.000000e+00"
+               iyy="1.000000e-06" iyz="-2.607703e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL4_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL4_145_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL4_145"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotL4_15">
+    <inertial>
+      <origin xyz="-0.1510 0.0300 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="2.607703e-21" ixz="-1.043081e-20"
+               iyy="1.000000e-06" iyz="0.000000e+00" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotL4_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotL4_15_joint" type="fixed">
+    <parent link="telL1"/>
+    <child link="rotL4_15"/>
+    <origin xyz="0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR0_145">
+    <inertial>
+      <origin xyz="0.1450 0.0920 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="5.215406e-21" ixz="0.000000e+00"
+               iyy="1.000000e-06" iyz="-3.911555e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR0_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR0_145_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR0_145"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR0_15">
+    <inertial>
+      <origin xyz="0.0150 0.1352 0.2300" rpy="0 0 0"/>
+      <mass value="0.0261"/>
+      <inertia ixx="1.365403e-05" ixy="-7.889490e-10" ixz="5.788282e-10"
+               iyy="1.563005e-06" iyz="6.425545e-09" izz="1.365243e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR0_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR0_15_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR0_15"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR1_145">
+    <inertial>
+      <origin xyz="0.1790 -0.0750 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="1.043081e-20" ixz="1.043081e-20"
+               iyy="1.000000e-06" iyz="0.000000e+00" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR1_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR1_145_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR1_145"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR1_15">
+    <inertial>
+      <origin xyz="0.0490 -0.0750 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="0.000000e+00" ixz="5.215406e-21"
+               iyy="1.000000e-06" iyz="-1.303852e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR1_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR1_15_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR1_15"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR2_145">
+    <inertial>
+      <origin xyz="0.2130 0.0600 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="5.215406e-21" ixz="-1.043081e-20"
+               iyy="1.000000e-06" iyz="0.000000e+00" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR2_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR2_145_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="rotR2_145"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR2_15">
+    <inertial>
+      <origin xyz="0.0830 0.0600 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-5.215406e-21" ixz="-1.303852e-21"
+               iyy="1.000000e-06" iyz="3.259629e-22" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR2_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR2_15_joint" type="fixed">
+    <parent link="telR2"/>
+    <child link="rotR2_15"/>
+    <origin xyz="-0.1577 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR3_145">
+    <inertial>
+      <origin xyz="0.2470 -0.0450 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-2.607703e-21" ixz="-1.043081e-20"
+               iyy="1.000000e-06" iyz="2.607703e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR3_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR3_145_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR3_145"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR3_15">
+    <inertial>
+      <origin xyz="0.1170 -0.0450 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="-2.607703e-21" ixz="0.000000e+00"
+               iyy="1.000000e-06" iyz="1.303852e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR3_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR3_15_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR3_15"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR4_145">
+    <inertial>
+      <origin xyz="0.2810 0.0300 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="0.000000e+00" ixz="-2.086163e-20"
+               iyy="1.000000e-06" iyz="0.000000e+00" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR4_145.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR4_145_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR4_145"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="rotR4_15">
+    <inertial>
+      <origin xyz="0.1510 0.0300 0.2300" rpy="0 0 0"/>
+      <mass value="0.0050"/>
+      <inertia ixx="1.000000e-06" ixy="2.607703e-21" ixz="-2.086163e-20"
+               iyy="1.000000e-06" iyz="-1.303852e-21" izz="1.000000e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/rotR4_15.stl"/>
+      </geometry>
+      <material name="nylon_white"/>
+    </visual>
+  </link>
+
+  <joint name="rotR4_15_joint" type="fixed">
+    <parent link="telR1"/>
+    <child link="rotR4_15"/>
+    <origin xyz="-0.1135 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="tipBL">
+    <inertial>
+      <origin xyz="-0.2374 -0.2511 0.3020" rpy="0 0 0"/>
+      <mass value="0.0492"/>
+      <inertia ixx="1.585231e-05" ixy="-2.689595e-07" ixz="-1.045189e-09"
+               iyy="6.782897e-06" iyz="-3.527514e-08" izz="2.155470e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/tipBL.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="tipBL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="tipBL"/>
+    <origin xyz="0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="tipBR">
+    <inertial>
+      <origin xyz="0.2374 -0.2511 0.3020" rpy="0 0 0"/>
+      <mass value="0.0492"/>
+      <inertia ixx="1.585231e-05" ixy="2.689595e-07" ixz="1.045189e-09"
+               iyy="6.782897e-06" iyz="-3.527514e-08" izz="2.155470e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/tipBR.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="tipBR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="tipBR"/>
+    <origin xyz="-0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="tipFL">
+    <inertial>
+      <origin xyz="-0.2374 0.2511 0.2940" rpy="0 0 0"/>
+      <mass value="0.0492"/>
+      <inertia ixx="1.585231e-05" ixy="2.689595e-07" ixz="-1.045189e-09"
+               iyy="6.782897e-06" iyz="3.527514e-08" izz="2.155470e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/tipFL.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="tipFL_joint" type="fixed">
+    <parent link="telL4"/>
+    <child link="tipFL"/>
+    <origin xyz="0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <link name="tipFR">
+    <inertial>
+      <origin xyz="0.2374 0.2511 0.2940" rpy="0 0 0"/>
+      <mass value="0.0492"/>
+      <inertia ixx="1.585231e-05" ixy="-2.689595e-07" ixz="1.045189e-09"
+               iyy="6.782897e-06" iyz="3.527514e-08" izz="2.155470e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rover_description/meshes/tipFR.stl"/>
+      </geometry>
+      <material name="anodized_orange"/>
+    </visual>
+  </link>
+
+  <joint name="tipFR_joint" type="fixed">
+    <parent link="telR4"/>
+    <child link="tipFR"/>
+    <origin xyz="-0.2297 0.0000 -0.2300" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ═════════ GAZEBO SIMULATION CONFIGURATION ═════════ -->
+  <gazebo reference="legFL_wheel">
+    <mu1>1.2</mu1>
+    <mu2>1.2</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="legFR_wheel">
+    <mu1>1.2</mu1>
+    <mu2>1.2</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="legBL_wheel">
+    <mu1>1.2</mu1>
+    <mu2>1.2</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="legBR_wheel">
+    <mu1>1.2</mu1>
+    <mu2>1.2</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="camera_optical_frame">
+    <sensor name="rover_camera" type="camera">
+      <camera>
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>1280</width>
+          <height>720</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>100.0</far>
+        </clip>
+      </camera>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>true</visualize>
+      <topic>/camera/image_raw</topic>
+      <gz_frame_id>camera_optical_frame</gz_frame_id>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="imu_link">
+    <sensor name="rover_imu" type="imu">
+      <always_on>1</always_on>
+      <update_rate>100</update_rate>
+      <visualize>false</visualize>
+      <topic>/imu/data</topic>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <topic>/joint_states</topic>
+      <update_rate>50</update_rate>
+    </plugin>
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      <left_joint>legFL_wheel_joint</left_joint>
+      <left_joint>legBL_wheel_joint</left_joint>
+      <right_joint>legFR_wheel_joint</right_joint>
+      <right_joint>legBR_wheel_joint</right_joint>
+      <wheel_separation>0.476</wheel_separation>
+      <wheel_radius>0.040</wheel_radius>
+      <max_wheel_torque>100.0</max_wheel_torque>
+      <max_wheel_acceleration>25.0</max_wheel_acceleration>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <cmd_vel_timeout>0.5</cmd_vel_timeout>
+      <topic>/cmd_vel</topic>
+      <odom_topic>/odom</odom_topic>
+      <tf_topic>/tf</tf_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_footprint</child_frame_id>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>legFL_steer_joint</joint_name>
+      <topic>/rover/steer_fl/cmd_pos</topic>
+      <p_gain>500.0</p_gain>
+      <i_gain>10.0</i_gain>
+      <d_gain>5.0</d_gain>
+      <i_max>50.0</i_max>
+      <i_min>-50.0</i_min>
+      <cmd_max>100.0</cmd_max>
+      <cmd_min>-100.0</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>legFR_steer_joint</joint_name>
+      <topic>/rover/steer_fr/cmd_pos</topic>
+      <p_gain>500.0</p_gain>
+      <i_gain>10.0</i_gain>
+      <d_gain>5.0</d_gain>
+      <i_max>50.0</i_max>
+      <i_min>-50.0</i_min>
+      <cmd_max>100.0</cmd_max>
+      <cmd_min>-100.0</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>legBL_steer_joint</joint_name>
+      <topic>/rover/steer_bl/cmd_pos</topic>
+      <p_gain>500.0</p_gain>
+      <i_gain>10.0</i_gain>
+      <d_gain>5.0</d_gain>
+      <i_max>50.0</i_max>
+      <i_min>-50.0</i_min>
+      <cmd_max>100.0</cmd_max>
+      <cmd_min>-100.0</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>legBR_steer_joint</joint_name>
+      <topic>/rover/steer_br/cmd_pos</topic>
+      <p_gain>500.0</p_gain>
+      <i_gain>10.0</i_gain>
+      <d_gain>5.0</d_gain>
+      <i_max>50.0</i_max>
+      <i_min>-50.0</i_min>
+      <cmd_max>100.0</cmd_max>
+      <cmd_min>-100.0</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legFL_drive_joint</joint_name>
+      <topic>/rover/motor_fl/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legFR_drive_joint</joint_name>
+      <topic>/rover/motor_fr/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legBL_drive_joint</joint_name>
+      <topic>/rover/motor_bl/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legBR_drive_joint</joint_name>
+      <topic>/rover/motor_br/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telL1_joint</joint_name>
+      <topic>/rover/tele_l1/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telL2_joint</joint_name>
+      <topic>/rover/tele_l2/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telL3_joint</joint_name>
+      <topic>/rover/tele_l3/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telL4_joint</joint_name>
+      <topic>/rover/tele_l4/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telL5_joint</joint_name>
+      <topic>/rover/tele_l5/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telL6_joint</joint_name>
+      <topic>/rover/tele_l6/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telR1_joint</joint_name>
+      <topic>/rover/tele_r1/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telR2_joint</joint_name>
+      <topic>/rover/tele_r2/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telR3_joint</joint_name>
+      <topic>/rover/tele_r3/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telR4_joint</joint_name>
+      <topic>/rover/tele_r4/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telR5_joint</joint_name>
+      <topic>/rover/tele_r5/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>telR6_joint</joint_name>
+      <topic>/rover/tele_r6/cmd_pos</topic>
+      <p_gain>2000.0</p_gain>
+      <d_gain>50.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>camera_pan_joint</joint_name>
+      <topic>/rover/camera/pan/cmd_pos</topic>
+      <p_gain>100.0</p_gain>
+      <d_gain>2.0</d_gain>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>camera_tilt_joint</joint_name>
+      <topic>/rover/camera/tilt/cmd_pos</topic>
+      <p_gain>100.0</p_gain>
+      <d_gain>2.0</d_gain>
+    </plugin>
+  </gazebo>
+
+</robot>

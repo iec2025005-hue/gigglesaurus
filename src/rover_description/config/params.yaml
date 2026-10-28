@@ -1,0 +1,176 @@
+# Swerve Robot — Interaction & Environment Specification Parameters
+# v1.0 · SI Units · Single Source of Truth
+# Hardware: NEMA17 + DRV8825 (steering), JGB37-520 + L298N (drive), 3S LiPo, ESP32-S3, IMU, 4 swerve modules
+
+schema_version: 1
+
+provenance:
+  default_status: D  # D = datasheet/CAD verified, A = assumed, M = measured
+  meaning: "CAD extracted physical properties and specification parameters"
+  units: "SI (meters, kilograms, seconds, radians, Volts, Amperes, Newtons)"
+  geometry_source: "/home/diya/Downloads/seee1.step (103 components)"
+  frames:
+    drive: "motor_shaft"
+    steering: "steering_output"
+    tyre: "wheel_contact"
+
+robot:
+  mass_kg: 10.3044
+  wheel_radius_m: 0.040
+  wheel_width_m: 0.080
+  wheel_mass_kg: 0.1697
+  unsprung_mass_per_module_kg: 0.7444
+  wheelbase_m: 0.540
+  track_nominal_m: 0.476
+  track_min_m: 0.476
+  track_max_m: 1.076
+  com_height_m: 0.242
+  com_x_m: 0.0004
+  com_y_m: 0.0127
+  max_payload_kg: 15.0
+
+telescopic_chassis:
+  stages_per_side: 6
+  max_travel_per_stage_m: 0.050
+  max_total_expansion_m: 0.600
+  expansion_velocity_m_s: 0.050
+  situations:
+    narrow_corridor:
+      trigger: "corridor_width < 1.0m or indoor_zone"
+      target_stage_m: 0.000
+      total_width_m: 0.476
+    nominal_cruising:
+      trigger: "flat terrain, roll < 3 deg"
+      target_stage_m: 0.010
+      total_width_m: 0.596
+    side_slope:
+      trigger: "abs(roll) > 4 deg or slope > 10 deg"
+      target_stage_m: 0.045
+      total_width_m: 1.016
+    high_speed_corner:
+      trigger: "abs(lat_accel) > 0.4 m/s^2"
+      target_stage_m: 0.035
+      total_width_m: 0.896
+    washboard_rough:
+      trigger: "vertical_vibration_rms > 0.8 m/s^2"
+      target_stage_m: 0.030
+      total_width_m: 0.836
+
+suspension:
+  stiffness_N_m: 2200.0
+  damping_Ns_m: 85.0
+  travel_lower_m: -0.020
+  travel_upper_m: 0.020
+  preload_N: 15.0
+  shock_axis_front: [0.0, -0.9027, -0.4303]
+  shock_axis_rear: [0.0, 0.9027, -0.4303]
+  tyre_stiffness_N_m: 25000.0
+
+drive:
+  motor: "JGB37-520 12V with L298N"
+  resistance_ohm: 3.2
+  inductance_H: 0.001
+  kt_Nm_A: 0.025
+  ke_Vs_rad: 0.025
+  gear_ratio: 50.0
+  gear_efficiency: 0.75
+  current_limit_A: 2.5
+  output_torque_limit_Nm: 0.85
+  bridge_drop_V: 1.8
+  max_speed_rad_s: 25.0
+
+steering:
+  motor: "NEMA17 + DRV8825"
+  holding_torque_Nm: 0.45
+  gear_ratio: 3.0
+  gear_efficiency: 0.80
+  output_torque_limit_Nm: 1.08
+  output_speed_limit_rad_s: 3.0
+  bearing_breakaway_Nm: 0.03
+  effective_patch_radius_m: 0.016
+  range_rad: [-0.65, 0.65]
+
+power:
+  battery: "3S LiPo 11.1V / 12.6V peak"
+  capacity_Ah: 5.0
+  ocv_full_V: 12.6
+  ocv_empty_V: 9.6
+  internal_resistance_ohm: 0.08
+  bms_limit_A: 15.0
+  buck_5V_dropout_V: 1.0
+  brownout_5V_threshold_V: 4.6
+
+sensors:
+  imu:
+    rate_hz: 100
+    gyro_noise_density_rad_s: 0.005
+    accel_noise_density_m_s2: 0.05
+    gyro_bias_stability_rad_s: 0.0001
+  camera:
+    resolution: [1280, 720]
+    rate_hz: 30
+    horizontal_fov_rad: 1.396
+  wheel_encoders:
+    cpr: 1320  # JGB37-520 11 PPR * 4 * 30 ratio
+    rate_hz: 50
+
+environment:
+  size_m: [40.0, 30.0]
+  layout: "continuous_loop"
+  zones:
+    - id: "indoor_block"
+      bounds: [[-18.0, -12.0], [-6.0, 12.0]]
+      surfaces: ["tile", "carpet", "polished_concrete"]
+      corridor_widths_m: [0.72, 0.96, 1.44]
+      thresholds_mm: [5, 10, 20]
+    - id: "offroad_block"
+      bounds: [[4.0, -12.0], [18.0, 12.0]]
+      surfaces: ["packed_dirt", "loose_gravel", "wet_mud"]
+      slope_ladder_deg: [5, 10, 15, 20, 25]
+      side_slope_deg: [5, 10, 15]
+      washboard_wavelength_m: [0.20, 0.30, 0.40]
+      curb_steps_m: [0.010, 0.020, 0.030, 0.040]
+    - id: "stress_lane"
+      bounds: [[-4.0, -12.0], [4.0, 12.0]]
+      straight_length_m: 10.0
+      marker_interval_m: 1.0
+
+surfaces:
+  tile:
+    mu_static: 0.80
+    mu_kinetic: 0.70
+    Crr: 0.015
+  carpet:
+    mu_static: 0.85
+    mu_kinetic: 0.75
+    Crr: 0.030
+  polished_concrete:
+    mu_static: 0.75
+    mu_kinetic: 0.65
+    Crr: 0.018
+  packed_dirt:
+    mu_static: 0.65
+    mu_kinetic: 0.55
+    Crr: 0.040
+  loose_gravel:
+    mu_static: 0.50
+    mu_kinetic: 0.40
+    Crr: 0.060
+  wet_mud:
+    mu_static: 0.35
+    mu_kinetic: 0.25
+    Crr: 0.090
+
+couplings:
+  L1_thermal:
+    mechanism: "Winding heat -> R increases -> torque drops"
+    log: ["motor_temp_c", "current_a", "torque_nm"]
+  L2_vibration:
+    mechanism: "Terrain washboard resonance -> IMU noise"
+    log: ["vibration_rms", "imu_accel_z"]
+  L3_slip:
+    mechanism: "Soft soil sinkage -> odometry drift"
+    log: ["slip_ratio", "odom_error_m"]
+  L4_brownout:
+    mechanism: "Motor stall inrush -> 5V rail dip"
+    log: ["rail_5v", "brownout_flag"]
