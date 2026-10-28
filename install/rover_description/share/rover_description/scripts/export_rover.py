@@ -1,1 +1,0 @@
-/home/diya/rover_urdf_ws/src/rover_description/scripts/export_rover.py

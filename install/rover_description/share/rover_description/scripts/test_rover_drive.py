@@ -1,1 +1,0 @@
-/home/diya/rover_urdf_ws/src/rover_description/scripts/test_rover_drive.py

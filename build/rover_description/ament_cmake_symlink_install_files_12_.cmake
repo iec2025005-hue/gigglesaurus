@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_files("/home/diya/rover_urdf_ws/src/rover_description" FILES "/home/diya/rover_urdf_ws/build/rover_description/ament_cmake_index/share/ament_index/resource_index/packages/rover_description" "DESTINATION" "share/ament_index/resource_index/packages")
