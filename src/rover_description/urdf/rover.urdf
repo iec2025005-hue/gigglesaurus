@@ -220,7 +220,7 @@
     <origin xyz="0.0000 -0.0400 -0.0060" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1.0" friction="0.1"/>
-    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="50.0" velocity="3.0"/>
   </joint>
 
   <link name="legFL_carrier">
@@ -444,7 +444,7 @@
     <origin xyz="0.0000 -0.0400 -0.0060" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1.0" friction="0.1"/>
-    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="50.0" velocity="3.0"/>
   </joint>
 
   <link name="legFR_carrier">
@@ -668,7 +668,7 @@
     <origin xyz="0.0000 0.0400 -0.0060" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1.0" friction="0.1"/>
-    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="50.0" velocity="3.0"/>
   </joint>
 
   <link name="legBL_carrier">
@@ -892,7 +892,7 @@
     <origin xyz="0.0000 0.0400 -0.0060" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1.0" friction="0.1"/>
-    <limit lower="-0.65" upper="0.65" effort="50.0" velocity="3.0"/>
+    <limit lower="-3.14159" upper="3.14159" effort="50.0" velocity="3.0"/>
   </joint>
 
   <link name="legBR_carrier">
@@ -2557,22 +2557,32 @@
       <topic>/joint_states</topic>
       <update_rate>50</update_rate>
     </plugin>
-    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
-      <left_joint>legFL_wheel_joint</left_joint>
-      <left_joint>legBL_wheel_joint</left_joint>
-      <right_joint>legFR_wheel_joint</right_joint>
-      <right_joint>legBR_wheel_joint</right_joint>
-      <wheel_separation>0.476</wheel_separation>
-      <wheel_radius>0.040</wheel_radius>
-      <max_wheel_torque>100.0</max_wheel_torque>
-      <max_wheel_acceleration>25.0</max_wheel_acceleration>
-      <odom_publish_frequency>50</odom_publish_frequency>
-      <cmd_vel_timeout>0.5</cmd_vel_timeout>
-      <topic>/cmd_vel</topic>
+    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
       <odom_topic>/odom</odom_topic>
       <tf_topic>/tf</tf_topic>
-      <frame_id>odom</frame_id>
-      <child_frame_id>base_footprint</child_frame_id>
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+      <odom_publish_frequency>50</odom_publish_frequency>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legFL_wheel_joint</joint_name>
+      <topic>/rover/wheel_fl/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legFR_wheel_joint</joint_name>
+      <topic>/rover/wheel_fr/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legBL_wheel_joint</joint_name>
+      <topic>/rover/wheel_bl/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
+    </plugin>
+    <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+      <joint_name>legBR_wheel_joint</joint_name>
+      <topic>/rover/wheel_br/cmd_vel</topic>
+      <use_velocity_commands>true</use_velocity_commands>
     </plugin>
     <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
       <joint_name>legFL_steer_joint</joint_name>

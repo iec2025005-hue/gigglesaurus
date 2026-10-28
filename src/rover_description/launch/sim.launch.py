@@ -55,19 +55,44 @@ def generate_launch_description():
         }]
     )
 
+    # Bridge arguments for full 4WIS/4WID Swerve, Sensors, and Telescopic Chassis
+    bridge_arguments = [
+        '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
+        '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+        '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
+        '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+        '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU',
+        '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+        # 4 Independent Steering Angles
+        '/rover/steer_fl/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/steer_fr/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/steer_bl/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/steer_br/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+        # 4 Independent Wheel Drive Velocities
+        '/rover/wheel_fl/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/wheel_fr/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/wheel_bl/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/wheel_br/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        # Drive Motor Shafts
+        '/rover/motor_fl/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/motor_fr/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/motor_bl/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/motor_br/cmd_vel@std_msgs/msg/Float64]gz.msgs.Double',
+        # Camera Pan / Tilt
+        '/rover/camera/pan/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+        '/rover/camera/tilt/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double',
+    ]
+    # 12 Telescopic Chassis Stages
+    for idx in range(1, 7):
+        bridge_arguments.append(f'/rover/tele_l{idx}/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double')
+        bridge_arguments.append(f'/rover/tele_r{idx}/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double')
+
     # ROS <-> Gazebo Bridge
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         output='screen',
-        arguments=[
-            '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
-            '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model',
-            '/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
-            '/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU',
-            '/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V'
-        ],
+        arguments=bridge_arguments,
         parameters=[{'use_sim_time': True}]
     )
 
