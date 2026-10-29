@@ -1,0 +1,30 @@
+PART1: MOVING CHASSIS
+12 regular bed STLs;24 plastic pieces.
+Contains four270mm arms, four end-bracket bodies with four caps, eight integrated hex-link halves and four hex flange splice strips.
+
+Use100% infill for this batch. PRINT_01 through04 contain the diagonally rotated arms; PRINT_01 also includes all four flange strips. PRINT_05 through12 contain the integrated hex-link halves; PRINT_05 also contains all end-bracket bodies/caps.
+Enable supports from the build plate for PRINT_05 through12 and inspect the preview. The bar/flange geometry includes a narrow ledge about2-4mm above the bed that needs support. Do not reduce scale to make it sit flat.
+
+INTEGRATED HEX LINKS
+This updated batch fuses the touching bar and windowed flange of each original hexarm into one rigid component before splitting it. Use this version for the hex links; do not mix it with the earlier separate bar/frame exports.
+A and B each have a225mm overall length and a40mm overlap; assembled length410mm. Reassemble using the original STEP orientation and BL/BR/FL/FR labels. Parts have been flipped so the broad frame faces the bed, so turn them over as needed for assembly.
+The bar overlap runs from local Y185 to225mm. A retains the upper2mm of the original4mm bar in that region; B retains the lower2mm. The flange/frame is part of A throughY225 and part of B beyondY225. A14x40x3mm strip bridges the inner flange rail atY225, with its long axis along the link length. Original total plastic envelope is130x410x6mm before adding this strip or bolt heads/nuts.
+See HEX_LINK_ASSEMBLY.png for the assembly layout and INTEGRATED_HEX_JOINTS.json for bar/inner-rail X locations per corner. The coordinate origin is the minimum X/Y/Z of the original fused group, before print rotation/translation.
+Each corner needs four M3 fasteners for the bar lap and four for its flange strip:32 new M3 bolts/nuts total for this batch. The plastic stack is4-6mm at the lap and5mm at the flange strip; M3x10-12 is a starting length, depending on washers/nut engagement. Verify one joint first. Bolt heads/nuts extend outside the original geometry and must be checked for clearance.
+End brackets retain their original pin and mounting holes; use suitable metal pins and hardware from the original assembly. Body and cap remain separate.
+
+LOAD AND PRINT
+Unzip this batch. Open PRINT_THESE/PRINT_01.stl in Anycubic Slicer Next with your Kobra S1 profile. Each STL is already arranged for ONE bed. Keep millimetres and100% scale. Leave the relative positions/orientations of parts as supplied; slicer centering is fine. Slice, inspect the layer/support preview, export the printer-specific toolpath, and print. Continue with PRINT_02, etc. Print every regular bed file ONCE. Do not additionally print the old individual STL packages.
+
+The three batches together contain34 flat-print bed layouts:12+14+8, not three physical prints. The full-scale assembly is much larger than the bed; parts have been split or rotated to preserve full scale and allow predominantly flat printing. This layout is not claimed to use the fewest possible beds. Keeping thin moving components mostly flat avoids making the important links depend on strength between upright layers.
+
+Files contain meshes, not nozzle temperatures or printer toolpaths. Use a calibrated PLA profile for a room-temperature unloaded hand test, a0.4mm nozzle,0.20mm layers, five walls and five top/bottom layers. See the batch settings below. Brims/supports are generated in the slicer and are not modeled into these STLs. Use a5mm brim for tall narrow supports. Arrangement leaves at least8mm at bed edges and5mm between part bounding boxes, so check combined brims in the slicer.
+
+TEST BEFORE BATCH PRINTING
+These are prototype adaptations, not a physically tested kit. New lap/strip joints and hardware protrusions must clear neighboring links over the complete travel. Test one corner and one plate joint before printing the whole kit. Start unloaded and move the mechanism slowly by hand. Stop if the mechanism binds, joints slip, or plastic flexes/cracks. No physical fit test, dynamic interference simulation, FEA, load rating or slicer run was performed.
+
+WHAT IS EXCLUDED
+Leg/suspension/wheel modules are excluded. Your already-printed telescope stages, named guideL/guideR parts and rot/hexrot rotary links are excluded. Screws, nuts, pins, bearings, motors, electronics and the camera itself are real hardware, not plastic STL parts. The four modeled hex follower sleeves have OD6.2mm, ID6.0mm and length4mm, giving only0.1mm wall; a printable substitute is not supplied. Obtain fitted sleeves or redesign that interface after measuring the actual pins/slots.
+
+VERIFICATION
+Every bed STL has watertight, consistently wound meshes and the expected count of separate connected components. All bounds are inside X/Y8..242mm and Z0..241mm. Part bounding boxes do not overlap. New joint holes were checked to remain within the original material. The eight integrated hex halves were checked to reconstruct the original fused source geometry after reassembly, apart from their new fastener holes. These checks establish geometry/mesh integrity, not motion or strength.

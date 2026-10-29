@@ -1,0 +1,28 @@
+PART3: TOP PLATFORM AND CAMERA/ACCESSORY MOUNTS
+8 regular bed STLs;31 plastic pieces.
+Contains the eight uppermost platform sections, ten platform strips, one integrated camera yoke, one integrated tilt cradle and11 fixed camera/actuator mounting pieces/spacers. Real motors, bearings, camera and electronics are excluded.
+
+Use15-20% gyroid infill, five walls and five top/bottom layers. Assign100% infill to splice strips if using per-object settings; otherwise the thin strips will mostly be skins/walls. Inspect supports for the camera and accessory fixtures on PRINT_01 and02; enable build-plate supports where the preview shows overhangs. Platform-only pieces print flat without supports.
+
+TOP PLATFORM ASSEMBLY
+Assembles to280x700x3mm. It is the uppermost windowed platform at original Z440..443mm, not the chassis deck below it. Original windows and four mounting holes at X+/-30,Y+/-160mm are retained.
+Assemble the tiles according to TOP_PLATFORM_ASSEMBLY.png. L means negative original X, R positive X; row1 starts at the lowest original Y.
+Four40x24x3mm strips join left/right atY=-275,-85,+85,+275mm. Six16x44x3mm edge strips join rows atX=-130,+130 andY=-175,0,+175mm. Strips go on top. Local plastic thickness becomes6mm before washers/heads.
+Use40 M3 bolts/nuts; M3x12 is a starting size depending on washers. Check clearance under the platform before movement.
+The original touching solids of the camera yoke and cradle are fused into rigid parts. Install using your original CAD orientation and suitable hardware; accessories are not needed to establish the chassis expansion mechanism's operation.
+
+LOAD AND PRINT
+Unzip this batch. Open PRINT_THESE/PRINT_01.stl in Anycubic Slicer Next with your Kobra S1 profile. Each STL is already arranged for ONE bed. Keep millimetres and100% scale. Leave the relative positions/orientations of parts as supplied; slicer centering is fine. Slice, inspect the layer/support preview, export the printer-specific toolpath, and print. Continue with PRINT_02, etc. Print every regular bed file ONCE. Do not additionally print the old individual STL packages.
+
+The three batches together contain34 flat-print bed layouts:12+14+8, not three physical prints. The full-scale assembly is much larger than the bed; parts have been split or rotated to preserve full scale and allow predominantly flat printing. This layout is not claimed to use the fewest possible beds. Keeping thin moving components mostly flat avoids making the important links depend on strength between upright layers.
+
+Files contain meshes, not nozzle temperatures or printer toolpaths. Use a calibrated PLA profile for a room-temperature unloaded hand test, a0.4mm nozzle,0.20mm layers, five walls and five top/bottom layers. See the batch settings below. Brims/supports are generated in the slicer and are not modeled into these STLs. Use a5mm brim for tall narrow supports. Arrangement leaves at least8mm at bed edges and5mm between part bounding boxes, so check combined brims in the slicer.
+
+TEST BEFORE BATCH PRINTING
+These are prototype adaptations, not a physically tested kit. New lap/strip joints and hardware protrusions must clear neighboring links over the complete travel. Test one corner and one plate joint before printing the whole kit. Start unloaded and move the mechanism slowly by hand. Stop if the mechanism binds, joints slip, or plastic flexes/cracks. No physical fit test, dynamic interference simulation, FEA, load rating or slicer run was performed.
+
+WHAT IS EXCLUDED
+Leg/suspension/wheel modules are excluded. Your already-printed telescope stages, named guideL/guideR parts and rot/hexrot rotary links are excluded. Screws, nuts, pins, bearings, motors, electronics and the camera itself are real hardware, not plastic STL parts. The four modeled hex follower sleeves have OD6.2mm, ID6.0mm and length4mm, giving only0.1mm wall; a printable substitute is not supplied. Obtain fitted sleeves or redesign that interface after measuring the actual pins/slots.
+
+VERIFICATION
+Every bed STL has watertight, consistently wound meshes and the expected count of separate connected components. All bounds are inside X/Y8..242mm and Z0..241mm. Part bounding boxes do not overlap. New joint holes were checked to remain within the original material. The eight integrated hex halves were checked to reconstruct the original fused source geometry after reassembly, apart from their new fastener holes. These checks establish geometry/mesh integrity, not motion or strength.

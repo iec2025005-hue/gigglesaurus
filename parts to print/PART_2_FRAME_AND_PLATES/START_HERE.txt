@@ -1,0 +1,31 @@
+PART2: FIXED FRAME AND CHASSIS PLATES
+14 regular bed STLs;57 plastic pieces.
+Contains24 fixed structural supports/rails, six base-plate sections, four middle-plate sections, four deck sections and19 splice strips.
+
+Start with20% gyroid infill for the regular beds; keep five walls and five top/bottom layers. The strips are thin; make them100% infill if applying per-object settings. PRINT_01 and02 contain strips alongside plate pieces; split to objects in place if needed to assign strip infill, without rearranging them. Otherwise use20% for the whole bed; the thin strips will largely consist of walls and top/bottom skins.
+Tall tubes/posts are upright to preserve long bores. Use a5mm brim and inspect the support/overhang preview. Their geometry fits the printer envelope, but adhesion and cooling need your calibrated profile.
+
+ASSEMBLY
+Original fixed:1 plate solids95,96 and97 are the base, middle and deck. See FIXED_PLATE_JOINTS.json for all strip centres in original STEP coordinates and the plate sizes.
+Base assembles to300x510x6mm, middle to320x295x6mm, deck to300x380x6mm. New40x24x3mm strips bridge the butt joints:11 for base,4 for middle,4 for deck. The strip's long axis crosses the seam.
+L/R labels are original negative/positive X, and row1 starts at the lowest original Y. Hold the assembled sections flat with butt edges touching before tightening gently. Do not crush printed layers.
+Use76 new M3 bolts/nuts, four per strip. Plastic stack9mm suggests M3x14-16 as a starting length depending on washers/nut engagement. Verify on one joint and check protrusion clearance before buying everything.
+
+CHECK_IF_ALREADY_PRINTED contains two additional arranged bed files with12 fixed central mounts/guide-related pieces. These parts may have been included in your previous telescope print. Print them only if missing. They are NOT additional regular beds. Compare FIXED_PART_IDENTIFICATION.json to your existing assembly before duplicating them.
+Fixed support parts keep source solid IDs in their names. Their original STEP bounds and notes in FIXED_PART_IDENTIFICATION.json identify the installed positions; print orientations differ from the assembly orientations.
+
+LOAD AND PRINT
+Unzip this batch. Open PRINT_THESE/PRINT_01.stl in Anycubic Slicer Next with your Kobra S1 profile. Each STL is already arranged for ONE bed. Keep millimetres and100% scale. Leave the relative positions/orientations of parts as supplied; slicer centering is fine. Slice, inspect the layer/support preview, export the printer-specific toolpath, and print. Continue with PRINT_02, etc. Print every regular bed file ONCE. Do not additionally print the old individual STL packages.
+
+The three batches together contain34 flat-print bed layouts:12+14+8, not three physical prints. The full-scale assembly is much larger than the bed; parts have been split or rotated to preserve full scale and allow predominantly flat printing. This layout is not claimed to use the fewest possible beds. Keeping thin moving components mostly flat avoids making the important links depend on strength between upright layers.
+
+Files contain meshes, not nozzle temperatures or printer toolpaths. Use a calibrated PLA profile for a room-temperature unloaded hand test, a0.4mm nozzle,0.20mm layers, five walls and five top/bottom layers. See the batch settings below. Brims/supports are generated in the slicer and are not modeled into these STLs. Use a5mm brim for tall narrow supports. Arrangement leaves at least8mm at bed edges and5mm between part bounding boxes, so check combined brims in the slicer.
+
+TEST BEFORE BATCH PRINTING
+These are prototype adaptations, not a physically tested kit. New lap/strip joints and hardware protrusions must clear neighboring links over the complete travel. Test one corner and one plate joint before printing the whole kit. Start unloaded and move the mechanism slowly by hand. Stop if the mechanism binds, joints slip, or plastic flexes/cracks. No physical fit test, dynamic interference simulation, FEA, load rating or slicer run was performed.
+
+WHAT IS EXCLUDED
+Leg/suspension/wheel modules are excluded. Your already-printed telescope stages, named guideL/guideR parts and rot/hexrot rotary links are excluded. Screws, nuts, pins, bearings, motors, electronics and the camera itself are real hardware, not plastic STL parts. The four modeled hex follower sleeves have OD6.2mm, ID6.0mm and length4mm, giving only0.1mm wall; a printable substitute is not supplied. Obtain fitted sleeves or redesign that interface after measuring the actual pins/slots.
+
+VERIFICATION
+Every bed STL has watertight, consistently wound meshes and the expected count of separate connected components. All bounds are inside X/Y8..242mm and Z0..241mm. Part bounding boxes do not overlap. New joint holes were checked to remain within the original material. The eight integrated hex halves were checked to reconstruct the original fused source geometry after reassembly, apart from their new fastener holes. These checks establish geometry/mesh integrity, not motion or strength.
