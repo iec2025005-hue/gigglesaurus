@@ -1,0 +1,10 @@
+{
+  "status": "invalid experiment scheduling; excluded from performance conclusions",
+  "reason": "A queued parent process survived interruption and conflicted with subsequent batches. Duplicate-launch guard rejected later attempts. Some source changed during that queue. Not a controlled repeat comparison.",
+  "batches": [
+    "perf_jtc_v2",
+    "perf_jtc_v3",
+    "stop_jtc_v2"
+  ],
+  "remedy": "Stopped active workspace server; added serialized batch lock and explicit signal forwarding; restarted as stop_jtc_v3. Earlier accepted jtc_headless_lp2_repeats and ten-minute soak precede this scheduling conflict."
+}

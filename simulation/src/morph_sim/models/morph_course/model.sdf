@@ -1,0 +1,949 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.8">
+  <model name="MORPH_MULTITERRAIN_COURSE">
+    <static>true</static>
+    <link name="survey_terrain">
+      <visual name="smooth_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/smooth.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/road_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/road_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/road_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="smooth_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/smooth.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.9</mu>
+              <mu2>0.855</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="grass_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/grass.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/grass_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/grass_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/grass_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="grass_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/grass.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.65</mu>
+              <mu2>0.6174999999999999</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="sand_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/sand.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/sand_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/sand_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/sand_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="sand_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/sand.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>0.475</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="mud_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mud.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/mud_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/mud_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/mud_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.35</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="mud_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mud.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.3</mu>
+              <mu2>0.285</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="ramps_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/ramps.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/concrete_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/concrete_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/concrete_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="ramps_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/ramps.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.85</mu>
+              <mu2>0.8075</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="debris_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/debris.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/gravel_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/gravel_normal.jpg</normal_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="debris_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/debris.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.65</mu>
+              <mu2>0.6174999999999999</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="rocks_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/rocks.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/gravel_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/gravel_normal.jpg</normal_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="rocks_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/rocks.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>0.6649999999999999</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="snow_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/snow.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/snow_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/snow_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/snow_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="snow_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/snow.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.25</mu>
+              <mu2>0.2375</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="mixed0_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed0.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/grass_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/grass_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/grass_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="mixed0_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed0.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.55</mu>
+              <mu2>0.5225</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="mixed1_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed1.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/sand_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/sand_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/sand_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="mixed1_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed1.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.55</mu>
+              <mu2>0.5225</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="mixed2_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed2.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/mud_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/mud_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/mud_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.35</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="mixed2_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed2.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.55</mu>
+              <mu2>0.5225</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="mixed3_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed3.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/gravel_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/gravel_normal.jpg</normal_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="mixed3_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/mixed3.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.55</mu>
+              <mu2>0.5225</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="front_crossway_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/front_crossway.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/road_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/road_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/road_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="front_crossway_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/front_crossway.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.76</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="back_crossway_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/back_crossway.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/road_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/road_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/road_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="back_crossway_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/back_crossway.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.76</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="west_service_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/west_service.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/concrete_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/concrete_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/concrete_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="west_service_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/west_service.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.76</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="east_village_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/east_village.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/grass_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/grass_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/grass_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="east_village_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/east_village.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.76</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="depot_forecourt_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/depot_forecourt.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/concrete_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/concrete_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/concrete_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="depot_forecourt_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/depot_forecourt.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.76</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="north_landscape_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/north_landscape.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/grass_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/grass_normal.jpg</normal_map>
+              <roughness_map>model://morph_course/textures/grass_roughness.jpg</roughness_map>
+              <metalness>0</metalness>
+              <roughness>0.9</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="north_landscape_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/north_landscape.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.76</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="label_smooth">
+        <pose>-16 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_smooth.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_smooth.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_grass">
+        <pose>-12 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_grass.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_grass.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_sand">
+        <pose>-8 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_sand.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_sand.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_mud">
+        <pose>-4 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_mud.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_mud.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_ramps">
+        <pose>0 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_ramps.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_ramps.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_debris">
+        <pose>4 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_debris.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_debris.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_rocks">
+        <pose>8 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_rocks.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_rocks.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_snow">
+        <pose>12 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_snow.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_snow.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="label_mixed">
+        <pose>16 -0.8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/label_mixed.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/label_mixed.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="start">
+        <pose>0 -4.7 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/start.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/start.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="pipeline_label">
+        <pose>-25 -1.5 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/pipeline_label.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/pipeline_label.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="village_label">
+        <pose>25 -1.5 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/village_label.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/village_label.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="depot_label">
+        <pose>-10 -8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/depot_label.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/depot_label.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rubble_label">
+        <pose>24 -8 0.015 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/rubble_label.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <emissive>.12 .12 .12 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/rubble_label.png</albedo_map>
+              <roughness>1</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="surrounding_landscape_visual">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/surrounding_landscape.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://morph_course/textures/grass_albedo.jpg</albedo_map>
+              <normal_map>model://morph_course/textures/grass_normal.jpg</normal_map>
+              <roughness>0.95</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="surrounding_landscape_collision">
+        <geometry>
+          <mesh>
+            <uri>model://morph_course/meshes/surrounding_landscape.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.65</mu>
+              <mu2>0.6</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+  </model>
+</sdf>

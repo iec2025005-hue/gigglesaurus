@@ -1,0 +1,1008 @@
+{
+  "scope": "Six injected failure modes on two main-arena surfaces; all design parameters assumed; release is command-level, not GUI key/focus test",
+  "cases": [
+    {
+      "case": "estop",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10420621284312,
+        "sim_s": 5.91,
+        "xy": [
+          0.4451891691957809,
+          -3.000569913421004
+        ],
+        "speed_m_s": 0.24154521965054898
+      },
+      "stop_wall_s": 0.471472137,
+      "stop_sim_s": 0.46999999999999975,
+      "stop_distance_path_m": 0.03070181597077347,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.0004257766970900001,
+      "native_watchdog": {
+        "sim_time_s": 7.046,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.00816763,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 0,
+        "max_torque_Nm": 0,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1566,
+      "passed": true,
+      "name": "stop_jtc_v3_high_estop",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 107,
+          "supervisor_pid": 82,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10422166312060
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10422481049578
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10422951102184,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10423666484876
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "release",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10439255144882,
+        "sim_s": 5.462000000000001,
+        "xy": [
+          0.4453261611083581,
+          -3.0005683632864377
+        ],
+        "speed_m_s": 0.2439107873573447
+      },
+      "stop_wall_s": 0.468845098,
+      "stop_sim_s": 0.4679999999999991,
+      "stop_distance_path_m": 0.04095019708090164,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.00010387587493221991,
+      "native_watchdog": {
+        "sim_time_s": 6.53,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.0009696,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 0,
+        "max_torque_Nm": 0,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1560,
+      "passed": true,
+      "name": "stop_jtc_v3_high_release",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 563,
+          "supervisor_pid": 538,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10440717933879
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10441032601796
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10441489078139,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10442154252442
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "stale_command",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10457925474405,
+        "sim_s": 5.672000000000001,
+        "xy": [
+          0.4478449214071943,
+          -3.0005700905873667
+        ],
+        "speed_m_s": 0.24618959934177548
+      },
+      "stop_wall_s": 0.6010427930000001,
+      "stop_sim_s": 0.5999999999999996,
+      "stop_distance_path_m": 0.08272573666550229,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.0,
+      "native_watchdog": {
+        "sim_time_s": 6.938,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.00448816,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 0,
+        "max_torque_Nm": 0,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1605,
+      "passed": true,
+      "name": "stop_jtc_v3_high_stale_command",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 1017,
+          "supervisor_pid": 992,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10459425938486
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10459740797640
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10460209801782,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10460925340732
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "stale_state",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10476763123840,
+        "sim_s": 5.760000000000001,
+        "xy": [
+          0.4451141464878637,
+          -3.000580720870957
+        ],
+        "speed_m_s": 0.24333847910177486
+      },
+      "stop_wall_s": 0.39336501100000004,
+      "stop_sim_s": 0.3899999999999997,
+      "stop_distance_path_m": 0.06518906399357509,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.004990019149358405,
+      "native_watchdog": {
+        "sim_time_s": 6.834,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 0.0079866,
+        "brake_energy_J": 0.201143,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0.000354198,
+        "hold_mechanical_energy_J": 0.000748957,
+        "max_torque_Nm": 0.0405705,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": true,
+      "switch_ack": true,
+      "position_command_count": 1264,
+      "passed": true,
+      "name": "stop_jtc_v3_high_stale_state",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 1471,
+          "supervisor_pid": 1446,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10478087789624
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10478402645761
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10478861631607,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10479527170640
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "manager_crash",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10495203377980,
+        "sim_s": 5.53,
+        "xy": [
+          0.4478527316681774,
+          -3.0005677584667327
+        ],
+        "speed_m_s": 0.24534176877424826
+      },
+      "stop_wall_s": 0.403327724,
+      "stop_sim_s": 0.40200000000000014,
+      "stop_distance_path_m": 0.06988889530379272,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.003072992806678116,
+      "native_watchdog": {
+        "sim_time_s": 6.634,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 0.00449468,
+        "brake_energy_J": 0.231967,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0.000376387,
+        "hold_mechanical_energy_J": 0.000732148,
+        "max_torque_Nm": 0.0389768,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1215,
+      "passed": true,
+      "name": "stop_jtc_v3_high_manager_crash",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 1925,
+          "supervisor_pid": 1900,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10496687154717
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10497001902494
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10497469856294,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10498135221896
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "actuator_crash",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10513893329787,
+        "sim_s": 5.692,
+        "xy": [
+          0.4463493273210249,
+          -3.0005607978685305
+        ],
+        "speed_m_s": 0.24410591052550748
+      },
+      "stop_wall_s": 0.38090477100000003,
+      "stop_sim_s": 0.3799999999999999,
+      "stop_distance_path_m": 0.06537078006563701,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.00606786134145529,
+      "native_watchdog": {
+        "sim_time_s": 6.736,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 0.0107342,
+        "brake_energy_J": 0.184652,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0.000772666,
+        "hold_mechanical_energy_J": 0.00106417,
+        "max_torque_Nm": 0.0455333,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1584,
+      "passed": true,
+      "name": "stop_jtc_v3_high_actuator_crash",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 2379,
+          "supervisor_pid": 2354,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10515233011420
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10515547716850
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10516021542091,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10516687232094
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "estop",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10532640081918,
+        "sim_s": 5.640000000000001,
+        "xy": [
+          12.000212432105824,
+          1.4696872887936536
+        ],
+        "speed_m_s": 0.24860978427494407
+      },
+      "stop_wall_s": 0.9356062490000001,
+      "stop_sim_s": 0.9339999999999993,
+      "stop_distance_path_m": 0.0449249102237189,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.0040580725113982296,
+      "native_watchdog": {
+        "sim_time_s": 7.246,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.0194199,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 7.35611e-05,
+        "max_torque_Nm": 0,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1704,
+      "passed": true,
+      "name": "stop_jtc_v3_low_estop",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 2833,
+          "supervisor_pid": 2808,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10534667316786
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10534982361958
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10535451628782,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10536167486408
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 0
+    },
+    {
+      "case": "release",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10551998231867,
+        "sim_s": 5.5760000000000005,
+        "xy": [
+          12.00017714582518,
+          1.4668553633030916
+        ],
+        "speed_m_s": 0.2455127651296171
+      },
+      "stop_wall_s": 0.521340581,
+      "stop_sim_s": 0.5199999999999996,
+      "stop_distance_path_m": 0.04444372711181309,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.003981290222162393,
+      "native_watchdog": {
+        "sim_time_s": 6.74,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.0194163,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 0,
+        "max_torque_Nm": 0,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1572,
+      "passed": true,
+      "name": "stop_jtc_v3_low_release",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 3287,
+          "supervisor_pid": 3262,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10553493298759
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10553808066300
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10554271095216,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10554936135450
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 0
+    },
+    {
+      "case": "stale_command",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10570626873019,
+        "sim_s": 5.5,
+        "xy": [
+          11.99958520916667,
+          1.4503363378637906
+        ],
+        "speed_m_s": 0.19723828644181854
+      },
+      "stop_wall_s": 0.5196844780000001,
+      "stop_sim_s": 0.5119999999999996,
+      "stop_distance_path_m": 0.07751709504506686,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 7.328506196943058e-05,
+      "native_watchdog": {
+        "sim_time_s": 6.634,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.0193625,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 0,
+        "max_torque_Nm": 0,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1581,
+      "passed": true,
+      "name": "stop_jtc_v3_low_stale_command",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 3741,
+          "supervisor_pid": 3716,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10572105264066
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10572419973567
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10572891455334,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10573556671419
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 0
+    },
+    {
+      "case": "stale_state",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10589134349431,
+        "sim_s": 5.550000000000001,
+        "xy": [
+          12.000197593276642,
+          1.4635600667260984
+        ],
+        "speed_m_s": 0.2437184258337629
+      },
+      "stop_wall_s": 1.109543442,
+      "stop_sim_s": 1.1079999999999997,
+      "stop_distance_path_m": 0.09149416388028637,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 3.556554474170963e-05,
+      "native_watchdog": {
+        "sim_time_s": 7.35,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 2.96976e-05,
+        "brake_energy_J": 0.402757,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 0,
+        "max_torque_Nm": 0.111637,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": true,
+      "switch_ack": true,
+      "position_command_count": 1266,
+      "passed": false,
+      "name": "stop_jtc_v3_low_stale_state",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 4195,
+          "supervisor_pid": 4170,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10591244029337
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10591558953503
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10592023794530,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10592689455781
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 1
+    },
+    {
+      "case": "manager_crash",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10608486426604,
+        "sim_s": 5.672000000000001,
+        "xy": [
+          11.999505385989483,
+          1.444528390771082
+        ],
+        "speed_m_s": 0.19030233836995575
+      },
+      "stop_wall_s": 0.5432570440000001,
+      "stop_sim_s": 0.5419999999999998,
+      "stop_distance_path_m": 0.07365870029759661,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 1.5872430238956583e-05,
+      "native_watchdog": {
+        "sim_time_s": 6.842,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 6.68907e-07,
+        "brake_energy_J": 0.470223,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 3.42476e-07,
+        "hold_mechanical_energy_J": 1.24161e-08,
+        "max_torque_Nm": 0.0136645,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1212,
+      "passed": true,
+      "name": "stop_jtc_v3_low_manager_crash",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 4649,
+          "supervisor_pid": 4624,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10609991119400
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10610305973501
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10610777032117,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10611442476938
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 0
+    },
+    {
+      "case": "actuator_crash",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 10627523513327,
+        "sim_s": 5.582000000000001,
+        "xy": [
+          12.000208544595543,
+          1.4651925920068722
+        ],
+        "speed_m_s": 0.2437642095922016
+      },
+      "stop_wall_s": 1.157427051,
+      "stop_sim_s": 1.1559999999999997,
+      "stop_distance_path_m": 0.08935808546275917,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.0002817543651749118,
+      "native_watchdog": {
+        "sim_time_s": 7.45,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 1.07498e-05,
+        "brake_energy_J": 0.425397,
+        "powered_hold": true,
+        "hold_mechanical_power_W": 0,
+        "hold_mechanical_energy_J": 0,
+        "max_torque_Nm": 0.102711,
+        "parameter_status": "assumed",
+        "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1773,
+      "passed": false,
+      "name": "stop_jtc_v3_low_actuator_crash",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow",
+        "position_backend:=trajectory"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "shutdown_diagnostics": {
+          "launch_pid": 5103,
+          "supervisor_pid": 5078,
+          "phases": [
+            {
+              "phase": "shutdown_requested",
+              "wall_ns": 10629643059706
+            },
+            {
+              "phase": "pause_service_complete",
+              "wall_ns": 10629958175465
+            },
+            {
+              "phase": "server_stop_service",
+              "wall_ns": 10630427711109,
+              "acknowledged": true
+            },
+            {
+              "phase": "supervisor_cleanup",
+              "wall_ns": 10631093170213
+            }
+          ],
+          "forced": false,
+          "requested": true,
+          "launch_return_code": 0
+        },
+        "clean_exit": true,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 1
+    }
+  ],
+  "passed": false
+}

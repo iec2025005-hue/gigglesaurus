@@ -1,0 +1,2778 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.12">
+  <model name="morph">
+    <link name="base_link">
+      <inertial>
+        <pose>0.0021250000000000002 0 0.021281250000000002 0 0 0</pose>
+        <mass>6.3999999999999986</mass>
+        <inertia>
+          <ixx>0.27136770208333327</ixx>
+          <ixy>0</ixy>
+          <ixz>-0.001498575</ixz>
+          <iyy>0.056968302083333353</iyy>
+          <iyz>0</iyz>
+          <izz>0.30258593333333328</izz>
+        </inertia>
+      </inertial>
+      <collision name="base_link_fixed_joint_lump__underbody_collision_collision">
+        <pose>0 0 0.02 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.28000000000000003 0.69999999999999996 0.059999999999999998</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.6</mu>
+              <mu2>0.6</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="base_link_fixed_joint_lump__fixed_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/fixed.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="base_link_fixed_joint_lump__sensor_glass_visual_1">
+        <pose>0.14499999999999999 0 0.17999999999999999 0 1.5707963267948966 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.0030000000000000001</length>
+            <radius>0.014999999999999999</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="base_link_fixed_joint_lump__status_led_visual_2">
+        <pose>0.13 0.027 0.193 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.0060000000000000001</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+          <emissive>0.02 0.8 1.0 1</emissive>
+        </material>
+      </visual>
+      <visual name="base_link_fixed_joint_lump__range_sensor_housing_visual_3">
+        <pose>0.22 0 0.12 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040000000000000001 0.059999999999999998 0.029999999999999999</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+      <sensor name="base_imu" type="imu">
+        <topic>/morph/imu</topic>
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <gz_frame_id>base_link</gz_frame_id>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.002</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.002</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.002</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.015</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.015</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.015</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="terrain_lidar" type="gpu_lidar">
+        <pose>0.22 0 0.12 0 0 0</pose>
+        <topic>/morph/range</topic>
+        <gz_frame_id>perception_link</gz_frame_id>
+        <always_on>true</always_on>
+        <update_rate>10</update_rate>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>96</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.1</min_angle>
+              <max_angle>1.1</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>12</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.15</min_angle>
+              <max_angle>0.25</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.12</min>
+            <max>5</max>
+            <resolution>0.005</resolution>
+          </range>
+          <noise type="gaussian">
+            <mean>0</mean>
+            <stddev>0.003</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+      <sensor name="underbody_contact" type="contact">
+        <topic>/morph/contacts/underbody</topic>
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>base_link_fixed_joint_lump__underbody_collision_collision</collision>
+        </contact>
+      </sensor>
+    </link>
+    <joint name="telL1_joint" type="prismatic">
+      <pose relative_to="base_link">0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>telL1</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telL1">
+      <pose relative_to="telL1_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.042000000000000003 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telL1_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telL1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telL2_joint" type="prismatic">
+      <pose relative_to="telL1">0 0 0 0 0 0</pose>
+      <parent>telL1</parent>
+      <child>telL2</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telL2">
+      <pose relative_to="telL2_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.084000000000000005 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telL2_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telL2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telL3_joint" type="prismatic">
+      <pose relative_to="telL2">0 0 0 0 0 0</pose>
+      <parent>telL2</parent>
+      <child>telL3</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telL3">
+      <pose relative_to="telL3_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.126 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telL3_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telL3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telL4_joint" type="prismatic">
+      <pose relative_to="telL3">0 0 0 0 0 0</pose>
+      <parent>telL3</parent>
+      <child>telL4</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telL4">
+      <pose relative_to="telL4_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.23599999999999999 0 -0.02 0 0 0</pose>
+        <mass>0.089999999999999997</mass>
+        <inertia>
+          <ixx>0.0044838125</ixx>
+          <ixy>0</ixy>
+          <ixz>0.00012239999999999999</ixz>
+          <iyy>0.0003690800000000008</iyy>
+          <iyz>0</iyz>
+          <izz>0.0046923925000000024</izz>
+        </inertia>
+      </inertial>
+      <visual name="telL4_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telL4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="telL4_fixed_joint_lump__rl_mount_visual_visual_1">
+        <pose>-0.27000000000000002 0.27000000000000002 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.070000000000000007 0.070000000000000007 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="telL4_fixed_joint_lump__rr_mount_visual_visual_2">
+        <pose>-0.27000000000000002 -0.27000000000000002 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.070000000000000007 0.070000000000000007 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="rl_height_joint" type="prismatic">
+      <pose relative_to="telL4">-0.27000000000000002 0.27000000000000002 0 0 0 0</pose>
+      <parent>telL4</parent>
+      <child>rl_height</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-0.014999999999999999</lower>
+          <upper>0.014999999999999999</upper>
+          <effort>100</effort>
+          <velocity>0.025000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>10</damping>
+          <friction>0.10000000000000001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rl_height">
+      <pose relative_to="rl_height_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>6.2499999999999986e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2499999999999986e-06</iyy>
+          <iyz>0</iyz>
+          <izz>7.9999999999999996e-06</izz>
+        </inertia>
+      </inertial>
+      <visual name="rl_height_fixed_joint_lump__rl_damper_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_damper.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rl_height_fixed_joint_lump__rl_coil_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_coil.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="rl_spring_joint" type="prismatic">
+      <pose relative_to="rl_height">0 0 0 0 0 0</pose>
+      <parent>rl_height</parent>
+      <child>rl_suspension</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.01</lower>
+          <upper>0.029999999999999999</upper>
+          <effort>150</effort>
+          <velocity>0.40000000000000002</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rl_suspension">
+      <pose relative_to="rl_spring_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 -0.040000000000000001 0 0 0</pose>
+        <mass>0.13</mass>
+        <inertia>
+          <ixx>8.2604166666666685e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.2604166666666685e-05</iyy>
+          <iyz>0</iyz>
+          <izz>2.654166666666667e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="rl_suspension_fixed_joint_lump__rl_piston_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_piston.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.22</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="rl_steer_joint" type="revolute">
+      <pose relative_to="rl_suspension">0 0 0 0 0 0</pose>
+      <parent>rl_suspension</parent>
+      <child>rl_steering</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0.69999999999999996</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.14999999999999999</damping>
+          <friction>0.029999999999999999</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rl_steering">
+      <pose relative_to="rl_steer_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-3.198961960624117e-20 -0.024642447205810561 -0.2090357539915591 0 0 0</pose>
+        <mass>0.40000000000000002</mass>
+        <inertia>
+          <ixx>0.001963799102</ixx>
+          <ixy>1.598813754e-21</ixy>
+          <ixz>5.048717442e-20</ixz>
+          <iyy>0.0014472231459999999</iyy>
+          <iyz>-0.00049327087160000004</iyz>
+          <izz>0.00058224926090000002</izz>
+        </inertia>
+      </inertial>
+      <collision name="rl_steering_fixed_joint_lump__rl_steer_collision_collision">
+        <pose>0 0 -0.12 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040000000000000001 0.040000000000000001 0.17999999999999999</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.6</mu>
+              <mu2>0.6</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="rl_steering_fixed_joint_lump__rl_fork_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_fork.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rl_steering_fixed_joint_lump__rl_motor_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rl_steering_fixed_joint_lump__rl_encoder_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_encoder.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="rl_wheel_joint" type="revolute">
+      <pose relative_to="rl_steering">0 0 -0.26000000000000001 0 0 0</pose>
+      <parent>rl_steering</parent>
+      <child>rl_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>0.5</effort>
+          <velocity>25</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <damping>0.0030000000000000001</damping>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rl_wheel">
+      <pose relative_to="rl_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.20000000000000001</mass>
+        <inertia>
+          <ixx>0.00028529500000000003</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00050734</iyy>
+          <iyz>0</iyz>
+          <izz>0.00028529500000000003</izz>
+        </inertia>
+      </inertial>
+      <collision name="rl_wheel_collision_collision">
+        <pose>0 0 0 1.5707963267948959 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.044999999999999998</length>
+            <radius>0.074999999999999997</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="rl_wheel_fixed_joint_lump__rl_tire_visual_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_tire.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.86</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rl_wheel_fixed_joint_lump__rl_hub_visual_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_hub.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rl_wheel_fixed_joint_lump__rl_bolts_visual_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_bolts.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+      <sensor name="rl_contact" type="contact">
+        <topic>/morph/contacts/rl</topic>
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>rl_wheel_collision_collision</collision>
+        </contact>
+      </sensor>
+    </link>
+    <joint name="rr_height_joint" type="prismatic">
+      <pose relative_to="telL4">-0.27000000000000002 -0.27000000000000002 0 0 0 0</pose>
+      <parent>telL4</parent>
+      <child>rr_height</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-0.014999999999999999</lower>
+          <upper>0.014999999999999999</upper>
+          <effort>100</effort>
+          <velocity>0.025000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>10</damping>
+          <friction>0.10000000000000001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rr_height">
+      <pose relative_to="rr_height_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>6.2499999999999986e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2499999999999986e-06</iyy>
+          <iyz>0</iyz>
+          <izz>7.9999999999999996e-06</izz>
+        </inertia>
+      </inertial>
+      <visual name="rr_height_fixed_joint_lump__rr_damper_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_damper.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rr_height_fixed_joint_lump__rr_coil_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_coil.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="rr_spring_joint" type="prismatic">
+      <pose relative_to="rr_height">0 0 0 0 0 0</pose>
+      <parent>rr_height</parent>
+      <child>rr_suspension</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.01</lower>
+          <upper>0.029999999999999999</upper>
+          <effort>150</effort>
+          <velocity>0.40000000000000002</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rr_suspension">
+      <pose relative_to="rr_spring_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 -0.040000000000000001 0 0 0</pose>
+        <mass>0.13</mass>
+        <inertia>
+          <ixx>8.2604166666666685e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.2604166666666685e-05</iyy>
+          <iyz>0</iyz>
+          <izz>2.654166666666667e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="rr_suspension_fixed_joint_lump__rr_piston_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_piston.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.22</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="rr_steer_joint" type="revolute">
+      <pose relative_to="rr_suspension">0 0 0 0 0 0</pose>
+      <parent>rr_suspension</parent>
+      <child>rr_steering</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0.69999999999999996</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.14999999999999999</damping>
+          <friction>0.029999999999999999</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rr_steering">
+      <pose relative_to="rr_steer_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-3.198961960624117e-20 -0.024642447205810561 -0.2090357539915591 0 0 0</pose>
+        <mass>0.40000000000000002</mass>
+        <inertia>
+          <ixx>0.001963799102</ixx>
+          <ixy>1.598813754e-21</ixy>
+          <ixz>5.048717442e-20</ixz>
+          <iyy>0.0014472231459999999</iyy>
+          <iyz>-0.00049327087160000004</iyz>
+          <izz>0.00058224926090000002</izz>
+        </inertia>
+      </inertial>
+      <collision name="rr_steering_fixed_joint_lump__rr_steer_collision_collision">
+        <pose>0 0 -0.12 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040000000000000001 0.040000000000000001 0.17999999999999999</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.6</mu>
+              <mu2>0.6</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="rr_steering_fixed_joint_lump__rr_fork_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_fork.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rr_steering_fixed_joint_lump__rr_motor_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rr_steering_fixed_joint_lump__rr_encoder_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_encoder.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="rr_wheel_joint" type="revolute">
+      <pose relative_to="rr_steering">0 0 -0.26000000000000001 0 0 0</pose>
+      <parent>rr_steering</parent>
+      <child>rr_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>0.5</effort>
+          <velocity>25</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <damping>0.0030000000000000001</damping>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rr_wheel">
+      <pose relative_to="rr_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.20000000000000001</mass>
+        <inertia>
+          <ixx>0.00028529500000000003</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00050734</iyy>
+          <iyz>0</iyz>
+          <izz>0.00028529500000000003</izz>
+        </inertia>
+      </inertial>
+      <collision name="rr_wheel_collision_collision">
+        <pose>0 0 0 1.5707963267948959 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.044999999999999998</length>
+            <radius>0.074999999999999997</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="rr_wheel_fixed_joint_lump__rr_tire_visual_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_tire.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.86</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rr_wheel_fixed_joint_lump__rr_hub_visual_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_hub.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="rr_wheel_fixed_joint_lump__rr_bolts_visual_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_bolts.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+      <sensor name="rr_contact" type="contact">
+        <topic>/morph/contacts/rr</topic>
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>rr_wheel_collision_collision</collision>
+        </contact>
+      </sensor>
+    </link>
+    <joint name="telL5_joint" type="prismatic">
+      <pose relative_to="telL4">0 0 0 0 0 0</pose>
+      <parent>telL4</parent>
+      <child>telL5</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telL5">
+      <pose relative_to="telL5_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.20999999999999999 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telL5_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telL5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telL6_joint" type="prismatic">
+      <pose relative_to="telL5">0 0 0 0 0 0</pose>
+      <parent>telL5</parent>
+      <child>telL6</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telL6">
+      <pose relative_to="telL6_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.252 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telL6_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telL6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="hexarmBL_joint" type="revolute">
+      <pose relative_to="telL6">-0.379 0 0.126 0 0 0</pose>
+      <parent>telL6</parent>
+      <child>hexarmBL</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.25</lower>
+          <upper>0.25</upper>
+          <effort>1</effort>
+          <velocity>0.29999999999999999</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.10000000000000001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="hexarmBL">
+      <pose relative_to="hexarmBL_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 -0.19 0 0 0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0002394616666666667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.2666666666666677e-07</iyy>
+          <iyz>0</iyz>
+          <izz>0.00024006833333333331</izz>
+        </inertia>
+      </inertial>
+      <visual name="hexarmBL_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/hexarmBL.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="hexarmFL_joint" type="revolute">
+      <pose relative_to="telL6">-0.379 0 0.114 0 0 0</pose>
+      <parent>telL6</parent>
+      <child>hexarmFL</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.25</lower>
+          <upper>0.25</upper>
+          <effort>1</effort>
+          <velocity>0.29999999999999999</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.10000000000000001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="hexarmFL">
+      <pose relative_to="hexarmFL_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0.19 0 0 0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0002394616666666667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.2666666666666677e-07</iyy>
+          <iyz>0</iyz>
+          <izz>0.00024006833333333331</izz>
+        </inertia>
+      </inertial>
+      <visual name="hexarmFL_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/hexarmFL.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telR1_joint" type="prismatic">
+      <pose relative_to="base_link">0 0 0 0 0 0</pose>
+      <parent>base_link</parent>
+      <child>telR1</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telR1">
+      <pose relative_to="telR1_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.042000000000000003 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telR1_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telR1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telR2_joint" type="prismatic">
+      <pose relative_to="telR1">0 0 0 0 0 0</pose>
+      <parent>telR1</parent>
+      <child>telR2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telR2">
+      <pose relative_to="telR2_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.084000000000000005 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telR2_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telR2.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telR3_joint" type="prismatic">
+      <pose relative_to="telR2">0 0 0 0 0 0</pose>
+      <parent>telR2</parent>
+      <child>telR3</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telR3">
+      <pose relative_to="telR3_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.126 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telR3_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telR3.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telR4_joint" type="prismatic">
+      <pose relative_to="telR3">0 0 0 0 0 0</pose>
+      <parent>telR3</parent>
+      <child>telR4</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telR4">
+      <pose relative_to="telR4_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.23599999999999999 0 -0.02 0 0 0</pose>
+        <mass>0.089999999999999997</mass>
+        <inertia>
+          <ixx>0.0044838125</ixx>
+          <ixy>0</ixy>
+          <ixz>-0.00012239999999999999</ixz>
+          <iyy>0.0003690800000000008</iyy>
+          <iyz>0</iyz>
+          <izz>0.0046923925000000024</izz>
+        </inertia>
+      </inertial>
+      <visual name="telR4_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telR4.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="telR4_fixed_joint_lump__fl_mount_visual_visual_1">
+        <pose>0.27000000000000002 0.27000000000000002 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.070000000000000007 0.070000000000000007 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="telR4_fixed_joint_lump__fr_mount_visual_visual_2">
+        <pose>0.27000000000000002 -0.27000000000000002 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.070000000000000007 0.070000000000000007 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="fl_height_joint" type="prismatic">
+      <pose relative_to="telR4">0.27000000000000002 0.27000000000000002 0 0 0 0</pose>
+      <parent>telR4</parent>
+      <child>fl_height</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-0.014999999999999999</lower>
+          <upper>0.014999999999999999</upper>
+          <effort>100</effort>
+          <velocity>0.025000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>10</damping>
+          <friction>0.10000000000000001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fl_height">
+      <pose relative_to="fl_height_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>6.2499999999999986e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2499999999999986e-06</iyy>
+          <iyz>0</iyz>
+          <izz>7.9999999999999996e-06</izz>
+        </inertia>
+      </inertial>
+      <visual name="fl_height_fixed_joint_lump__fl_damper_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_damper.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fl_height_fixed_joint_lump__fl_coil_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_coil.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="fl_spring_joint" type="prismatic">
+      <pose relative_to="fl_height">0 0 0 0 0 0</pose>
+      <parent>fl_height</parent>
+      <child>fl_suspension</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.01</lower>
+          <upper>0.029999999999999999</upper>
+          <effort>150</effort>
+          <velocity>0.40000000000000002</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fl_suspension">
+      <pose relative_to="fl_spring_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 -0.040000000000000001 0 0 0</pose>
+        <mass>0.13</mass>
+        <inertia>
+          <ixx>8.2604166666666685e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.2604166666666685e-05</iyy>
+          <iyz>0</iyz>
+          <izz>2.654166666666667e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="fl_suspension_fixed_joint_lump__fl_piston_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_piston.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.22</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="fl_steer_joint" type="revolute">
+      <pose relative_to="fl_suspension">0 0 0 0 0 0</pose>
+      <parent>fl_suspension</parent>
+      <child>fl_steering</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0.69999999999999996</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.14999999999999999</damping>
+          <friction>0.029999999999999999</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fl_steering">
+      <pose relative_to="fl_steer_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-3.198961960624117e-20 -0.024642447205810561 -0.2090357539915591 0 0 0</pose>
+        <mass>0.40000000000000002</mass>
+        <inertia>
+          <ixx>0.001963799102</ixx>
+          <ixy>1.598813754e-21</ixy>
+          <ixz>5.048717442e-20</ixz>
+          <iyy>0.0014472231459999999</iyy>
+          <iyz>-0.00049327087160000004</iyz>
+          <izz>0.00058224926090000002</izz>
+        </inertia>
+      </inertial>
+      <collision name="fl_steering_fixed_joint_lump__fl_steer_collision_collision">
+        <pose>0 0 -0.12 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040000000000000001 0.040000000000000001 0.17999999999999999</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.6</mu>
+              <mu2>0.6</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="fl_steering_fixed_joint_lump__fl_fork_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_fork.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fl_steering_fixed_joint_lump__fl_motor_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fl_steering_fixed_joint_lump__fl_encoder_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_encoder.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="fl_wheel_joint" type="revolute">
+      <pose relative_to="fl_steering">0 0 -0.26000000000000001 0 0 0</pose>
+      <parent>fl_steering</parent>
+      <child>fl_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>0.5</effort>
+          <velocity>25</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <damping>0.0030000000000000001</damping>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fl_wheel">
+      <pose relative_to="fl_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.20000000000000001</mass>
+        <inertia>
+          <ixx>0.00028529500000000003</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00050734</iyy>
+          <iyz>0</iyz>
+          <izz>0.00028529500000000003</izz>
+        </inertia>
+      </inertial>
+      <collision name="fl_wheel_collision_collision">
+        <pose>0 0 0 1.5707963267948959 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.044999999999999998</length>
+            <radius>0.074999999999999997</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="fl_wheel_fixed_joint_lump__fl_tire_visual_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_tire.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.86</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fl_wheel_fixed_joint_lump__fl_hub_visual_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_hub.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fl_wheel_fixed_joint_lump__fl_bolts_visual_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_bolts.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+      <sensor name="fl_contact" type="contact">
+        <topic>/morph/contacts/fl</topic>
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>fl_wheel_collision_collision</collision>
+        </contact>
+      </sensor>
+    </link>
+    <joint name="fr_height_joint" type="prismatic">
+      <pose relative_to="telR4">0.27000000000000002 -0.27000000000000002 0 0 0 0</pose>
+      <parent>telR4</parent>
+      <child>fr_height</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-0.014999999999999999</lower>
+          <upper>0.014999999999999999</upper>
+          <effort>100</effort>
+          <velocity>0.025000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>10</damping>
+          <friction>0.10000000000000001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fr_height">
+      <pose relative_to="fr_height_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>6.2499999999999986e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2499999999999986e-06</iyy>
+          <iyz>0</iyz>
+          <izz>7.9999999999999996e-06</izz>
+        </inertia>
+      </inertial>
+      <visual name="fr_height_fixed_joint_lump__fr_damper_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_damper.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fr_height_fixed_joint_lump__fr_coil_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_coil.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="fr_spring_joint" type="prismatic">
+      <pose relative_to="fr_height">0 0 0 0 0 0</pose>
+      <parent>fr_height</parent>
+      <child>fr_suspension</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.01</lower>
+          <upper>0.029999999999999999</upper>
+          <effort>150</effort>
+          <velocity>0.40000000000000002</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fr_suspension">
+      <pose relative_to="fr_spring_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 -0.040000000000000001 0 0 0</pose>
+        <mass>0.13</mass>
+        <inertia>
+          <ixx>8.2604166666666685e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>8.2604166666666685e-05</iyy>
+          <iyz>0</iyz>
+          <izz>2.654166666666667e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="fr_suspension_fixed_joint_lump__fr_piston_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_piston.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.22</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="fr_steer_joint" type="revolute">
+      <pose relative_to="fr_suspension">0 0 0 0 0 0</pose>
+      <parent>fr_suspension</parent>
+      <child>fr_steering</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1.570796326794897</lower>
+          <upper>1.570796326794897</upper>
+          <effort>0.69999999999999996</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.14999999999999999</damping>
+          <friction>0.029999999999999999</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fr_steering">
+      <pose relative_to="fr_steer_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-3.198961960624117e-20 -0.024642447205810561 -0.2090357539915591 0 0 0</pose>
+        <mass>0.40000000000000002</mass>
+        <inertia>
+          <ixx>0.001963799102</ixx>
+          <ixy>1.598813754e-21</ixy>
+          <ixz>5.048717442e-20</ixz>
+          <iyy>0.0014472231459999999</iyy>
+          <iyz>-0.00049327087160000004</iyz>
+          <izz>0.00058224926090000002</izz>
+        </inertia>
+      </inertial>
+      <collision name="fr_steering_fixed_joint_lump__fr_steer_collision_collision">
+        <pose>0 0 -0.12 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.040000000000000001 0.040000000000000001 0.17999999999999999</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.6</mu>
+              <mu2>0.6</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="fr_steering_fixed_joint_lump__fr_fork_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_fork.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fr_steering_fixed_joint_lump__fr_motor_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_motor.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fr_steering_fixed_joint_lump__fr_encoder_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_encoder.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="fr_wheel_joint" type="revolute">
+      <pose relative_to="fr_steering">0 0 -0.26000000000000001 0 0 0</pose>
+      <parent>fr_steering</parent>
+      <child>fr_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>0.5</effort>
+          <velocity>25</velocity>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <damping>0.0030000000000000001</damping>
+          <friction>0.001</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="fr_wheel">
+      <pose relative_to="fr_wheel_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.20000000000000001</mass>
+        <inertia>
+          <ixx>0.00028529500000000003</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00050734</iyy>
+          <iyz>0</iyz>
+          <izz>0.00028529500000000003</izz>
+        </inertia>
+      </inertial>
+      <collision name="fr_wheel_collision_collision">
+        <pose>0 0 0 1.5707963267948959 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.044999999999999998</length>
+            <radius>0.074999999999999997</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1.2</mu>
+              <mu2>1.2</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="fr_wheel_fixed_joint_lump__fr_tire_visual_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_tire.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png</albedo_map>
+              <metalness>0.0</metalness>
+              <roughness>0.86</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fr_wheel_fixed_joint_lump__fr_hub_visual_visual_1">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_hub.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="fr_wheel_fixed_joint_lump__fr_bolts_visual_visual_2">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/research_bolts.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+      <sensor name="fr_contact" type="contact">
+        <topic>/morph/contacts/fr</topic>
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+          <collision>fr_wheel_collision_collision</collision>
+        </contact>
+      </sensor>
+    </link>
+    <joint name="telR5_joint" type="prismatic">
+      <pose relative_to="telR4">0 0 0 0 0 0</pose>
+      <parent>telR4</parent>
+      <child>telR5</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telR5">
+      <pose relative_to="telR5_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.20999999999999999 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telR5_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telR5.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="telR6_joint" type="prismatic">
+      <pose relative_to="telR5">0 0 0 0 0 0</pose>
+      <parent>telR5</parent>
+      <child>telR6</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.037900000000000003</lower>
+          <upper>0.016511111110999999</upper>
+          <effort>8</effort>
+          <velocity>0.0060000000000000001</velocity>
+        </limit>
+        <dynamics>
+          <damping>5</damping>
+          <friction>0.050000000000000003</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="telR6">
+      <pose relative_to="telR6_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.252 0 -0.059999999999999998 0 0 0</pose>
+        <mass>0.029999999999999999</mass>
+        <inertia>
+          <ixx>1.1312500000000001e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.2500000000000001e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.1312499999999993e-05</izz>
+        </inertia>
+      </inertial>
+      <visual name="telR6_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/telR6.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="hexarmBR_joint" type="revolute">
+      <pose relative_to="telR6">0.379 0 0.126 0 0 0</pose>
+      <parent>telR6</parent>
+      <child>hexarmBR</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.25</lower>
+          <upper>0.25</upper>
+          <effort>1</effort>
+          <velocity>0.29999999999999999</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.10000000000000001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="hexarmBR">
+      <pose relative_to="hexarmBR_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 -0.19 0 0 0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0002394616666666667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.2666666666666677e-07</iyy>
+          <iyz>0</iyz>
+          <izz>0.00024006833333333331</izz>
+        </inertia>
+      </inertial>
+      <visual name="hexarmBR_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/hexarmBR.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <joint name="hexarmFR_joint" type="revolute">
+      <pose relative_to="telR6">0.379 0 0.114 0 0 0</pose>
+      <parent>telR6</parent>
+      <child>hexarmFR</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-0.25</lower>
+          <upper>0.25</upper>
+          <effort>1</effort>
+          <velocity>0.29999999999999999</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.10000000000000001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="hexarmFR">
+      <pose relative_to="hexarmFR_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0.19 0 0 0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0002394616666666667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.2666666666666677e-07</iyy>
+          <iyz>0</iyz>
+          <izz>0.00024006833333333331</izz>
+        </inertia>
+      </inertial>
+      <visual name="hexarmFR_cad_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://morph_sim/meshes/hexarmFR.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+          <pbr>
+            <metal>
+              <albedo_map>file:///home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png</albedo_map>
+              <metalness>0.75</metalness>
+              <roughness>0.42</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <self_collide>false</self_collide>
+    </link>
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
+      <parameters>/home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/log/run_c3bkflc3/controllers.yaml</parameters>
+      <hold_joints>false</hold_joints>
+      <position_proportional_gain>0.12</position_proportional_gain>
+    </plugin>
+    <plugin name="morph_sim::SuspensionSystem" filename="libmorph_suspension.so">
+      <stiffness>2200.0</stiffness>
+      <damping>85.0</damping>
+      <thermal_capacity>180.0</thermal_capacity>
+      <thermal_resistance>6.0</thermal_resistance>
+      <temperature_coefficient>0.012</temperature_coefficient>
+      <ambient>22</ambient>
+      <joint>fl_spring_joint</joint>
+      <joint>fr_spring_joint</joint>
+      <joint>rl_spring_joint</joint>
+      <joint>rr_spring_joint</joint>
+      <seal_friction>0.25</seal_friction>
+      <bump_stiffness>12000.0</bump_stiffness>
+      <force_cap>150.0</force_cap>
+      <bump_lower>-0.008</bump_lower>
+      <bump_upper>0.025</bump_upper>
+      <seal_velocity_scale>0.002</seal_velocity_scale>
+      <adjustment_time>0.5</adjustment_time>
+      <reference_temperature>22.0</reference_temperature>
+    </plugin>
+    <frame name="camera_mount_joint" attached_to="base_link">
+      <pose>0.13 0 0.17999999999999999 0 0 0</pose>
+    </frame>
+    <frame name="camera_link" attached_to="camera_mount_joint">
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name="perception_mount" attached_to="base_link">
+      <pose>0.22 0 0.12 0 0 0</pose>
+    </frame>
+    <frame name="perception_link" attached_to="perception_mount">
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name="rl_mount_joint" attached_to="telL4">
+      <pose>-0.27000000000000002 0.27000000000000002 0 0 0 0</pose>
+    </frame>
+    <frame name="rl_mount" attached_to="rl_mount_joint">
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name="rr_mount_joint" attached_to="telL4">
+      <pose>-0.27000000000000002 -0.27000000000000002 0 0 0 0</pose>
+    </frame>
+    <frame name="rr_mount" attached_to="rr_mount_joint">
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name="fl_mount_joint" attached_to="telR4">
+      <pose>0.27000000000000002 0.27000000000000002 0 0 0 0</pose>
+    </frame>
+    <frame name="fl_mount" attached_to="fl_mount_joint">
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name="fr_mount_joint" attached_to="telR4">
+      <pose>0.27000000000000002 -0.27000000000000002 0 0 0 0</pose>
+    </frame>
+    <frame name="fr_mount" attached_to="fr_mount_joint">
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>world</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <odom_publish_frequency>50</odom_publish_frequency>
+      <dimensions>3</dimensions>
+      <odom_topic>/morph/ground_truth/odom</odom_topic>
+      <tf_topic>/morph/ground_truth/tf</tf_topic>
+    </plugin>
+    <plugin filename="libmorph_watchdog.so" name="morph_sim::DriveWatchdog">
+      <capture_speed>0.2</capture_speed>
+      <mode>powered_hold</mode>
+      <hold_kp>0.8</hold_kp>
+      <trace>false</trace>
+      <timeout>0.2</timeout>
+      <torque_limit>0.5</torque_limit>
+      <brake_gain>0.21874999999999997</brake_gain>
+      <wheel>fl_wheel_joint</wheel>
+      <wheel>fr_wheel_joint</wheel>
+      <wheel>rl_wheel_joint</wheel>
+      <wheel>rr_wheel_joint</wheel>
+      <position_joint>telR1_joint</position_joint>
+      <position_joint>telR2_joint</position_joint>
+      <position_joint>telR3_joint</position_joint>
+      <position_joint>telR4_joint</position_joint>
+      <position_joint>telR5_joint</position_joint>
+      <position_joint>telR6_joint</position_joint>
+      <position_joint>telL1_joint</position_joint>
+      <position_joint>telL2_joint</position_joint>
+      <position_joint>telL3_joint</position_joint>
+      <position_joint>telL4_joint</position_joint>
+      <position_joint>telL5_joint</position_joint>
+      <position_joint>telL6_joint</position_joint>
+      <position_joint>hexarmFR_joint</position_joint>
+      <position_joint>hexarmBR_joint</position_joint>
+      <position_joint>hexarmFL_joint</position_joint>
+      <position_joint>hexarmBL_joint</position_joint>
+      <position_joint>fl_steer_joint</position_joint>
+      <position_joint>fr_steer_joint</position_joint>
+      <position_joint>rl_steer_joint</position_joint>
+      <position_joint>rr_steer_joint</position_joint>
+    </plugin>
+    <plugin filename="libmorph_height_servo.so" name="morph_sim::HeightServo">
+      <kp>1000.0</kp>
+      <kd>12.0</kd>
+      <timeout>0.2</timeout>
+      <fl>
+        <mass>0.03</mass>
+        <lower>-0.015</lower>
+        <upper>0.015</upper>
+        <force_limit>100</force_limit>
+        <speed_limit>0.025</speed_limit>
+        <damping>10</damping>
+        <friction>0.1</friction>
+      </fl>
+      <fr>
+        <mass>0.03</mass>
+        <lower>-0.015</lower>
+        <upper>0.015</upper>
+        <force_limit>100</force_limit>
+        <speed_limit>0.025</speed_limit>
+        <damping>10</damping>
+        <friction>0.1</friction>
+      </fr>
+      <rl>
+        <mass>0.03</mass>
+        <lower>-0.015</lower>
+        <upper>0.015</upper>
+        <force_limit>100</force_limit>
+        <speed_limit>0.025</speed_limit>
+        <damping>10</damping>
+        <friction>0.1</friction>
+      </rl>
+      <rr>
+        <mass>0.03</mass>
+        <lower>-0.015</lower>
+        <upper>0.015</upper>
+        <force_limit>100</force_limit>
+        <speed_limit>0.025</speed_limit>
+        <damping>10</damping>
+        <friction>0.1</friction>
+      </rr>
+    </plugin>
+  </model>
+</sdf>

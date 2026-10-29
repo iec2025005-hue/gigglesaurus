@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+ <xacro:macro name="box_inertia" params="mass x y z xyz:='0 0 0'">
+  <inertial><origin xyz="${xyz}"/><mass value="${mass}"/><inertia ixx="${mass*(y*y+z*z)/12}" ixy="0" ixz="0" iyy="${mass*(x*x+z*z)/12}" iyz="0" izz="${mass*(x*x+y*y)/12}"/></inertial>
+ </xacro:macro>
+ <xacro:macro name="box_visual" params="name xyz size rgba">
+  <visual name="${name}"><origin xyz="${xyz}"/><geometry><box size="${size}"/></geometry><material name="${name}_material"><color rgba="${rgba}"/></material></visual>
+ </xacro:macro>
+ <xacro:macro name="box_collision" params="name xyz size">
+  <collision name="${name}"><origin xyz="${xyz}"/><geometry><box size="${size}"/></geometry></collision>
+ </xacro:macro>
+ <xacro:macro name="mesh_visual" params="mesh color">
+  <visual name="${mesh}_cad"><geometry><mesh filename="package://morph_sim/meshes/${mesh}.stl"/></geometry><material name="${mesh}_material"><color rgba="${color}"/></material></visual>
+ </xacro:macro>
+ <xacro:macro name="controlled_joint" params="name interface">
+  <joint name="${name}"><command_interface name="${interface}"/><state_interface name="position"><param name="initial_value">0.0</param></state_interface><state_interface name="velocity"/><state_interface name="effort"/></joint>
+ </xacro:macro>
+</robot>

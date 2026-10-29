@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.8">
+  <model name="model">
+    <static>true</static>
+    <link name="source">
+      <visual name="branches_visual">
+        <geometry>
+          <mesh>
+            <uri>model://ph_tree_small_02/branches.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://ph_tree_small_02/textures/tree_small_02_branch_diff_1k.jpg</albedo_map>
+              <normal_map>model://ph_tree_small_02/textures/tree_small_02_branch_nor_gl_1k.jpg</normal_map>
+              <roughness>0.86</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="leaves_visual">
+        <geometry>
+          <mesh>
+            <uri>model://ph_tree_small_02/leaves.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://ph_tree_small_02/textures/tree_small_02_leaves_diff_1k.jpg</albedo_map>
+              <normal_map>model://ph_tree_small_02/textures/tree_small_02_leaves_nor_gl_1k.jpg</normal_map>
+              <roughness>0.86</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="trunk_visual">
+        <geometry>
+          <mesh>
+            <uri>model://ph_tree_small_02/trunk.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://ph_tree_small_02/textures/tree_small_02_diff_1k.jpg</albedo_map>
+              <normal_map>model://ph_tree_small_02/textures/tree_small_02_nor_gl_1k.jpg</normal_map>
+              <roughness>0.86</roughness>
+              <metalness>0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="trunk_collision">
+        <geometry>
+          <mesh>
+            <uri>model://ph_tree_small_02/trunk.obj</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>0.65</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+  </model>
+</sdf>

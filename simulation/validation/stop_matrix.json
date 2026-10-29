@@ -1,0 +1,510 @@
+{
+  "scope": "Six injected failure modes on two main-arena surfaces; all design parameters assumed",
+  "cases": [
+    {
+      "case": "estop",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12103467231206,
+        "sim_s": 5.54,
+        "xy": [
+          0.4308640649601503,
+          -3.0004834283889457
+        ],
+        "speed_m_s": 0.24324964145998892
+      },
+      "stop_wall_s": 0.47337809300000006,
+      "stop_sim_s": 0.47199999999999953,
+      "stop_distance_path_m": 0.030914035800089633,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.00010170933349034361,
+      "native_watchdog": {
+        "sim_time_s": 6.634,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.00217936,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1560,
+      "passed": true,
+      "name": "stop_v2_high_estop",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 2
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "release",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12122346114749,
+        "sim_s": 5.800000000000001,
+        "xy": [
+          0.43273572374224084,
+          -3.00049127586893
+        ],
+        "speed_m_s": 0.24219432136556643
+      },
+      "stop_wall_s": 0.493115962,
+      "stop_sim_s": 0.4919999999999991,
+      "stop_distance_path_m": 0.04091759532267668,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.010186835301064076,
+      "native_watchdog": {
+        "sim_time_s": 6.938,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.00132958,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1560,
+      "passed": true,
+      "name": "stop_v2_high_release",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 1
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "stale_command",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12140909007426,
+        "sim_s": 5.590000000000001,
+        "xy": [
+          0.4259649490296073,
+          -3.0004448505923293
+        ],
+        "speed_m_s": 0.24495754831966265
+      },
+      "stop_wall_s": 0.561502669,
+      "stop_sim_s": 0.5599999999999996,
+      "stop_distance_path_m": 0.08335433365773362,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.007123879224102168,
+      "native_watchdog": {
+        "sim_time_s": 6.834,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.00530087,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1596,
+      "passed": true,
+      "name": "stop_v2_high_stale_command",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "stale_state",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12159615405371,
+        "sim_s": 5.720000000000001,
+        "xy": [
+          0.4300271471720896,
+          -3.0004960727367083
+        ],
+        "speed_m_s": 0.24341896679672664
+      },
+      "stop_wall_s": 0.43302862200000003,
+      "stop_sim_s": 0.4319999999999995,
+      "stop_distance_path_m": 0.07043859956874339,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.003957132877401627,
+      "native_watchdog": {
+        "sim_time_s": 6.836,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 0.00192287,
+        "brake_energy_J": 0.239403,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": true,
+      "switch_ack": true,
+      "position_command_count": 1272,
+      "passed": true,
+      "name": "stop_v2_high_stale_state",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 1
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "manager_crash",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12178204585308,
+        "sim_s": 5.582000000000001,
+        "xy": [
+          0.4283234838955056,
+          -3.0004768141179667
+        ],
+        "speed_m_s": 0.24516018289983538
+      },
+      "stop_wall_s": 0.38917417800000004,
+      "stop_sim_s": 0.387999999999999,
+      "stop_distance_path_m": 0.06802756739010882,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.0033649157516893974,
+      "native_watchdog": {
+        "sim_time_s": 6.632,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 0.00130125,
+        "brake_energy_J": 0.22558,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1212,
+      "passed": true,
+      "name": "stop_v2_high_manager_crash",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "actuator_crash",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12196877853168,
+        "sim_s": 5.962000000000001,
+        "xy": [
+          0.4319908731054209,
+          -3.0005166178067935
+        ],
+        "speed_m_s": 0.2421861891684667
+      },
+      "stop_wall_s": 0.43151725300000005,
+      "stop_sim_s": 0.4299999999999997,
+      "stop_distance_path_m": 0.0729889748232442,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.005009239334139736,
+      "native_watchdog": {
+        "sim_time_s": 7.038,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 0.00346679,
+        "brake_energy_J": 0.261714,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1551,
+      "passed": true,
+      "name": "stop_v2_high_actuator_crash",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 1
+      },
+      "surface_case": "high",
+      "process_exit_code": 0
+    },
+    {
+      "case": "estop",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12215308665573,
+        "sim_s": 5.45,
+        "xy": [
+          11.999824524415807,
+          1.4670643661253815
+        ],
+        "speed_m_s": 0.2217324876002565
+      },
+      "stop_wall_s": 0.7816509380000001,
+      "stop_sim_s": 0.7800000000000002,
+      "stop_distance_path_m": 0.05003096637531622,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.019961411605666196,
+      "native_watchdog": {
+        "sim_time_s": 6.934,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.0147472,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1653,
+      "passed": true,
+      "name": "stop_v2_low_estop",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 1
+      },
+      "surface_case": "low",
+      "process_exit_code": 0
+    },
+    {
+      "case": "release",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12234077918385,
+        "sim_s": 5.414000000000001,
+        "xy": [
+          11.999813014664054,
+          1.4687531910771943
+        ],
+        "speed_m_s": 0.21850773491509587
+      },
+      "stop_wall_s": 0.5987651700000001,
+      "stop_sim_s": 0.597999999999999,
+      "stop_distance_path_m": 0.04753859649476671,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 0.004630152930637798,
+      "native_watchdog": {
+        "sim_time_s": 6.634,
+        "heartbeat_fresh": true,
+        "locally_measured_wheels": 0,
+        "brake_power_W": 0,
+        "brake_energy_J": 0.00798436,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1596,
+      "passed": true,
+      "name": "stop_v2_low_release",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": true,
+        "forced_termination": false,
+        "native_limit_warning_count": 2
+      },
+      "surface_case": "low",
+      "process_exit_code": 0
+    },
+    {
+      "case": "stale_command",
+      "passed": false,
+      "error": "No summary; inspect /home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/validation/performance/stop_v2_low_stale_command/benchmark.log",
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 1
+    },
+    {
+      "case": "stale_state",
+      "passed": false,
+      "error": "No summary; inspect /home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/validation/performance/stop_v2_low_stale_state/benchmark.log",
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 1
+    },
+    {
+      "case": "manager_crash",
+      "passed": false,
+      "error": "No summary; inspect /home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/validation/performance/stop_v2_low_manager_crash/benchmark.log",
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 1
+      },
+      "surface_case": "low",
+      "process_exit_code": 1
+    },
+    {
+      "case": "actuator_crash",
+      "parameter_status": "assumed",
+      "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+      "criteria": {
+        "stop_wall_s_max": 1.0,
+        "stop_distance_m_max": 0.2,
+        "post_hold_speed_m_s_max": 0.02
+      },
+      "trigger": {
+        "wall_ns": 12314523317126,
+        "sim_s": 5.462000000000001,
+        "xy": [
+          12.000042161051942,
+          1.4715411377559595
+        ],
+        "speed_m_s": 0.24596251177807193
+      },
+      "stop_wall_s": 0.833084641,
+      "stop_sim_s": 0.8319999999999999,
+      "stop_distance_path_m": 0.09067461738328965,
+      "stable_stop": true,
+      "post_hold_speed_m_s": 3.147327672440547e-06,
+      "native_watchdog": {
+        "sim_time_s": 6.942,
+        "heartbeat_fresh": false,
+        "locally_measured_wheels": 4,
+        "brake_power_W": 2.18833e-09,
+        "brake_energy_J": 0.397602,
+        "parameter_status": "assumed",
+        "scope": "simulated motor short-brake watchdog; hardware equivalence and thermal allocation unvalidated"
+      },
+      "no_position_commands_after_stale_deadline": null,
+      "switch_ack": null,
+      "position_command_count": 1677,
+      "passed": true,
+      "name": "stop_v2_low_actuator_crash",
+      "launch_args": [
+        "headless:=true",
+        "rviz:=false",
+        "sector:=snow"
+      ],
+      "cleanup": {
+        "launch_exit_code": 0,
+        "traceback": false,
+        "native_crash": false,
+        "forced_termination": false,
+        "native_limit_warning_count": 0
+      },
+      "surface_case": "low",
+      "process_exit_code": 0
+    }
+  ],
+  "passed": false
+}

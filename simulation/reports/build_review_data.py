@@ -1,0 +1,18 @@
+from pathlib import Path
+import json,math,hashlib,platform,subprocess
+import numpy as np
+P=Path(__file__).resolve().parents[1]
+def summarize(path):
+ d=json.loads(path.read_text());duration=sum(r['duration_sim_s'] for r in d);wall=sum(r['duration_sim_s']/r['rtf'] for r in d)
+ forward=next(r for r in d if r['phase']=='forward_response');combined=next(r for r in d if r['phase']=='combined_drive_and_expand')
+ points=sorted((t['wall_s'],t['sim_s']) for r in d for t in r['trajectory']);points=np.asarray(points);windows=[]
+ if len(points)>2:
+  for t in np.arange(points[0,0],points[-1,0]-1,1):windows.append(float(np.interp(t+1,points[:,0],points[:,1])-np.interp(t,points[:,0],points[:,1])))
+ return {'case':path.stem,'duration_sim_s':duration,'duration_wall_s':wall,'aggregate_rtf':duration/wall,'phase_min_rtf':min(r['rtf'] for r in d),'sampled_1s_rtf_p05':float(np.percentile(windows,5)) if windows else None,'response_wall_ms':forward['response']['wall_s']*1000,'response_sim_ms':forward['response']['sim_s']*1000,'forward_distance_m':math.dist(forward['start'][:2],forward['end'][:2]),'stage_end_mm':combined['stage_end']*1000,'combined_estop':combined['estop'],'phase_rtf':{r['phase']:r['rtf'] for r in d},'raw_file':str(path.relative_to(P))}
+configs={'gui_2ms':(640,15,True,True,None),'headless_2ms':(640,15,True,True,None),'gui_balanced_2ms':(480,10,False,True,None),'headless_1ms':(480,10,False,True,None),'gui_balanced_soak':(480,10,False,True,None),'gui_realtime':(320,5,False,False,None),'gui_realtime_lp2':(320,5,False,False,2)}
+rows=[summarize(p) for p in sorted((P/'validation/performance').glob('*.json')) if p.name!='summary.json']
+for row in rows:
+ c=configs[row['case']];row['configuration']={'camera_width':c[0],'camera_rate_Hz':c[1],'camera_effects':c[2],'render_shadows':c[3],'LP_NUM_THREADS':c[4],'physics_step_s':.001 if row['case']=='headless_1ms' else .002}
+files=['src/morph_sim/urdf/morph.urdf.xacro','src/morph_sim/urdf/leg.xacro','src/morph_sim/config/params.yaml','src/morph_sim/worlds/multisector.sdf','src/morph_sim/morph_sim/control.py','src/morph_sim/src/suspension_system.cpp']
+report={'date':'28 October 2026','cases':rows,'test_result':{'checks':51,'failures':0},'entrance_result':json.loads((P/'validation/sector_checks.json').read_text()),'hash_scope':'Final reviewed source snapshot; not retrospective per-run hashes','hashes':{f:hashlib.sha256((P/f).read_bytes()).hexdigest() for f in files},'target':{'scope':'proposed soft real-time acceptance target; not hard real-time','aggregate_rtf_min':.95,'sampled_1s_rtf_p05_min':.90,'response_wall_ms_p95_max':250,'required_repeat_runs':5,'required_response_trials':20,'soak_minutes_min':10},'grade_design_bound':{'mass_kg':10,'wheel_radius_m':.075,'torque_per_wheel_Nm':.5,'ideal_total_force_N':4*.5/.075,'ideal_zero_rr_grade_deg':math.degrees(math.asin((4*.5/.075)/(10*9.81))),'torque_per_wheel_at_25deg_Nm_with_Crr_0_015':10*9.81*(math.sin(math.radians(25))+.015*math.cos(math.radians(25)))*.075/4},'limitations':['No hardware measurements; all design parameters assumed','One response trial per benchmark case; response p95 is not established','Sequential runs under varying system load; differences do not establish causation','One-second RTF estimates are interpolated from roughly 10 Hz application samples, not physics-step deadlines','Historical sector checks cover entrances, not full lane traversal','Stationary emergency-stop latch checked; moving emergency-stop stopping distance remains unverified']}
+(P/'validation/performance/summary.json').write_text(json.dumps(report,indent=2));print(json.dumps(rows,indent=2))

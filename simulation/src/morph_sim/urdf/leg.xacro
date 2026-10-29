@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+ <xacro:macro name="module_visual" params="name mesh color"><visual name="${name}"><geometry><mesh filename="package://morph_sim/meshes/${mesh}.stl"/></geometry><material name="${name}_finish"><color rgba="${color}"/></material></visual></xacro:macro>
+ <xacro:macro name="leg" params="name side ysign">
+  <!-- Telescope group 4 translates this attachment by 4*d. -->
+  <link name="${name}_mount"><xacro:box_inertia mass="0.03" x="0.07" y="0.07" z="0.02"/><xacro:box_visual name="${name}_mount_visual" xyz="0 0 0" size="0.07 0.07 0.02" rgba="0.02 0.8 0.9 1"/></link>
+  <joint name="${name}_mount_joint" type="fixed"><parent link="tel${side}4"/><child link="${name}_mount"/><origin xyz="${0.27 if side=='R' else -0.27} ${ysign*0.27} 0"/></joint>
+  <link name="${name}_height"><xacro:box_inertia mass="0.03" x="0.04" y="0.04" z="0.03"/><xacro:module_visual name="${name}_damper" mesh="research_damper" color="0.72 0.39 0.08 1"/><xacro:module_visual name="${name}_coil" mesh="research_coil" color="0.12 0.14 0.16 1"/></link>
+  <joint name="${name}_height_joint" type="prismatic"><parent link="${name}_mount"/><child link="${name}_height"/><axis xyz="0 0 -1"/><limit lower="-0.015" upper="0.015" effort="100" velocity="0.025"/><dynamics damping="10" friction="0.1"/></joint>
+  <!-- Passive compliance under the height actuator: +q is compression. -->
+  <link name="${name}_suspension"><xacro:box_inertia mass="0.13" x="0.035" y="0.035" z="0.08" xyz="0 0 -0.04"/><xacro:module_visual name="${name}_piston" mesh="research_piston" color="0.75 0.79 0.82 1"/></link>
+  <joint name="${name}_spring_joint" type="prismatic"><parent link="${name}_height"/><child link="${name}_suspension"/><axis xyz="0 0 1"/><limit lower="-0.01" upper="0.03" effort="150" velocity="0.4"/><dynamics damping="0" friction="0"/></joint>
+  <link name="${name}_steering"><inertial><origin xyz="-3.198961960624117e-20 -0.024642447205810557 -0.20903575399155913"/><mass value="0.4"/><inertia ixx="0.001963799102" ixy="1.598813754e-21" ixz="5.048717442e-20" iyy="0.001447223146" iyz="-0.0004932708716" izz="0.0005822492609"/></inertial><xacro:module_visual name="${name}_fork" mesh="research_fork" color="0.21 0.24 0.28 1"/><xacro:module_visual name="${name}_motor" mesh="research_motor" color="0.45 0.49 0.54 1"/><xacro:module_visual name="${name}_encoder" mesh="research_encoder" color="0.08 0.09 0.11 1"/><xacro:box_collision name="${name}_steer_collision" xyz="0 0 -0.12" size="0.04 0.04 0.18"/></link>
+  <joint name="${name}_steer_joint" type="revolute"><parent link="${name}_suspension"/><child link="${name}_steering"/><axis xyz="0 0 1"/><limit lower="${-pi/2}" upper="${pi/2}" effort="0.7" velocity="1.0"/><dynamics damping="0.15" friction="0.03"/></joint>
+  <link name="${name}_wheel">
+   <inertial><mass value="0.2"/><inertia ixx="${(0.14*(3*(wheel_radius**2+(.034*wheel_radius/.075)**2)+wheel_width**2)+0.06*(3*(.033*wheel_radius/.075)**2+(.04*wheel_width/.045)**2))/12}" ixy="0" ixz="0" iyy="${(0.14*(wheel_radius**2+(.034*wheel_radius/.075)**2)+0.06*(.033*wheel_radius/.075)**2)/2}" iyz="0" izz="${(0.14*(3*(wheel_radius**2+(.034*wheel_radius/.075)**2)+wheel_width**2)+0.06*(3*(.033*wheel_radius/.075)**2+(.04*wheel_width/.045)**2))/12}"/></inertial>
+   <visual name="${name}_tire_visual"><geometry><mesh filename="package://morph_sim/meshes/research_tire.stl" scale="${wheel_radius/.075} ${wheel_width/.045} ${wheel_radius/.075}"/></geometry><material name="tire"><color rgba="0.065 0.07 0.075 1"/></material></visual>
+   <visual name="${name}_hub_visual"><geometry><mesh filename="package://morph_sim/meshes/research_hub.stl" scale="${wheel_radius/.075} ${wheel_width/.045} ${wheel_radius/.075}"/></geometry><material name="hub"><color rgba="0.56 0.61 0.65 1"/></material></visual>
+   <visual name="${name}_bolts_visual"><geometry><mesh filename="package://morph_sim/meshes/research_bolts.stl" scale="${wheel_radius/.075} ${wheel_width/.045} ${wheel_radius/.075}"/></geometry><material name="bolts"><color rgba="0.15 0.16 0.18 1"/></material></visual>
+   <collision name="${name}_wheel_collision"><origin rpy="${pi/2} 0 0"/><geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry></collision>
+  </link>
+  <joint name="${name}_wheel_joint" type="continuous"><parent link="${name}_steering"/><child link="${name}_wheel"/><origin xyz="0 0 -0.26"/><axis xyz="0 1 0"/><limit effort="0.5" velocity="25"/><dynamics damping="0.003" friction="0.001"/></joint>
+ </xacro:macro>
+ <xacro:macro name="leg_control" params="name">
+  <xacro:controlled_joint name="${name}_height_joint" interface="position"/><xacro:controlled_joint name="${name}_steer_joint" interface="position"/><xacro:controlled_joint name="${name}_wheel_joint" interface="velocity"/>
+  <joint name="${name}_spring_joint"><state_interface name="position"/><state_interface name="velocity"/><state_interface name="effort"/></joint>
+ </xacro:macro>
+</robot>

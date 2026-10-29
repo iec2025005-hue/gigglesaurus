@@ -1,0 +1,51 @@
+{
+  "case": "actuator_crash",
+  "requested_speed_m_s": 0.1,
+  "mode": "snow",
+  "initial_mode": "snow",
+  "parameter_status": "assumed",
+  "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+  "criteria": {
+    "stop_wall_s_max": 1.0,
+    "stop_distance_m_max": 0.2,
+    "post_hold_speed_m_s_max": 0.02
+  },
+  "trigger": {
+    "wall_ns": 10996582010550,
+    "sim_s": 13.814,
+    "xy": [
+      12.000133392574616,
+      1.1553511301509256
+    ],
+    "speed_m_s": 0.08236647317303346
+  },
+  "stop_wall_s": 0.8013539230000001,
+  "stop_sim_s": 0.8000000000000007,
+  "stop_distance_path_m": 0.031235066674637435,
+  "stable_stop": true,
+  "post_hold_speed_m_s": 5.977287466029959e-05,
+  "native_watchdog": {
+    "sim_time_s": 15.332,
+    "heartbeat_fresh": false,
+    "locally_measured_wheels": 4,
+    "brake_power_W": 0.000266772,
+    "brake_energy_J": 0.0792106,
+    "powered_hold": true,
+    "hold_mechanical_power_W": 0,
+    "hold_mechanical_energy_J": 2.66e-05,
+    "max_torque_Nm": 0.0958255,
+    "parameter_status": "assumed",
+    "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+  },
+  "no_position_commands_after_stale_deadline": null,
+  "switch_ack": null,
+  "position_command_count": 4107,
+  "passed": true,
+  "name": "stop_jtc_snow_envelope_low_actuator_crash",
+  "launch_args": [
+    "headless:=true",
+    "rviz:=false",
+    "sector:=snow",
+    "position_backend:=trajectory"
+  ]
+}

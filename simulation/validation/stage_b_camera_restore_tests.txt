@@ -1,0 +1,122 @@
+....................F......F............................................ [ 57%]
+......................................................                   [100%]
+=================================== FAILURES ===================================
+__________________________ test_sensor_pbr_enrichment __________________________
+
+    def test_sensor_pbr_enrichment():
+     root=ET.fromstring('<sdf version="1.9"><model name="morph"><link name="base_link"><collision name="underbody_collision"/><visual name="base"/></link>'+''.join('<link name="'+n+'_wheel"><collision name="'+n+'_wheel_collision"/><visual name="'+n+'_tire"/></link>' for n in LEGS)+'</model></sdf>')
+>    enrich_sdf(root,P.resolve());assert len(root.findall('.//sensor'))==7
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src/morph_sim/tests/test_core.py:130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = <Element 'sdf' at 0x70d76a303240>
+share = PosixPath('/home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/src/morph_sim')
+camera_rate = 10.0, camera_width = 480, range_sensor = True
+
+    def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True):
+     model=root.find('model')
+     if model is None:raise ValueError('gz sdf conversion returned no model')
+     links={link.attrib['name']:link for link in model.findall('link')}
+     if 'base_link' not in links:raise ValueError('base_link missing after SDF conversion')
+     for name,link in links.items():
+      for visual in link.findall('visual'):
+       material=visual.find('material')
+       if material is None:material=child(visual,'material')
+       old=material.find('pbr')
+       if old is not None:material.remove(old)
+       vname=visual.attrib.get('name','')
+       # Preserve CAD/component finishes. Textures must not multiply tinted CAD
+       # colours by another dark albedo, which previously hid the wheel assembly.
+       rgba=material.findtext('diffuse') or '0.45 0.49 0.54 1'
+       for field in ('ambient','diffuse'):
+        item=material.find(field)
+        if item is None:item=child(material,field)
+        item.text=rgba
+       metal=child(child(material,'pbr'),'metal')
+       rubber='tire' in vname
+       tex='rubber' if rubber or 'coil' in vname else 'encoder' if 'encoder' in vname else 'gold' if 'damper' in vname else 'chrome' if 'piston' in vname else 'cyan' if 'hexarm' in name else 'metal'
+       material.find('ambient').text='1 1 1 1'
+       material.find('diffuse').text='1 1 1 1'
+       child(metal,'albedo_map',(share/'models/materials/textures'/f'finish_{tex}.png').as_uri())
+    
+       child(metal,'metalness',0.0 if rubber or 'encoder' in vname else .75)
+       child(metal,'roughness',.86 if rubber else .22 if 'piston' in vname else .42)
+       if 'status_led' in vname:child(material,'emissive','0.02 0.8 1.0 1')
+      for collision in link.findall('collision'):add_surface(collision,1.2 if name.endswith('_wheel') else .6)
+      # No global self-collision: adjacent simplified collision shapes deliberately overlap.
+      sc=link.find('self_collide')
+      if sc is None:sc=child(link,'self_collide')
+      sc.text='false'
+     odom=child(model,'plugin',filename='gz-sim-odometry-publisher-system',name='gz::sim::systems::OdometryPublisher')
+     child(odom,'odom_frame','world');child(odom,'robot_base_frame','base_link');child(odom,'odom_publish_frequency',50);child(odom,'dimensions',3);child(odom,'odom_topic','/morph/ground_truth/odom');child(odom,'tf_topic','/morph/ground_truth/tf')
+     base=links['base_link'];imu=child(base,'sensor',name='base_imu',type='imu');child(imu,'topic','/morph/imu');child(imu,'always_on','true');child(imu,'update_rate',100);child(imu,'gz_frame_id','base_link')
+     camera_link=links.get('camera_link')
+     camera_frame=model.find("frame[@name='camera_link']")
+>    if camera_link is None and camera_frame is None:raise ValueError('Camera mount frame disappeared during SDF conversion')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    ValueError: Camera mount frame disappeared during SDF conversion
+
+src/morph_sim/morph_sim/assets.py:64: ValueError
+___________________ test_sdf_plugins_and_contact_references ____________________
+
+    def test_sdf_plugins_and_contact_references():
+     root=ET.fromstring('<sdf version="1.9"><model name="morph"><link name="base_link"><collision name="underbody_collision"/></link>'+''.join('<link name="'+n+'_wheel"><collision name="'+n+'_wheel_collision"/></link>' for n in LEGS)+'</model></sdf>')
+>    enrich_sdf(root,P.resolve())
+
+src/morph_sim/tests/test_core.py:168: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = <Element 'sdf' at 0x70d76a3671f0>
+share = PosixPath('/home/diya/Documents/Codex/2026-10-24/ac/outputs/morph_spec_v4_ws/src/morph_sim')
+camera_rate = 10.0, camera_width = 480, range_sensor = True
+
+    def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True):
+     model=root.find('model')
+     if model is None:raise ValueError('gz sdf conversion returned no model')
+     links={link.attrib['name']:link for link in model.findall('link')}
+     if 'base_link' not in links:raise ValueError('base_link missing after SDF conversion')
+     for name,link in links.items():
+      for visual in link.findall('visual'):
+       material=visual.find('material')
+       if material is None:material=child(visual,'material')
+       old=material.find('pbr')
+       if old is not None:material.remove(old)
+       vname=visual.attrib.get('name','')
+       # Preserve CAD/component finishes. Textures must not multiply tinted CAD
+       # colours by another dark albedo, which previously hid the wheel assembly.
+       rgba=material.findtext('diffuse') or '0.45 0.49 0.54 1'
+       for field in ('ambient','diffuse'):
+        item=material.find(field)
+        if item is None:item=child(material,field)
+        item.text=rgba
+       metal=child(child(material,'pbr'),'metal')
+       rubber='tire' in vname
+       tex='rubber' if rubber or 'coil' in vname else 'encoder' if 'encoder' in vname else 'gold' if 'damper' in vname else 'chrome' if 'piston' in vname else 'cyan' if 'hexarm' in name else 'metal'
+       material.find('ambient').text='1 1 1 1'
+       material.find('diffuse').text='1 1 1 1'
+       child(metal,'albedo_map',(share/'models/materials/textures'/f'finish_{tex}.png').as_uri())
+    
+       child(metal,'metalness',0.0 if rubber or 'encoder' in vname else .75)
+       child(metal,'roughness',.86 if rubber else .22 if 'piston' in vname else .42)
+       if 'status_led' in vname:child(material,'emissive','0.02 0.8 1.0 1')
+      for collision in link.findall('collision'):add_surface(collision,1.2 if name.endswith('_wheel') else .6)
+      # No global self-collision: adjacent simplified collision shapes deliberately overlap.
+      sc=link.find('self_collide')
+      if sc is None:sc=child(link,'self_collide')
+      sc.text='false'
+     odom=child(model,'plugin',filename='gz-sim-odometry-publisher-system',name='gz::sim::systems::OdometryPublisher')
+     child(odom,'odom_frame','world');child(odom,'robot_base_frame','base_link');child(odom,'odom_publish_frequency',50);child(odom,'dimensions',3);child(odom,'odom_topic','/morph/ground_truth/odom');child(odom,'tf_topic','/morph/ground_truth/tf')
+     base=links['base_link'];imu=child(base,'sensor',name='base_imu',type='imu');child(imu,'topic','/morph/imu');child(imu,'always_on','true');child(imu,'update_rate',100);child(imu,'gz_frame_id','base_link')
+     camera_link=links.get('camera_link')
+     camera_frame=model.find("frame[@name='camera_link']")
+>    if camera_link is None and camera_frame is None:raise ValueError('Camera mount frame disappeared during SDF conversion')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    ValueError: Camera mount frame disappeared during SDF conversion
+
+src/morph_sim/morph_sim/assets.py:64: ValueError
+=========================== short test summary info ============================
+FAILED src/morph_sim/tests/test_core.py::test_sensor_pbr_enrichment - ValueEr...
+FAILED src/morph_sim/tests/test_core.py::test_sdf_plugins_and_contact_references
+2 failed, 124 passed in 10.86s

@@ -1,0 +1,47 @@
+{
+  "case": "stale_state",
+  "parameter_status": "assumed",
+  "scope": "Simulation failure test; stop time is source action to first body sample below 0.01 m/s sustained for 0.2 s",
+  "criteria": {
+    "stop_wall_s_max": 1.0,
+    "stop_distance_m_max": 0.2,
+    "post_hold_speed_m_s_max": 0.02
+  },
+  "trigger": {
+    "wall_ns": 10476763123840,
+    "sim_s": 5.760000000000001,
+    "xy": [
+      0.4451141464878637,
+      -3.000580720870957
+    ],
+    "speed_m_s": 0.24333847910177486
+  },
+  "stop_wall_s": 0.39336501100000004,
+  "stop_sim_s": 0.3899999999999997,
+  "stop_distance_path_m": 0.06518906399357509,
+  "stable_stop": true,
+  "post_hold_speed_m_s": 0.004990019149358405,
+  "native_watchdog": {
+    "sim_time_s": 6.834,
+    "heartbeat_fresh": false,
+    "locally_measured_wheels": 4,
+    "brake_power_W": 0.0079866,
+    "brake_energy_J": 0.201143,
+    "powered_hold": true,
+    "hold_mechanical_power_W": 0.000354198,
+    "hold_mechanical_energy_J": 0.000748957,
+    "max_torque_Nm": 0.0405705,
+    "parameter_status": "assumed",
+    "scope": "simulated local drive watchdog; powered hold requires healthy supply and encoder; hardware equivalence and electrical/thermal allocation unvalidated"
+  },
+  "no_position_commands_after_stale_deadline": true,
+  "switch_ack": true,
+  "position_command_count": 1264,
+  "passed": true,
+  "name": "stop_jtc_v3_high_stale_state",
+  "launch_args": [
+    "headless:=true",
+    "rviz:=false",
+    "position_backend:=trajectory"
+  ]
+}

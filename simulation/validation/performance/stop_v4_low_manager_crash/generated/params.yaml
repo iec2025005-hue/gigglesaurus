@@ -1,0 +1,621 @@
+schema_version: 1
+provenance:
+  default_status: A
+  meaning: Assumed design parameters; not measured or hardware validated
+  units: SI; suffixes identify exceptions
+  geometry_source: Original chassis with assumed 150 mm diameter / 45 mm wide research
+    wheel module
+  frames:
+    drive: motor_shaft unless output prefix
+    steering: steering_output unless motor prefix
+    tyre: wheel_contact
+  seed: 721
+robot:
+  mass_kg: 10.0
+  wheel_radius_m: 0.075
+  wheel_width_m: 0.045
+  wheel_mass_kg: 0.2
+  unsprung_mass_per_module_kg: 0.73
+  wheelbase_m: 0.54
+  track_m: 0.54
+  com_height_m: 0.34
+  com_x_m: 0.0
+  com_y_m: 0.0
+suspension:
+  stiffness_N_m: 2200.0
+  damping_Ns_m: 85.0
+  lower_m: -0.01
+  upper_m: 0.03
+  preload_N: 0.0
+  tyre_stiffness_N_m: 25000.0
+  thermal_capacity_J_K: 180.0
+  thermal_resistance_K_W: 6.0
+  temperature_coefficient_per_K: 0.012
+  seal_friction_N: 0.25
+  bump_stiffness_N_m: 12000.0
+  force_cap_N: 150.0
+  bump_lower_m: -0.008
+  bump_upper_m: 0.025
+  seal_velocity_scale_m_s: 0.002
+  adjustment_time_s: 0.5
+  reference_temperature_C: 22.0
+drive:
+  resistance_ohm: 3.2
+  inductance_H: 0.001
+  kt_Nm_A: 0.02
+  ke_Vs_rad: 0.02
+  gear_ratio: 50.0
+  gear_efficiency: 0.7
+  current_limit_A: 2.0
+  output_torque_limit_Nm: 0.5
+  bridge_drop_V: 2.0
+  speed_kp_Vs_rad: 0.015
+  speed_ki_V_rad: 0.08
+  thermal_capacity_J_K: 60.0
+  thermal_resistance_K_W: 2.5
+  driver_capacity_J_K: 20.0
+  driver_thermal_resistance_K_W: 8.0
+  derate_C: 75.0
+  cutoff_C: 100.0
+  recover_C: 65.0
+  copper_alpha_per_K: 0.00393
+  magnet_alpha_per_K: -0.001
+steering:
+  motor_holding_torque_Nm: 0.45
+  gear_ratio: 3.0
+  gear_efficiency: 0.7
+  output_torque_limit_Nm: 0.7
+  output_speed_limit_rad_s: 1.0
+  pullout_speed_rad_s: 5.0
+  bearing_breakaway_Nm: 0.03
+  effective_patch_radius_m: 0.012
+  kp_Nm_rad: 0.8
+  kd_Nms_rad: 0.02
+  steps_per_motor_turn: 3200
+  safety_factor: 0.85
+power:
+  capacity_Ah: 5.0
+  soc_initial: 1.0
+  ocv_full_V: 12.6
+  ocv_empty_V: 9.6
+  internal_resistance_ohm: 0.08
+  wire_resistance_ohm: 0.04
+  bms_limit_A: 12.0
+  electronics_W: 8.0
+  buck_efficiency: 0.9
+  buck_dropout_V: 1.0
+  brownout_5V: 4.6
+  recover_5V: 4.9
+  cold_resistance_multiplier_at_minus10C: 2.0
+  battery_capacity_J_K: 500.0
+  battery_thermal_resistance_K_W: 4.0
+sensors:
+  encoder_counts_per_wheel_turn: 600
+  encoder_max_edges_s: 10000.0
+  encoder_false_count_probability: 0.0
+  magnetic_encoder_resolution_rad: 0.001534
+  magnetic_temp_bias_rad_K: 0.0001
+  magnetic_eccentricity_rad: 0.002
+  imu_gyro_std_rad_s: 0.002
+  imu_accel_std_m_s2: 0.015
+  imu_gyro_temp_rad_s_K: 0.000349
+  imu_gyro_limit_rad_s: 34.9
+  imu_accel_limit_m_s2: 156.96
+  camera_exposure_s: 0.01
+  camera_focal_px: 494.0
+  camera_drop_probability: 0.0
+  camera_latency_s: 0.05
+  camera_lens_dirt_fraction: 0.0
+  adc_voltage_std_V: 0.02
+  thermistor_lag_s: 5.0
+environment:
+  default_surface: packed_dirt
+  default_scenario: indoor
+  world_extent_m:
+  - 64.0
+  - 44.0
+  spawn_m:
+  - 0.0
+  - -3.0
+  - 0.38
+  scenarios:
+    indoor:
+      ambient_C: 22.0
+      wetness: 0.0
+      lux: 400.0
+      wind_m_s: 0.0
+    hot:
+      ambient_C: 50.0
+      wetness: 0.0
+      lux: 100000.0
+      wind_m_s: 1.0
+    cold:
+      ambient_C: -10.0
+      wetness: 0.0
+      lux: 10000.0
+      wind_m_s: 2.0
+    wet:
+      ambient_C: 22.0
+      wetness: 1.0
+      lux: 5000.0
+      wind_m_s: 1.0
+    night:
+      ambient_C: 18.0
+      wetness: 0.0
+      lux: 0.1
+      wind_m_s: 0.0
+  zones: []
+interaction:
+  native_contact:
+    tier: 1
+    implemented_in: Gazebo DART/Bullet
+    scope: rigid contact; mu/mu2; matching visual/collision mesh
+  motor_thermal:
+    tier: 1
+    implemented_in: interaction_runtime
+    scope: lumped assumed electrical/thermal model
+  pacejka:
+    tier: 1
+    implemented_in: design_physics
+    scope: offline prediction, NOT additional native contact force
+  bekker:
+    tier: 1
+    implemented_in: design_physics
+    scope: plate approximation, NOT deformable terrain
+  unsupported_hardware:
+    tier: 3
+    enabled: false
+couplings:
+  L1_thermal:
+    tier: 1
+    mechanism: heat changes winding resistance, current and torque
+  L3_slip:
+    tier: 1
+    mechanism: wheel encoder odometry independently compared to ground truth
+  L4_brownout:
+    tier: 1
+    mechanism: drive inhibited until simulated homing after rail recovery
+surfaces:
+  tile:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.8
+    mu_static_y: 0.75
+    mu_kinetic_x: 0.68
+    mu_kinetic_y: 0.6375
+    wet_mu_x: 0.35
+    wet_mu_y: 0.315
+    Crr: 0.012
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.002
+  carpet:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.9
+    mu_static_y: 0.85
+    mu_kinetic_x: 0.765
+    mu_kinetic_y: 0.7224999999999999
+    wet_mu_x: 0.7
+    wet_mu_y: 0.63
+    Crr: 0.035
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+  concrete:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.85
+    mu_static_y: 0.8
+    mu_kinetic_x: 0.7224999999999999
+    mu_kinetic_y: 0.68
+    wet_mu_x: 0.55
+    wet_mu_y: 0.49500000000000005
+    Crr: 0.015
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.002
+  rubber_mat:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 1.0
+    mu_static_y: 0.95
+    mu_kinetic_x: 0.85
+    mu_kinetic_y: 0.8075
+    wet_mu_x: 0.75
+    wet_mu_y: 0.675
+    Crr: 0.025
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+  tarmac:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.9
+    mu_static_y: 0.85
+    mu_kinetic_x: 0.765
+    mu_kinetic_y: 0.7224999999999999
+    wet_mu_x: 0.6
+    wet_mu_y: 0.54
+    Crr: 0.018
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.002
+  packed_dirt:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.75
+    mu_static_y: 0.7
+    mu_kinetic_x: 0.6375
+    mu_kinetic_y: 0.595
+    wet_mu_x: 0.5
+    wet_mu_y: 0.45
+    Crr: 0.035
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+  loose_gravel:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.6
+    mu_static_y: 0.5
+    mu_kinetic_x: 0.51
+    mu_kinetic_y: 0.425
+    wet_mu_x: 0.55
+    wet_mu_y: 0.49500000000000005
+    Crr: 0.08
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+    bekker:
+      kc: 10000.0
+      kphi: 1000000.0
+      n: 1.1
+      cohesion_Pa: 1000.0
+      phi_rad: 0.5
+      shear_length_m: 0.02
+      max_sinkage_m: 0.02
+      units: kc N/m^(n+1), kphi N/m^(n+2); provisional plate fit
+  dry_sand:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.5
+    mu_static_y: 0.45
+    mu_kinetic_x: 0.425
+    mu_kinetic_y: 0.3825
+    wet_mu_x: 0.5
+    wet_mu_y: 0.45
+    Crr: 0.12
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+    bekker:
+      kc: 10000.0
+      kphi: 1000000.0
+      n: 1.1
+      cohesion_Pa: 1000.0
+      phi_rad: 0.5
+      shear_length_m: 0.02
+      max_sinkage_m: 0.02
+      units: kc N/m^(n+1), kphi N/m^(n+2); provisional plate fit
+  wet_sand:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.6
+    mu_static_y: 0.5
+    mu_kinetic_x: 0.51
+    mu_kinetic_y: 0.425
+    wet_mu_x: 0.6
+    wet_mu_y: 0.54
+    Crr: 0.08
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+    bekker:
+      kc: 10000.0
+      kphi: 1000000.0
+      n: 1.1
+      cohesion_Pa: 1000.0
+      phi_rad: 0.5
+      shear_length_m: 0.02
+      max_sinkage_m: 0.02
+      units: kc N/m^(n+1), kphi N/m^(n+2); provisional plate fit
+  mud:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.35
+    mu_static_y: 0.3
+    mu_kinetic_x: 0.2975
+    mu_kinetic_y: 0.255
+    wet_mu_x: 0.25
+    wet_mu_y: 0.225
+    Crr: 0.15
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+    bekker:
+      kc: 10000.0
+      kphi: 1000000.0
+      n: 1.1
+      cohesion_Pa: 1000.0
+      phi_rad: 0.5
+      shear_length_m: 0.02
+      max_sinkage_m: 0.02
+      units: kc N/m^(n+1), kphi N/m^(n+2); provisional plate fit
+  short_grass:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.65
+    mu_static_y: 0.6
+    mu_kinetic_x: 0.5525
+    mu_kinetic_y: 0.51
+    wet_mu_x: 0.4
+    wet_mu_y: 0.36000000000000004
+    Crr: 0.05
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+  tall_grass:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.55
+    mu_static_y: 0.5
+    mu_kinetic_x: 0.4675
+    mu_kinetic_y: 0.425
+    wet_mu_x: 0.35
+    wet_mu_y: 0.315
+    Crr: 0.09
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+  leaf_litter:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.45
+    mu_static_y: 0.4
+    mu_kinetic_x: 0.3825
+    mu_kinetic_y: 0.34
+    wet_mu_x: 0.3
+    wet_mu_y: 0.27
+    Crr: 0.07
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+  wet_rock:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.35
+    mu_static_y: 0.3
+    mu_kinetic_x: 0.2975
+    mu_kinetic_y: 0.255
+    wet_mu_x: 0.25
+    wet_mu_y: 0.225
+    Crr: 0.02
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+  snow:
+    status: A
+    frame: wheel_contact
+    mu_static_x: 0.25
+    mu_static_y: 0.24
+    mu_kinetic_x: 0.22
+    mu_kinetic_y: 0.21
+    wet_mu_x: 0.18
+    wet_mu_y: 0.17
+    Crr: 0.06
+    pacejka_B: 10.0
+    pacejka_C: 1.6
+    pacejka_E: 0.97
+    pacejka_D: mu * normal_load_N
+    relaxation_x_m: 0.04
+    relaxation_y_m: 0.04
+    contact_kp_N_m: 1000000.0
+    contact_kd_Ns_m: 100.0
+    min_depth_m: 0.0001
+    max_vel_m_s: 0.1
+    contact_tag_scope: ODE reference values; not claimed active in DART
+    roughness_rms_m: 0.01
+    scope: Rigid snow appearance and assumed friction; no snow compaction model
+control_modes:
+  track:
+    speed: 0.6
+    yaw: 0.7
+    height: -0.008
+    stiffness: 2200.0
+    damping: 85.0
+    extension: 0.0
+  grass:
+    speed: 0.36
+    yaw: 0.55
+    height: 0.0
+    stiffness: 1900.0
+    damping: 75.0
+    extension: 0.0
+  mud:
+    speed: 0.14
+    yaw: 0.28
+    height: 0.007
+    stiffness: 1600.0
+    damping: 90.0
+    extension: 0.016511111111
+  rocky:
+    speed: 0.13
+    yaw: 0.35
+    height: 0.01
+    stiffness: 1600.0
+    damping: 70.0
+    extension: -0.0379
+  climb:
+    speed: 0.12
+    yaw: 0.25
+    height: 0.008
+    stiffness: 2200.0
+    damping: 95.0
+    extension: 0.016511111111
+  sand:
+    speed: 0.18
+    yaw: 0.3
+    height: 0.003
+    stiffness: 1800.0
+    damping: 75.0
+    extension: 0.016511111111
+  debris:
+    speed: 0.13
+    yaw: 0.35
+    height: 0.01
+    stiffness: 1650.0
+    damping: 80.0
+    extension: -0.0379
+  snow:
+    speed: 0.1
+    yaw: 0.24
+    height: 0.002
+    stiffness: 1800.0
+    damping: 90.0
+    extension: 0.016511111111
+  mixed:
+    speed: 0.15
+    yaw: 0.3
+    height: 0.006
+    stiffness: 1800.0
+    damping: 80.0
+    extension: 0.0
+control_safety:
+  state_timeout_s: 0.2
+  command_timeout_s: 0.2
+  future_stamp_tolerance_s: 0.02
+  watchdog_mode: powered_hold
+  watchdog_hold_kp_Nm_rad: 0.8
+  hold_capture_speed_rad_s: 0.2
+  hold_position_gain_s_inv: 4.0
+  hold_speed_limit_rad_s: 0.5
+height_servo:
+  kp_N_m: 1000.0
+  kd_Ns_m: 12.0

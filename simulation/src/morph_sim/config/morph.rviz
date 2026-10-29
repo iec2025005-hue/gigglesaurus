@@ -1,0 +1,98 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Enabled: true
+      Name: Ground reference
+      Plane: XY
+      Cell Size: 1
+    - Class: rviz_default_plugins/RobotModel
+      Enabled: true
+      Name: Morph robot
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Visual Enabled: true
+      Collision Enabled: false
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Name: Joint frames
+      Show Arrows: false
+      Show Axes: false
+      Show Names: false
+    - Class: rviz_default_plugins/Image
+      Enabled: true
+      Name: Front camera
+      Topic:
+        Value: /morph/camera/image
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/PointCloud2
+      Enabled: true
+      Name: Measured range cloud
+      Topic:
+        Value: /morph/perception/points
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        Depth: 1
+      Style: Points
+      Size (Pixels): 3
+      Color Transformer: AxisColor
+      Position Transformer: XYZ
+      Axis: Z
+      Decay Time: 0
+    - Class: rviz_default_plugins/Path
+      Enabled: true
+      Name: Ground truth trajectory
+      Topic:
+        Value: /morph/ground_truth/path
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+      Color: 55; 210; 210
+      Line Style: Lines
+      Line Width: 0.02
+    - Class: rviz_default_plugins/Odometry
+      Enabled: false
+      Name: Encoder odometry (optional)
+      Topic:
+        Value: /morph/encoder/odom
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Sensor adaptation decision
+      Marker Topic:
+        Value: /morph/perception/marker
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: false
+      Name: Terrain geometry (optional)
+      Marker Topic:
+        Value: /morph/arena/markers
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+  Enabled: true
+  Global Options:
+    Fixed Frame: world
+    Frame Rate: 15
+    Background Color: 16; 26; 38
+  Name: root
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Target Frame: base_link
+      Distance: 2.8
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Pitch: 0.58
+      Yaw: 0.72

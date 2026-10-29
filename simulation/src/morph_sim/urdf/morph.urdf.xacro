@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="morph">
+ <xacro:arg name="controllers_file" default="controllers.yaml"/>
+ <xacro:arg name="wheel_radius" default="0.075"/><xacro:arg name="wheel_width" default="0.045"/>
+ <xacro:property name="wheel_radius" value="$(arg wheel_radius)"/><xacro:property name="wheel_width" value="$(arg wheel_width)"/>
+ <xacro:include filename="common.xacro"/><xacro:include filename="leg.xacro"/>
+ <link name="base_link"><xacro:box_inertia mass="6.33" x="0.28" y="0.70" z="0.15" xyz="0 0 0.02"/><xacro:mesh_visual mesh="fixed" color="0.12 0.17 0.23 1"/><xacro:box_collision name="underbody_collision" xyz="0 0 0.02" size="0.28 0.70 0.06"/></link>
+ <link name="camera_link"><xacro:box_inertia mass="0.02" x="0.03" y="0.04" z="0.025"/><visual name="sensor_glass"><origin xyz="0.015 0 0" rpy="0 ${pi/2} 0"/><geometry><cylinder radius="0.015" length="0.003"/></geometry><material name="glass_blue"><color rgba="0.08 0.42 0.62 1"/></material></visual><visual name="status_led"><origin xyz="0 0.027 0.013"/><geometry><sphere radius="0.006"/></geometry><material name="cyan_led"><color rgba="0.01 0.9 1 1"/></material></visual></link>
+ <joint name="camera_mount_joint" type="fixed"><parent link="base_link"/><child link="camera_link"/><origin xyz="0.13 0 0.18"/></joint>
+ <xacro:macro name="stage" params="side index parent">
+  <link name="tel${side}${index}"><xacro:box_inertia mass="0.03" x="0.15" y="0.045" z="0.05" xyz="${(1 if side=='R' else -1)*index*0.042} 0 -0.06"/><xacro:mesh_visual mesh="tel${side}${index}" color="0.64 0.72 0.78 1"/></link>
+  <joint name="tel${side}${index}_joint" type="prismatic"><parent link="${parent}"/><child link="tel${side}${index}"/><axis xyz="${1 if side=='R' else -1} 0 0"/><limit lower="-0.0379" upper="0.016511111111" effort="8" velocity="0.006"/><dynamics damping="5" friction="0.05"/></joint>
+ </xacro:macro>
+ <xacro:macro name="telescope" params="side">
+  <xacro:stage side="${side}" index="1" parent="base_link"/><xacro:stage side="${side}" index="2" parent="tel${side}1"/><xacro:stage side="${side}" index="3" parent="tel${side}2"/><xacro:stage side="${side}" index="4" parent="tel${side}3"/><xacro:stage side="${side}" index="5" parent="tel${side}4"/><xacro:stage side="${side}" index="6" parent="tel${side}5"/>
+ </xacro:macro>
+ <xacro:telescope side="R"/><xacro:telescope side="L"/>
+ <xacro:macro name="perimeter" params="side fb sx sy">
+  <!-- Visual reduced-order closure: geometry follows head and corner angle; no redundant rigid loop. -->
+  <link name="hexarm${fb}${side}"><xacro:box_inertia mass="0.02" x="0.02" y="0.379" z="0.006" xyz="0 ${sy*0.19} 0"/><xacro:mesh_visual mesh="hexarm${fb}${side}" color="0.01 0.75 0.85 1"/></link>
+  <joint name="hexarm${fb}${side}_joint" type="revolute"><parent link="tel${side}6"/><child link="hexarm${fb}${side}"/><origin xyz="${sx*0.379} 0 ${0.114 if sy>0 else 0.126}"/><axis xyz="0 0 1"/><limit lower="-0.25" upper="0.25" effort="1" velocity="0.3"/><dynamics damping="0.1"/></joint>
+ </xacro:macro>
+ <xacro:perimeter side="R" fb="F" sx="1" sy="1"/><xacro:perimeter side="R" fb="B" sx="1" sy="-1"/><xacro:perimeter side="L" fb="F" sx="-1" sy="1"/><xacro:perimeter side="L" fb="B" sx="-1" sy="-1"/>
+ <xacro:leg name="fl" side="R" ysign="1"/><xacro:leg name="fr" side="R" ysign="-1"/><xacro:leg name="rl" side="L" ysign="1"/><xacro:leg name="rr" side="L" ysign="-1"/>
+ <link name="perception_link"><xacro:box_inertia mass="0.05" x="0.04" y="0.06" z="0.03"/><xacro:box_visual name="range_sensor_housing" xyz="0 0 0" size="0.04 0.06 0.03" rgba="0.12 0.16 0.20 1"/></link>
+ <joint name="perception_mount" type="fixed"><parent link="base_link"/><child link="perception_link"/><origin xyz="0.22 0 0.12"/></joint>
+ <ros2_control name="MorphSystem" type="system"><hardware><plugin>gz_ros2_control/GazeboSimSystem</plugin></hardware>
+  <xacro:macro name="stage_controls" params="side"><xacro:controlled_joint name="tel${side}1_joint" interface="position"/><xacro:controlled_joint name="tel${side}2_joint" interface="position"/><xacro:controlled_joint name="tel${side}3_joint" interface="position"/><xacro:controlled_joint name="tel${side}4_joint" interface="position"/><xacro:controlled_joint name="tel${side}5_joint" interface="position"/><xacro:controlled_joint name="tel${side}6_joint" interface="position"/></xacro:macro>
+  <xacro:stage_controls side="R"/><xacro:stage_controls side="L"/>
+  <xacro:controlled_joint name="hexarmFR_joint" interface="position"/><xacro:controlled_joint name="hexarmBR_joint" interface="position"/><xacro:controlled_joint name="hexarmFL_joint" interface="position"/><xacro:controlled_joint name="hexarmBL_joint" interface="position"/>
+  <xacro:leg_control name="fl"/><xacro:leg_control name="fr"/><xacro:leg_control name="rl"/><xacro:leg_control name="rr"/>
+ </ros2_control>
+ <gazebo><plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin"><parameters>$(arg controllers_file)</parameters><hold_joints>false</hold_joints><position_proportional_gain>0.12</position_proportional_gain></plugin>
+ <plugin filename="libmorph_suspension.so" name="morph_sim::SuspensionSystem"><stiffness>2200</stiffness><damping>85</damping><thermal_capacity>180</thermal_capacity><thermal_resistance>6</thermal_resistance><temperature_coefficient>0.012</temperature_coefficient><ambient>22</ambient><joint>fl_spring_joint</joint><joint>fr_spring_joint</joint><joint>rl_spring_joint</joint><joint>rr_spring_joint</joint></plugin></gazebo>
+</robot>

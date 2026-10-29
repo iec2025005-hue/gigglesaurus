@@ -1,0 +1,83 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    use_sim_time: true
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    drive_controller:
+      type: forward_command_controller/ForwardCommandController
+    steering_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    height_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    shape_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+drive_controller:
+  ros__parameters:
+    interface_name: effort
+    joints:
+    - fl_wheel_joint
+    - fr_wheel_joint
+    - rl_wheel_joint
+    - rr_wheel_joint
+    use_sim_time: true
+steering_controller:
+  ros__parameters:
+    joints:
+    - fl_steer_joint
+    - fr_steer_joint
+    - rl_steer_joint
+    - rr_steer_joint
+    use_sim_time: true
+    command_interfaces:
+    - position
+    state_interfaces:
+    - position
+    - velocity
+    interpolate_from_desired_state: true
+    set_last_command_interface_value_as_state_on_activation: true
+    cmd_timeout: 0.2
+height_controller:
+  ros__parameters:
+    joints:
+    - fl_height_joint
+    - fr_height_joint
+    - rl_height_joint
+    - rr_height_joint
+    use_sim_time: true
+    command_interfaces:
+    - position
+    state_interfaces:
+    - position
+    - velocity
+    interpolate_from_desired_state: true
+    set_last_command_interface_value_as_state_on_activation: true
+    cmd_timeout: 0.2
+shape_controller:
+  ros__parameters:
+    joints:
+    - telR1_joint
+    - telR2_joint
+    - telR3_joint
+    - telR4_joint
+    - telR5_joint
+    - telR6_joint
+    - telL1_joint
+    - telL2_joint
+    - telL3_joint
+    - telL4_joint
+    - telL5_joint
+    - telL6_joint
+    - hexarmFR_joint
+    - hexarmBR_joint
+    - hexarmFL_joint
+    - hexarmBL_joint
+    use_sim_time: true
+    command_interfaces:
+    - position
+    state_interfaces:
+    - position
+    - velocity
+    interpolate_from_desired_state: true
+    set_last_command_interface_value_as_state_on_activation: true
+    cmd_timeout: 0.2

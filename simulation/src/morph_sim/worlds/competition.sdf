@@ -1,0 +1,2127 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <world name="morph_arena">
+    <gui fullscreen="0">
+      <plugin filename="MinimalScene" name="3D View">
+        <gz-gui><title>3D View</title><property type="bool" key="showTitleBar">false</property><property type="string" key="state">docked</property></gz-gui>
+        <engine>ogre2</engine><scene>scene</scene><ambient_light>0.36 0.40 0.47</ambient_light><background_color>0.50 0.64 0.79</background_color>
+        <camera_pose>-2 -9 3 0 0.6 0</camera_pose>
+      </plugin>
+      <plugin filename="GzSceneManager" name="Scene Manager" />
+      <plugin filename="InteractiveViewControl" name="Interactive view control" />
+      <plugin filename="EntityContextMenuPlugin" name="Entity context menu" />
+      <plugin filename="WorldControl" name="World control"><play_pause>true</play_pause><step>true</step></plugin>
+      <plugin filename="WorldStats" name="World stats"><sim_time>true</sim_time><real_time_factor>true</real_time_factor></plugin>
+      <plugin filename="EntityTree" name="Entity tree" />
+      <plugin filename="KeyPublisher" name="Key Publisher" />
+    </gui>
+    <gravity>0 0 -9.81</gravity>
+    <physics name="stable_1khz" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact" />
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu" />
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <scene>
+      <ambient>.36 .40 .47 1</ambient>
+      <background>.50 .64 .79 1</background>
+      <shadows>true</shadows>
+      <grid>false</grid>
+    </scene>
+    <light name="competition_sun" type="directional">
+      <pose>0 0 20 0 0 0</pose>
+      <diffuse>1 .94 .83 1</diffuse>
+      <specular>.7 .7 .7 1</specular>
+      <direction>-.4 .3 -.85</direction>
+      <cast_shadows>true</cast_shadows>
+      <attenuation>
+        <range>1000</range>
+        <constant>1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+    </light>
+    <model name="arena_floor">
+      <static>true</static>
+      <pose>0 0 -0.06 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>40 28 0.12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>40 28 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.611764705882353 0.6588235294117647 0.6980392156862745 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cement_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cement_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cement_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="road_south">
+      <static>true</static>
+      <pose>0 -9 0.015 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>30 3 0.03</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.15</mu>
+                <mu2>1.15</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>30 3 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.16862745098039217 0.2 0.23921568627450981 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/asphalt_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/asphalt_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/asphalt_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="road_north">
+      <static>true</static>
+      <pose>0 9 0.015 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>30 3 0.03</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.15</mu>
+                <mu2>1.15</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>30 3 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.16862745098039217 0.2 0.23921568627450981 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/asphalt_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/asphalt_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/asphalt_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="road_east">
+      <static>true</static>
+      <pose>14 0 0.015 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>3 18 0.03</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.15</mu>
+                <mu2>1.15</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3 18 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.16862745098039217 0.2 0.23921568627450981 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/asphalt_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/asphalt_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/asphalt_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="road_west">
+      <static>true</static>
+      <pose>-14 0 0.015 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>3 18 0.03</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.15</mu>
+                <mu2>1.15</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>3 18 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.16862745098039217 0.2 0.23921568627450981 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/asphalt_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/asphalt_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/asphalt_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_-13">
+      <static>true</static>
+      <pose>-13 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_-11">
+      <static>true</static>
+      <pose>-11 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_-9">
+      <static>true</static>
+      <pose>-9 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_-7">
+      <static>true</static>
+      <pose>-7 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_-5">
+      <static>true</static>
+      <pose>-5 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_-3">
+      <static>true</static>
+      <pose>-3 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_-1">
+      <static>true</static>
+      <pose>-1 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_1">
+      <static>true</static>
+      <pose>1 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_3">
+      <static>true</static>
+      <pose>3 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_5">
+      <static>true</static>
+      <pose>5 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_7">
+      <static>true</static>
+      <pose>7 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_9">
+      <static>true</static>
+      <pose>9 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_11">
+      <static>true</static>
+      <pose>11 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_-1_13">
+      <static>true</static>
+      <pose>13 -9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_-7">
+      <static>true</static>
+      <pose>-14 -7 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_-5">
+      <static>true</static>
+      <pose>-14 -5 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_-3">
+      <static>true</static>
+      <pose>-14 -3 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_-1">
+      <static>true</static>
+      <pose>-14 -1 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_1">
+      <static>true</static>
+      <pose>-14 1 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_3">
+      <static>true</static>
+      <pose>-14 3 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_5">
+      <static>true</static>
+      <pose>-14 5 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_-1_7">
+      <static>true</static>
+      <pose>-14 7 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_-13">
+      <static>true</static>
+      <pose>-13 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_-11">
+      <static>true</static>
+      <pose>-11 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_-9">
+      <static>true</static>
+      <pose>-9 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_-7">
+      <static>true</static>
+      <pose>-7 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_-5">
+      <static>true</static>
+      <pose>-5 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_-3">
+      <static>true</static>
+      <pose>-3 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_-1">
+      <static>true</static>
+      <pose>-1 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_1">
+      <static>true</static>
+      <pose>1 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_3">
+      <static>true</static>
+      <pose>3 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_5">
+      <static>true</static>
+      <pose>5 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_7">
+      <static>true</static>
+      <pose>7 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_9">
+      <static>true</static>
+      <pose>9 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_11">
+      <static>true</static>
+      <pose>11 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_1_13">
+      <static>true</static>
+      <pose>13 9 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.06 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_-7">
+      <static>true</static>
+      <pose>14 -7 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_-5">
+      <static>true</static>
+      <pose>14 -5 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_-3">
+      <static>true</static>
+      <pose>14 -3 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_-1">
+      <static>true</static>
+      <pose>14 -1 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_1">
+      <static>true</static>
+      <pose>14 1 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_3">
+      <static>true</static>
+      <pose>14 3 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_5">
+      <static>true</static>
+      <pose>14 5 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="lane_v_1_7">
+      <static>true</static>
+      <pose>14 7 0.032 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.06 0.9 0.003</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>.95 .87 .2 1</ambient>
+            <diffuse>.95 .87 .2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_terrain">
+      <static>true</static>
+      <pose>-8 0 .005 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <heightmap>
+              <uri>model://morph_sim/models/heightmaps/rock.png</uri>
+              <size>6 6 0.32</size>
+              <pos>0 0 0</pos>
+              <sampling>2</sampling>
+            </heightmap>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <heightmap>
+              <uri>model://morph_sim/models/heightmaps/rock.png</uri>
+              <size>6 6 0.32</size>
+              <pos>0 0 0</pos>
+              <sampling>2</sampling>
+              <texture>
+                <size>1</size>
+                <diffuse>model://morph_sim/models/materials/textures/rock_albedo.png</diffuse>
+                <normal>model://morph_sim/models/materials/textures/rock_normal.png</normal>
+              </texture>
+            </heightmap>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="sand_terrain">
+      <static>true</static>
+      <pose>0 0 .005 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <heightmap>
+              <uri>model://morph_sim/models/heightmaps/sand.png</uri>
+              <size>6 6 0.28</size>
+              <pos>0 0 0</pos>
+              <sampling>2</sampling>
+            </heightmap>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.35</mu>
+                <mu2>0.35</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>50000</kp>
+                <kd>500</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <heightmap>
+              <uri>model://morph_sim/models/heightmaps/sand.png</uri>
+              <size>6 6 0.28</size>
+              <pos>0 0 0</pos>
+              <sampling>2</sampling>
+              <texture>
+                <size>1</size>
+                <diffuse>model://morph_sim/models/materials/textures/sand_albedo.png</diffuse>
+                <normal>model://morph_sim/models/materials/textures/sand_normal.png</normal>
+              </texture>
+            </heightmap>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="grass_terrain">
+      <static>true</static>
+      <pose>8 0 .005 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <heightmap>
+              <uri>model://morph_sim/models/heightmaps/grass.png</uri>
+              <size>6 6 0.4</size>
+              <pos>0 0 0</pos>
+              <sampling>2</sampling>
+            </heightmap>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.65</mu>
+                <mu2>0.65</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <heightmap>
+              <uri>model://morph_sim/models/heightmaps/grass.png</uri>
+              <size>6 6 0.4</size>
+              <pos>0 0 0</pos>
+              <sampling>2</sampling>
+              <texture>
+                <size>1</size>
+                <diffuse>model://morph_sim/models/materials/textures/grass_albedo.png</diffuse>
+                <normal>model://morph_sim/models/materials/textures/grass_normal.png</normal>
+              </texture>
+            </heightmap>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    <model name="cement_step_0">
+      <static>true</static>
+      <pose>7.0 5 0.0075 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.35 2 0.015</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.95</mu>
+                <mu2>0.95</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.35 2 0.015</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.611764705882353 0.6588235294117647 0.6980392156862745 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cement_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cement_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cement_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cement_step_1">
+      <static>true</static>
+      <pose>7.35 5 0.015 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.35 2 0.03</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.95</mu>
+                <mu2>0.95</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.35 2 0.03</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.611764705882353 0.6588235294117647 0.6980392156862745 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cement_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cement_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cement_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cement_step_2">
+      <static>true</static>
+      <pose>7.7 5 0.0225 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.35 2 0.045</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.95</mu>
+                <mu2>0.95</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.35 2 0.045</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.611764705882353 0.6588235294117647 0.6980392156862745 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cement_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cement_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cement_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cement_step_3">
+      <static>true</static>
+      <pose>8.05 5 0.03 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.35 2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.95</mu>
+                <mu2>0.95</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.35 2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.611764705882353 0.6588235294117647 0.6980392156862745 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cement_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cement_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cement_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="cement_step_4">
+      <static>true</static>
+      <pose>8.4 5 0.0375 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.35 2 0.075</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.95</mu>
+                <mu2>0.95</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.35 2 0.075</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.611764705882353 0.6588235294117647 0.6980392156862745 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cement_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cement_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cement_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="hill_ramp">
+      <static>true</static>
+      <pose>-1 5 0.14 0 -0.14 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2 2 0.08</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.75</mu>
+                <mu2>0.75</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2 2 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.2549019607843137 0.44313725490196076 0.23921568627450981 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/grass_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/grass_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/grass_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="hill_platform">
+      <static>true</static>
+      <pose>0.98 5 0.24 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 2 0.12</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.75</mu>
+                <mu2>0.75</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 2 0.12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.2549019607843137 0.44313725490196076 0.23921568627450981 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/grass_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/grass_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/grass_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_0">
+      <static>true</static>
+      <pose>-10.0 -5.0 0.025 0 0.08 0.0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_1">
+      <static>true</static>
+      <pose>-9.45 -5.0 0.030000000000000002 0 0.08 0.7</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_2">
+      <static>true</static>
+      <pose>-8.9 -5.0 0.035 0 0.08 1.4</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_3">
+      <static>true</static>
+      <pose>-8.35 -5.0 0.025 0 0.08 2.0999999999999996</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_4">
+      <static>true</static>
+      <pose>-10.0 -4.3 0.030000000000000002 0 0.08 2.8</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_5">
+      <static>true</static>
+      <pose>-9.45 -4.3 0.035 0 0.08 3.5</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_6">
+      <static>true</static>
+      <pose>-8.9 -4.3 0.025 0 0.08 4.199999999999999</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="rock_obstacle_7">
+      <static>true</static>
+      <pose>-8.35 -4.3 0.030000000000000002 0 0.08 4.8999999999999995</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.85</mu>
+                <mu2>0.85</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.17 0.2 0.06</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.4666666666666667 0.49019607843137253 0.5372549019607843 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/rock_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/rock_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/rock_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="boundary_x_-18">
+      <static>true</static>
+      <pose>-18 0 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.15 25 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.15 25 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.027450980392156862 0.6941176470588235 0.7764705882352941 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cyan_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cyan_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cyan_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="boundary_x_18">
+      <static>true</static>
+      <pose>18 0 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.15 25 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.15 25 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.027450980392156862 0.6941176470588235 0.7764705882352941 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cyan_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cyan_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cyan_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="boundary_y_-12">
+      <static>true</static>
+      <pose>0 -12 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>36 0.15 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>36 0.15 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.027450980392156862 0.6941176470588235 0.7764705882352941 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cyan_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cyan_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cyan_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="boundary_y_12">
+      <static>true</static>
+      <pose>0 12 0.15 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>36 0.15 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000.0</kp>
+                <kd>100</kd>
+                <max_vel>0.1</max_vel>
+                <min_depth>0.001</min_depth>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>36 0.15 0.3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.027450980392156862 0.6941176470588235 0.7764705882352941 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+            <pbr>
+              <metal>
+                <albedo_map>model://morph_sim/models/materials/textures/cyan_albedo.png</albedo_map>
+                <normal_map>model://morph_sim/models/materials/textures/cyan_normal.png</normal_map>
+                <roughness_map>model://morph_sim/models/materials/textures/cyan_roughness.png</roughness_map>
+                <roughness>0.85</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <gui fullscreen="false">
+      <plugin filename="MinimalScene" name="3D View">
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+        <ambient_light>.4 .4 .4</ambient_light>
+        <background_color>.5 .65 .8</background_color>
+        <camera_pose>20 -25 20 0 .52 2.22</camera_pose>
+      </plugin>
+      <plugin filename="WorldControl" name="World control" />
+      <plugin filename="WorldStats" name="World statistics" />
+    </gui>
+  </world>
+</sdf>
