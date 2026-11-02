@@ -22,7 +22,7 @@ For manual control with the new RViz view: `bash run_realtime.sh`. To open RViz 
 - The perception text marker reports the current observed geometry and shape choice. It expires when observations stop.
 - Optional displays show encoder odometry and the arena's terrain mesh geometry. Enable these in the Displays panel when needed; the default keeps rendering lighter.
 
-Use `rviz:=false` if you want Gazebo without the extra visualization window. RViz is now enabled by default in the normal simulation launch.
+RViz is optional: it displays robot frames, sensor data and paths; it does not calculate physics or drive sensor adaptation. The normal simulation launch now leaves it disabled. Use `bash run_gazebo.sh rviz:=true` to enable it, or use `run_smart.sh`, which explicitly requests it. The recorded RViz shutdown crash remains unresolved; disabling this viewer avoids that execution path but is not a crash fix.
 
 ## How the automatic mechanism works
 

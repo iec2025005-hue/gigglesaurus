@@ -158,6 +158,7 @@ class TerrainManager(Node):
    receivers={key:key+'_controller' for key in ('steering','height','shape')}
    self.controller_discovery_ready=all(any(endpoint.node_name==name for endpoint in self.get_subscriptions_info_by_topic('/'+key+'_controller/'+('joint_trajectory' if self.position_backend=='trajectory' else 'commands'))) for key,name in receivers.items())
   feedback=self.states if self.controller_discovery_ready and fresh_snapshot(self.joint_time,self.joint_wall,now,time.monotonic(),self.safety['state_timeout_s'],self.safety['future_stamp_tolerance_s']) else {}
+  if not feedback:self.position_limiter.reset()
   if not feedback and now-self.last_feedback_warning>5.:
    self.get_logger().warning('No fresh joint states: wheel commands are held at zero. Check joint_state_broadcaster and the Gazebo controller plugin.')
    self.last_feedback_warning=now

@@ -86,3 +86,34 @@ def test_disabled_camera_is_not_claimed_as_passing_camera_evidence():
     result = camera_acceptance({'launch': {'camera_enabled': 'false'}}, {}, [], (0, 0), (1, 1))
     assert not result['required']
     assert result['passed'] is None
+
+
+@pytest.mark.parametrize('dt', [0., .01, .05])
+def test_position_limiter_starts_and_recovers_from_measured_state(tmp_path, dt):
+    import xml.etree.ElementTree as ET
+    from morph_sim.trajectory_limits import PositionTrajectoryLimiter
+    robot = ET.Element('robot')
+    hardware = ET.SubElement(robot, 'ros2_control')
+    for i in range(24):
+        name = f'axis{i}'
+        joint = ET.SubElement(robot, 'joint', name=name)
+        ET.SubElement(joint, 'limit', lower='-1', upper='1', velocity='1')
+        joint = ET.SubElement(hardware, 'joint', name=name)
+        ET.SubElement(joint, 'command_interface', name='position')
+        state = ET.SubElement(joint, 'state_interface', name='position')
+        ET.SubElement(state, 'param', name='initial_value').text = '0'
+    gazebo = ET.SubElement(robot, 'gazebo')
+    plugin = ET.SubElement(gazebo, 'plugin', name='gz_ros2_control::GazeboSimROS2ControlPlugin')
+    ET.SubElement(plugin, 'position_proportional_gain').text = '.1'
+    urdf = tmp_path / 'robot.urdf'
+    ET.ElementTree(robot).write(urdf)
+    controllers = tmp_path / 'controllers.yaml'
+    controllers.write_text('controller_manager:\n  ros__parameters:\n    update_rate: 100\n')
+    limiter = PositionTrajectoryLimiter(urdf, controllers)
+    for actual in (.5, -.4):
+        limiter.reset()
+        measured = dict.fromkeys(limiter.limits, actual)
+        targets = dict.fromkeys(limiter.limits, 1.)
+        bounded, trace = limiter.apply(targets, measured, dt)
+        assert all(abs(v-actual) <= .95 * min(dt, .01) + 1e-12 for v in bounded.values())
+        assert not any(row['lead_conflict'] for row in trace)

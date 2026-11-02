@@ -14,7 +14,14 @@ These changes are software fixes reviewed on Windows. They do not close the Linu
 
 ## Validation here
 
-96 portable tests passed; one Gazebo-dependent test was excluded. The prior portable subset passed 63 tests before changes. The full Linux suite, C++ plugins, ROS callback integration and live sensor behavior cannot be run in this Windows session, which has no WSL/ROS/Gazebo installed. No historical result files were rewritten.
+99 portable tests passed; one Gazebo-dependent test was excluded. The prior portable subset passed 63 tests before changes. Python compilation, Bash syntax checking and Git whitespace checks passed. The full Linux suite, C++ plugins, ROS callback integration and live sensor behavior cannot be run in this Windows session, which has no WSL/ROS/Gazebo installed. No historical result files were rewritten.
+
+## Follow-up fixes — 3 November 2026
+
+- Position-limit history starts from measured feedback rather than URDF zero values, and resets on feedback loss. Regression tests cover nonzero startup/recovery positions and zero/normal/long callback intervals. Live joint-limit warning elimination remains unverified.
+- The perception adapter rejects delayed clouds, stale/missing joint feedback and old/future IMU samples. Valid decisions carry the cloud's source time through to the manager instead of replacing it with callback time. Live ROS integration remains pending.
+- Normal launches now default to `rviz:=false`. Physics, control, sensor generation and local perception do not depend on RViz. Explicit `rviz:=true`, `run_smart.sh` and standalone `run_rviz.sh` remain available. Visualization TF/path publishers remain available for attaching RViz later. This mitigates duplicate graphics work and bypasses the recorded viewer crash during normal use; it does not repair RViz's segmentation fault.
+- `validate_linux.sh` selects the sourced or workspace-recorded ROS distro instead of hardcoding Jazzy, resolves the workspace relative to its script, and tolerates ROS setup files referencing unset variables. Supported compatibility choices remain Humble/Jazzy/Lyrical; actual build compatibility still requires the corresponding Linux test.
 
 ## Ubuntu follow-up
 
