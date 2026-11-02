@@ -17,7 +17,12 @@ class PositionTrajectoryLimiter:
         gain=float(robot.findtext("./gazebo/plugin[@name='gz_ros2_control::GazeboSimROS2ControlPlugin']/position_proportional_gain"))
         self.servo_rate=gain/self.period
         if self.servo_rate<=0 or self.period<=0 or len(self.limits)!=24:raise ValueError('Incomplete position-controller limits or servo timing')
-        self.previous={j.get('name'):float(j.findtext("state_interface[@name='position']/param[@name='initial_value']",default='0')) for j in robot.findall('./ros2_control/joint') if j.get('name') in controlled}
+        # Activation must start from feedback, not URDF initial values: loaded
+        # axes can move before controllers and the manager become available.
+        self.previous={}
+    def reset(self):
+        """Discard command history after feedback loss before accepting new motion."""
+        self.previous.clear()
     def apply(self,requested,measured,dt):
         output={};trace=[];period=min(max(dt,0.),self.period)
         for name,target in requested.items():

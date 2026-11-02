@@ -8,6 +8,7 @@ import time
 
 class ExperimentBatch:
     def __enter__(self):
+        Path('log').mkdir(parents=True,exist_ok=True)
         self.lock=Path('log/experiment-batch.lock').open('a')
         try:fcntl.flock(self.lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:self.lock.close();raise SystemExit('Another experiment batch is running; stop its owning terminal first')

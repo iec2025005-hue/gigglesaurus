@@ -7,6 +7,7 @@ Missing responses are failures, never dropped from acceptance statistics.
 import json,math,os,socket,time,uuid
 from pathlib import Path
 from sequence_gaps import SequenceGaps
+from camera_acceptance import camera_acceptance
 import numpy as np
 import rclpy
 from rclpy.node import Node
@@ -135,6 +136,9 @@ def main():
    a=np.array(values,dtype=np.int64);ds=np.diff(a[:,1])*1e-9
    rates[name]={'messages':len(a),'observed_sim_hz':(len(a)-1)*1e9/(a[-1,1]-a[0,1]) if len(a)>1 and a[-1,1]>a[0,1] else None,'ros_writer_sequence_gaps':b.sequences[name].report(),'observed_wall_hz':(len(a)-1)*1e9/(a[-1,0]-a[0,0]) if len(a)>1 else None,'max_stamp_gap_s':float(max(ds)) if len(ds) else None,'non_increasing_stamps':int(sum(ds<=0)),'dropped_samples':None,'drop_scope':'No producer sequence counter; actual drops cannot be identified from header gaps alone'}
   report={'scope':'20 application command-to-observed-motion trials by default; not physical keyboard or compositor timing','mean_rtf':mean,'one_second_rtf_p05':p05,'body_response_wall_p95_ms':p95,'criteria':{'mean_rtf_min':.95,'one_second_rtf_p05_min':.90,'response_p95_ms_max':250},'trials':trials,'one_second_rtf':b.rtf,'sensor_rates':rates,'sensor_samples':b.rates,'camera_validation':{'matched_pairs':len(b.camera_checks),'passed':bool(b.camera_checks) and all(x['passed'] for x in b.camera_checks),'checks':b.camera_checks},'callback_execution':b.status.get('timing',{}).get('callback_execution'),'graphics_frame_time':b.frames or None,'loaded_soak_wall_s':(time.monotonic_ns()-soak_wall)*1e-9 if soak_duration or soak_wall_duration else 0.,'loaded_soak_requested_wall_s':soak_wall_duration,'loaded_soak_sim_s':(b.sim()-soak_start)*1e-9 if soak_duration or soak_wall_duration else 0.,'loaded_soak_requested_sim_s':soak_duration,'loaded_soak_samples':soak_samples,'loaded_soak_motion_fraction':soak_motion_fraction,'loaded_soak_feedback_failure_messages':b.feedback_failures-soak_feedback_baseline,'loaded_soak_passed':soak_passed,'loaded_soak_criteria':{'motion_fraction_min':.5,'feedback_failure_messages_max':0,'brownout_or_needs_home_allowed':False},'loaded_soak_scope':'Alternating forward/reverse electrical-drive motion at assumed robot mass, expanded and raised; no extra calibrated payload','passed':len(trials)>=20 and all(t['baseline_settled'] for t in trials) and p95 is not None and p95<=250 and mean>=.95 and p05 is not None and p05>=.90 and (soak_passed is not False)}
+  manifest=json.loads(Path(os.environ['MORPH_RUN_MANIFEST_FILE']).read_text())
+  report['camera_acceptance']=camera_acceptance(manifest,b.rates,b.camera_checks,start,end)
+  if report['camera_acceptance']['required']:report['passed']=report['passed'] and report['camera_acceptance']['passed']
   output.write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k not in ('trials','sensor_samples')},indent=2));return 0 if report['passed'] else 1
  except Exception as error:
   output.write_text(json.dumps({'passed':False,'error':str(error),'trials_completed':len(trials),'trials':trials,'observed_wall_s':(time.monotonic_ns()-experiment_start_wall)*1e-9,'observed_sim_s':(b.sim()-experiment_start_sim)*1e-9,'sensor_samples':b.rates,'graphics_frame_time':b.frames,'camera_validation':{'matched_pairs':len(b.camera_checks),'checks':b.camera_checks},'scope':'Incomplete protocol; no release RTF or p95 claimed'},indent=2))

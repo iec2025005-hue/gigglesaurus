@@ -3,9 +3,11 @@
 import argparse,json,os,subprocess
 from pathlib import Path
 from experiment_batch import ExperimentBatch
-parser=argparse.ArgumentParser();parser.add_argument('--prefix',required=True);parser.add_argument('--repeats',type=int,default=5);parser.add_argument('--position-backend',choices=('forward','trajectory'),default='forward');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--prefix',required=True);parser.add_argument('--repeats',type=int,default=5);parser.add_argument('--position-backend',choices=('auto','forward','trajectory'),default='auto');args=parser.parse_args()
+if args.repeats<1:parser.error('--repeats must be positive')
 if not args.prefix.replace('_','').replace('-','').isalnum():raise ValueError('Invalid output prefix')
 ws=Path.cwd();records=[]
+(ws/'log').mkdir(parents=True,exist_ok=True)
 presets={
  'headless':['headless:=true','rviz:=false'],
  'visible':['headless:=false','rviz:=false'],

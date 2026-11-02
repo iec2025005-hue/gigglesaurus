@@ -59,6 +59,10 @@ class AdaptationCore:
    self.mode='climb'; self.target_d=D_MAX
   p=PROFILES[self.mode]
   states_ready=all(n in measured and math.isfinite(measured[n]) for n in STAGES+ARMS+tuple(leg+suffix for leg in LEGS for suffix in ('_steer_joint','_height_joint','_wheel_joint')))
+  if not states_ready:
+   # Never retain drive slew state across a feedback outage. Otherwise recovery
+   # can publish a previously accumulated speed on its very first valid sample.
+   self.v=[0.,0.,0.];self.wheels=[0.]*4
   if states_ready:self.d=sum(measured[n] for n in STAGES)/12
   # Coordinate the moving module attachment with chassis velocity.
   # Transformation is allowed at low speed, with steering alignment gating only the stages.
@@ -71,7 +75,7 @@ class AdaptationCore:
   request=[clamp(command[0],-p['speed'],p['speed']),clamp(command[1],-p['speed'],p['speed']),clamp(command[2],-p['yaw'],p['yaw'])]
   if math.hypot(*request[:2])>p['speed']:
    f=p['speed']/math.hypot(*request[:2]); request[0]*=f; request[1]*=f
-  if self.estop or not measured or self.flip_phase is not None : request=[0.,0.,0.]
+  if self.estop or not states_ready or self.flip_phase is not None : request=[0.,0.,0.]
   if transition_pending:
    request[0]=clamp(request[0],-.15,.15);request[1]=clamp(request[1],-.15,.15);request[2]=clamp(request[2],-.25,.25)
   for i in range(3):self.v[i]=approach(self.v[i],request[i],(1.2 if i<2 else 1.2)*dt)

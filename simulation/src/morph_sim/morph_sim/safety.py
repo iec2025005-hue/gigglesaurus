@@ -6,13 +6,29 @@ ACTUATED_JOINTS=STAGES+ARMS+tuple(n+suffix for n in LEGS for suffix in ('_steer_
 
 def valid_joint_sample(names,positions,velocities,stamp,now,timeout=.2,future_tolerance=.02):
     if len(names)!=len(set(names)) or len(names)!=len(positions) or len(names)!=len(velocities):return False
-    if not math.isfinite(stamp) or not -future_tolerance<=now-stamp<=timeout:return False
+    if not all(math.isfinite(v) for v in (stamp,now)) or not -future_tolerance<=now-stamp<=timeout:return False
     positions=dict(zip(names,positions));velocities=dict(zip(names,velocities))
     return all(name in positions and name in velocities and math.isfinite(positions[name]) and math.isfinite(velocities[name]) for name in ACTUATED_JOINTS)
 
 
 def fresh_snapshot(stamp,receipt_wall,now,wall,timeout=.2,future_tolerance=.02):
-    return -future_tolerance<=now-stamp<=timeout and 0<=wall-receipt_wall<=timeout
+    return all(math.isfinite(v) for v in (stamp,receipt_wall,now,wall)) and -future_tolerance<=now-stamp<=timeout and 0<=wall-receipt_wall<=timeout
+
+
+def decode_perception(payload,now,timeout=.5,future_tolerance=.02):
+    """Retain producer time: queued range decisions must not become fresh on receipt."""
+    import json
+    data=json.loads(payload)
+    if not isinstance(data,dict) or type(data.get('valid')) is not bool:
+        raise ValueError('Expected a perception decision object')
+    stamp=data.get('sim_time_s')
+    if type(stamp) not in (int,float) or not math.isfinite(stamp) or not -future_tolerance<=now-stamp<=timeout:
+        raise ValueError('Stale or future perception decision')
+    if data['valid']:
+        speed=data.get('speed_limit_m_s')
+        if data.get('mode') not in ('track','climb','rocky') or type(speed) not in (int,float) or not math.isfinite(speed) or not 0<=speed<=.3:
+            raise ValueError('Invalid perception mode or speed')
+    return data
 
 
 class StopPositionHold:

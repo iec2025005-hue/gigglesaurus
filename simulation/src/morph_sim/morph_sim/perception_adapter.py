@@ -9,6 +9,7 @@ from sensor_msgs.msg import PointCloud2,Imu,JointState
 from std_msgs.msg import String
 from visualization_msgs.msg import Marker
 from .perception_core import assess,DecisionFilter
+from .safety import valid_joint_sample
 
 def xyz_from_cloud(m):
  fields={f.name:f for f in m.fields}
@@ -25,20 +26,31 @@ class PerceptionAdapter(Node):
   self.create_subscription(PointCloud2,'/morph/perception/points',self.cloud,qos_profile_sensor_data)
   self.create_subscription(Imu,'/morph/imu',self.imu,qos_profile_sensor_data);self.create_subscription(JointState,'/joint_states',self.joints,qos_profile_sensor_data)
  def imu(self,m):
+  stamp=m.header.stamp.sec+m.header.stamp.nanosec*1e-9
+  now=self.get_clock().now().nanoseconds*1e-9
+  if not -.02<=now-stamp<=.3:return
   q=m.orientation;norm=math.sqrt(q.x*q.x+q.y*q.y+q.z*q.z+q.w*q.w)
   if norm<.5 or not math.isfinite(norm):return
   x,y,z,w=q.x/norm,q.y/norm,q.z/norm,q.w/norm
-  self.roll=math.atan2(2*(w*x+y*z),1-2*(x*x+y*y));self.pitch=math.asin(max(-1.,min(1.,2*(w*y-z*x))));self.imu_time=self.get_clock().now().nanoseconds*1e-9
- def joints(self,m):self.states=dict(zip(m.name,m.position))
+  self.roll=math.atan2(2*(w*x+y*z),1-2*(x*x+y*y));self.pitch=math.asin(max(-1.,min(1.,2*(w*y-z*x))));self.imu_time=stamp
+ def joints(self,m):
+  stamp=m.header.stamp.sec+m.header.stamp.nanosec*1e-9
+  now=self.get_clock().now().nanoseconds*1e-9
+  if not valid_joint_sample(m.name,m.position,m.velocity,stamp,now):
+   self.states={};return
+  self.states=dict(zip(m.name,m.position));self.joint_time=stamp
  def cloud(self,m):
   if not self.get_parameter('processing_enabled').value:return
   now=self.get_clock().now().nanoseconds*1e-9
+  stamp=m.header.stamp.sec+m.header.stamp.nanosec*1e-9
   try:
-   if now-self.imu_time>.3:result={'valid':False,'reason':'IMU stale'}
+   if not -.02<=now-stamp<=.5:result={'valid':False,'reason':'Range cloud stale or future stamped'}
+   elif not self.states or not -.02<=now-getattr(self,'joint_time',-1e9)<=.2:result={'valid':False,'reason':'Joint feedback stale'}
+   elif not -.02<=now-self.imu_time<=.3:result={'valid':False,'reason':'IMU stale'}
    else:
     names=('fl','fr','rl','rr');height=.26+float(self.get_parameter('wheel_radius').value)+.12+sum(self.states.get(n+'_height_joint',0)-self.states.get(n+'_spring_joint',0) for n in names)/4
     result=self.filter.update(assess(xyz_from_cloud(m),height,self.roll,self.pitch))
-   result['sim_time_s']=now;self.pub.publish(String(data=json.dumps(result,allow_nan=False)))
+   result['sim_time_s']=stamp if result.get('valid') else now;self.pub.publish(String(data=json.dumps(result,allow_nan=False)))
    marker=Marker();marker.header.frame_id='base_link';marker.header.stamp=self.get_clock().now().to_msg();marker.ns='perception';marker.id=0;marker.type=Marker.TEXT_VIEW_FACING;marker.action=Marker.ADD;marker.pose.position.z=.55;marker.pose.orientation.w=1.;marker.lifetime.sec=0;marker.lifetime.nanosec=400000000;marker.scale.z=.065;marker.color.r=.2;marker.color.g=1.;marker.color.b=.85;marker.color.a=1.;marker.text=f"SENSED: {result.get('shape','unknown')} | {result.get('reason')}";self.marker.publish(marker)
   except (ValueError,TypeError,KeyError) as exc:self.pub.publish(String(data=json.dumps({'valid':False,'reason':str(exc),'sim_time_s':now})))
 

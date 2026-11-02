@@ -19,10 +19,10 @@ bash setup_ubuntu.sh
 bash run_gazebo.sh
 ```
 
-The normal launch includes Gazebo, the combined control console and RViz. To use the separately measured camera-disabled timing configuration without RViz:
+The normal launch includes Gazebo and the combined control console. RViz is optional and disabled by default to avoid duplicate rendering and the unresolved RViz shutdown crash. Sensors, perception, controllers and physics run without it. Enable the additional diagnostic viewer when needed:
 
 ```bash
-bash run_gazebo.sh rviz:=false
+bash run_gazebo.sh rviz:=true
 ```
 
 Useful options:
