@@ -17,11 +17,12 @@ def timed_callback(method):
 
 def decode_command(payload,now_sim_ns,now_wall_ns,timeout_s=.2,future_s=.02):
     data=json.loads(payload)
-    values=data['values']
-    if len(values)!=3 or not all(isinstance(v,(int,float)) and math.isfinite(v) for v in values):raise ValueError('Expected three finite velocities')
+    if not isinstance(data,dict):raise ValueError('Expected a command object')
+    values=data.get('values')
+    if not isinstance(values,list) or len(values)!=3 or not all(type(v) in (int,float) and math.isfinite(v) for v in values):raise ValueError('Expected three finite velocities')
     for key in ('source_sim_ns','source_wall_ns','sequence'):
-        if type(data[key]) is not int or data[key]<0:raise ValueError('Invalid command timestamp or sequence')
-    if not isinstance(data['source_id'],str) or not data['source_id']:raise ValueError('Missing command source identity')
+        if type(data.get(key)) is not int or data[key]<0:raise ValueError('Invalid command timestamp or sequence')
+    if not isinstance(data.get('source_id'),str) or not data['source_id']:raise ValueError('Missing command source identity')
     if not -future_s*1e9<=now_sim_ns-data['source_sim_ns']<=timeout_s*1e9:raise ValueError('Stale/future source command')
     if data.get('host')==socket.gethostname() and not -future_s*1e9<=now_wall_ns-data['source_wall_ns']<=timeout_s*1e9:raise ValueError('Stale local wall-clock source command')
     return data

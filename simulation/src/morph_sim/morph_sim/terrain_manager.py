@@ -4,7 +4,7 @@ from . import lifecycle
 from .trajectory_limits import PositionTrajectoryLimiter
 from .timing import timed_callback,decode_command
 import socket
-from .safety import valid_joint_sample,fresh_snapshot,ACTUATED_JOINTS
+from .safety import valid_joint_sample,fresh_snapshot,decode_perception,ACTUATED_JOINTS
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
 from std_msgs.msg import Float64MultiArray, Float64, String
@@ -70,10 +70,9 @@ class TerrainManager(Node):
   if math.isfinite(p.x) and math.isfinite(p.y):self.position=(p.x,p.y)
  def on_perception(self,m):
   try:
-   data=json.loads(m.data)
-   if data.get('valid') and (data.get('mode') not in ('track','climb','rocky') or not math.isfinite(data.get('speed_limit_m_s',float('nan')))):return
-   self.perception=data;self.perception_time=self.get_clock().now().nanoseconds*1e-9
-  except (ValueError,TypeError):pass
+   data=decode_perception(m.data,self.get_clock().now().nanoseconds*1e-9)
+   self.perception=data;self.perception_time=data['sim_time_s']
+  except (ValueError,TypeError):self.perception={};self.perception_time=-1e9
  def on_event(self,m):
   if m.data=='perception_toggle':
    self.perception_enabled=not self.perception_enabled
@@ -89,9 +88,12 @@ class TerrainManager(Node):
   self.core.event(m.data)
  def on_manual(self,m):
   try:
-   command=json.loads(m.data);name=command['joint'];value=float(command['value'])
-   duration=clamp(float(command.get('duration',10.)),.1,30.)
+   command=json.loads(m.data)
+   if not isinstance(command,dict):raise ValueError('Expected a manual command object')
+   name=command['joint'];value=float(command['value'])
+   duration=float(command.get('duration',10.))
    if not math.isfinite(value) or not math.isfinite(duration):raise ValueError('non-finite command')
+   duration=clamp(duration,.1,30.)
    if name=='shape_offset':
     if not D_MIN<=value<=D_MAX:raise ValueError('shape offset outside limits')
     self.core.target_d=value;return
@@ -161,7 +163,7 @@ class TerrainManager(Node):
    self.last_feedback_warning=now
   command=list(self.cmd) if fresh_snapshot(self.cmd_time,self.cmd_wall,now,time.monotonic(),self.safety['command_timeout_s'],self.safety['future_stamp_tolerance_s']) else [0.,0.,0.]
   if self.perception_enabled:
-   if now-self.perception_time<.5 and self.perception.get('valid'):
+   if -.02<=now-self.perception_time<.5 and self.perception.get('valid'):
     mode=self.perception['mode']
     if mode!=self.core.mode:self.core.event(mode)
     cap=clamp(self.perception['speed_limit_m_s'],0.,.3);speed=math.hypot(*command[:2])

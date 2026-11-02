@@ -3,9 +3,11 @@
 from pathlib import Path
 from experiment_batch import ExperimentBatch
 import argparse,json,os,subprocess
-parser=argparse.ArgumentParser();parser.add_argument("--prefix",required=True);parser.add_argument("--position-backend",choices=("forward","trajectory"),default="forward");parser.add_argument("--low-speed",type=float,default=.25);parser.add_argument("--low-mode",default="");args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument("--prefix",required=True);parser.add_argument("--position-backend",choices=("auto","forward","trajectory"),default="auto");parser.add_argument("--low-speed",type=float,default=.25);parser.add_argument("--low-mode",default="");args=parser.parse_args()
+if not 0<args.low_speed<=.3:parser.error('--low-speed must be in (0, 0.3] m/s')
 if not args.prefix.replace("_", "").replace("-", "").isalnum():raise ValueError("Invalid evidence prefix")
 ws=Path.cwd();results=[]
+(ws/'log').mkdir(parents=True,exist_ok=True)
 with ExperimentBatch() as batch:
  for surface,arguments in [('high',['headless:=true','rviz:=false']),('low',['headless:=true','rviz:=false','sector:=snow'])]:
   for case in ('estop','release','stale_command','stale_state','manager_crash','actuator_crash'):
