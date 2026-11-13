@@ -144,7 +144,7 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
   limit=joint.find('limit')
   name=joint.get('name','')
   if limit is not None and name.endswith('_wheel_joint'):
-   limit.set('effort',str(params['drive']['output_torque_limit_Nm']))
+   limit.set('effort',str(params['drive']['output_torque_limit_Nm']*(1+params['drive'].get('peak_boost_fraction',0.))))
   if limit is not None and name.endswith('_steer_joint'):
    limit.set('effort',str(params['steering']['output_torque_limit_Nm']));limit.set('velocity',str(params['steering']['output_speed_limit_rad_s']))
   if limit is not None and name.endswith('_spring_joint'):

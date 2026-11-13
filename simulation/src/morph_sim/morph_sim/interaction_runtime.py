@@ -161,7 +161,7 @@ class InteractionRuntime(Node):
             if old is None and new is not None:
                 # Do not carry braking PI integral into captured-position holding.
                 self.plant.integral[i]=0.;self.plant.previous_targets[i]=target[i]
-        power=self.plant.step(dt,target,omega,enabled=ready)
+        power=self.plant.step(dt,target,omega,enabled=ready,boost=bool(self.status.get('torque_boost',False)))
         power['controlled_stop_braking']=bool(braking)
         self.last_power=power
         r=self.p['robot'];st=self.p['steering'];surface=self.p['surfaces'][self.surface]

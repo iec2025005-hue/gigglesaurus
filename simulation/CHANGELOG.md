@@ -3,6 +3,22 @@
 Format: what was wrong, what was fixed, how it was verified. Simulation only; all robot
 parameters are assumed values.
 
+## V2 complete research suite, Commit 2 — on-the-fly morphing, rail holding, active suspension (2026-11-13)
+
+Report: `reports/v2_commit2.md`.
+
+| What was wrong | What was fixed | Verified by |
+|---|---|---|
+| The rails gave no holding force when no shape change was active (commanded length followed the measurement), and the command was tied to the mean stage position so slipped stages dragged the others in | Hold the last commanded length; per-joint bounding only | Sim: 15 deg ramp now climbed in Extended with self-locking rails; unit tests |
+| Shape changes forced a slow-down to 0.15 m/s | `continuous` morph policy (opt-in) | Sim at 0.3 m/s: lateral drift 0.6-0.7 mm, heading 0.0 deg; unit tests |
+
+Added: explicit coupled kinematics functions, corner-height suspension presets and topic, thermally
+governed +20 % torque boost, one-wheel-at-a-time trench stepping planner, 19 tests (196 total).
+
+Measured: head-on trench crossing with suspension pitch works for 100 mm only; yawed crossing gets
+Extended over 100/130/155 mm; Compact stalls on the 15 deg ramp that Extended climbs; morphing
+while crabbing does not work.
+
 ## V2 complete research suite, Commit 1 — chassis, arena, terramechanics (2026-11-13)
 
 Report: `reports/v2_commit1.md`.

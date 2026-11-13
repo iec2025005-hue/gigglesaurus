@@ -60,12 +60,14 @@ drive:
   recover_C: 65.0
   copper_alpha_per_K: 0.00393
   magnet_alpha_per_K: -0.001
+  peak_boost_fraction: 0.2
+  peak_boost_derate_C: 60.0
 steering:
   motor_holding_torque_Nm: 0.45
   gear_ratio: 3.0
   gear_efficiency: 0.7
   output_torque_limit_Nm: 0.7
-  output_speed_limit_rad_s: 1.0
+  output_speed_limit_rad_s: 3.2
   pullout_speed_rad_s: 5.0
   bearing_breakaway_Nm: 0.03
   effective_patch_radius_m: 0.012
@@ -659,3 +661,13 @@ terramechanics:
       cohesion_Pa: 4140.0
       phi_rad: 0.2269
       shear_length_m: 0.006
+motion:
+  implemented_in: morph_sim/control.py
+  scope: Command shaping; values from the V2 brief unless stated
+  jerk_limit_m_s3: 6.0
+  yaw_jerk_limit_rad_s3: 6.0
+  acceleration_limit_m_s2: 1.2
+  yaw_acceleration_limit_rad_s2: 1.2
+  friction_acceleration_fraction: 0.35
+  acceleration_floor_m_s2: 0.4
+  acceleration_ceiling_m_s2: 2.2

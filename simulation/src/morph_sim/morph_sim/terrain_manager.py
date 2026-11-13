@@ -33,11 +33,14 @@ class TerrainManager(Node):
   self.declare_parameter('automatic_terrain',False)
   self.declare_parameter('arena','adaptive')
   self.declare_parameter('perception_auto',False)
+  self.declare_parameter('morph_policy','gated')
   self.perception_enabled=bool(self.get_parameter('perception_auto').value);self.perception={};self.perception_time=-1e9
   self.course=Course(get_package_share_directory('morph_sim')) if self.get_parameter('arena').value=='multisector' else None
   self.core=AdaptationCore(float(self.get_parameter('wheel_radius').value))
   self.automatic_terrain=bool(self.get_parameter('automatic_terrain').value)
   self.core.auto=self.automatic_terrain or self.perception_enabled
+  if self.get_parameter('morph_policy').value not in ('gated','continuous'):raise ValueError('morph_policy must be gated or continuous')
+  self.core.morph_policy=self.get_parameter('morph_policy').value
   self.zone=None;self.position=None
   self.cmd=[0.,0.,0.];self.cmd_time=-1e9;self.cmd_wall=-1e9;self.joint_time=-1e9;self.joint_wall=-1e9;self.imu_time=0.;self.states={};self.last=self.get_clock().now().nanoseconds*1e-9;self.hit=False
   self.height_cmd=[0.]*4;self.joint_velocities={};self.wheel_velocities={};self.actual_speed=0.;self.odom_time=0.
@@ -56,6 +59,8 @@ class TerrainManager(Node):
   self.create_subscription(String,'/morph/event',self.on_event,10)
   self.create_subscription(String,'/morph/perception/decision',self.on_perception,1)
   self.create_subscription(String,'/morph/manual_joint',self.on_manual,10)
+  self.create_subscription(Float64MultiArray,'/morph/suspension/corner_heights',self.on_corner_heights,10)
+  self.create_subscription(Float64,'/morph/surface_friction',self.on_surface_friction,10)
   self.create_subscription(JointState,'/joint_states',self.on_joints,qos_profile_sensor_data)
   self.create_subscription(Imu,'/morph/imu',self.on_imu,qos_profile_sensor_data)
   self.create_subscription(Contacts,'/morph/contacts/underbody',self.on_underbody,qos_profile_sensor_data)
@@ -87,6 +92,15 @@ class TerrainManager(Node):
    return
   if m.data=='flip' and (self.get_clock().now().nanoseconds*1e-9-self.joint_time>.3 or len(self.wheel_velocities)!=4 or max([abs(v) for v in self.wheel_velocities.values()]+[0.])>.5):return
   self.core.event(m.data)
+ def on_surface_friction(self,m):
+  # Known friction of the surface under the robot links the acceleration limit to it; <= 0 or non-finite means unknown.
+  from .control import friction_acceleration_limit
+  self.core.accel_limit=friction_acceleration_limit(m.data if math.isfinite(m.data) else None)
+ def on_corner_heights(self,m):
+  # Four finite corner height targets [fl, fr, rl, rr] in metres override the mode height; an empty message releases.
+  if len(m.data)==0:self.core.corner_target=None
+  elif len(m.data)==4 and all(math.isfinite(v) for v in m.data):self.core.corner_target=[clamp(float(v),-.015,.015) for v in m.data]
+  else:self.get_logger().warning('Corner height command rejected: expected 0 or 4 finite values')
  def on_manual(self,m):
   try:
    command=json.loads(m.data);name=command['joint'];value=float(command['value'])

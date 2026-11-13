@@ -93,7 +93,13 @@ class PowerPlant:
             return True
         return False
 
-    def step(self, dt, targets, velocities, enabled=True):
+    def boost_factor(self, requested):
+        """Peak torque multiplier per wheel: full boost below derate_C, fading to none at the existing derate temperature."""
+        d = self.p['drive']; fraction = d.get('peak_boost_fraction', 0.) if requested else 0.
+        return [1 + fraction * clamp((d['derate_C'] - max(t, dt_)) / max(d['derate_C'] - d.get('peak_boost_derate_C', d['derate_C']), 1e-9), 0., 1.) if fraction else 1.
+                for t, dt_ in zip(self.temp, self.driver_temp)]
+
+    def step(self, dt, targets, velocities, enabled=True, boost=False):
         if not 0 < dt <= .05 or len(targets)!=4 or len(velocities)!=4:
             raise ValueError('Plant expects four wheels and dt in (0,.05]')
         if not all(math.isfinite(v) for v in targets+velocities):
@@ -102,7 +108,7 @@ class PowerPlant:
         cold = 1 + clamp((22-self.ambient)/32, 0, 1)*(p['cold_resistance_multiplier_at_minus10C']-1)
         resistance = p['internal_resistance_ohm']*cold + p['wire_resistance_ohm']
         ocv = p['ocv_empty_V']+(p['ocv_full_V']-p['ocv_empty_V'])*self.soc
-        duties=[]; currents=[]; torques=[]
+        duties=[]; currents=[]; torques=[]; boosts=self.boost_factor(boost)
         for i,(target,omega) in enumerate(zip(targets,velocities)):
             if self.temp[i]>=d['cutoff_C'] or self.driver_temp[i]>=d['cutoff_C']: self.cutoff[i]=True
             if max(self.temp[i],self.driver_temp[i])<d['recover_C']: self.cutoff[i]=False
@@ -128,9 +134,9 @@ class PowerPlant:
             steady=(voltage-d['ke_Vs_rad']*omega*d['gear_ratio'])/r if active else 0.
             current=steady+(self.current[i]-steady)*math.exp(-r*dt/d['inductance_H'])
             derate=clamp((d['cutoff_C']-max(self.temp[i],self.driver_temp[i]))/(d['cutoff_C']-d['derate_C']),0.,1.)
-            current=clamp(current,-d['current_limit_A']*derate,d['current_limit_A']*derate) if active else 0.
+            current=clamp(current,-d['current_limit_A']*derate*boosts[i],d['current_limit_A']*derate*boosts[i]) if active else 0.
             duties.append(voltage/max(available,1e-9)); currents.append(current)
-            torques.append(clamp(kt*current*d['gear_ratio']*d['gear_efficiency'],-d['output_torque_limit_Nm'],d['output_torque_limit_Nm']))
+            torques.append(clamp(kt*current*d['gear_ratio']*d['gear_efficiency'],-d['output_torque_limit_Nm']*boosts[i],d['output_torque_limit_Nm']*boosts[i]))
         # Conservative battery budget includes PWM duty, and electronics.
         electronics=p['electronics_W']/max(self.voltage*p['buck_efficiency'],1.)
         requested=sum(abs(i*u) for i,u in zip(currents,duties))
@@ -152,4 +158,4 @@ class PowerPlant:
         self.battery_temp+=dt*(total*total*resistance-(self.battery_temp-self.ambient)/p['battery_thermal_resistance_K_W'])/p['battery_capacity_J_K']
         self.soc=max(0.,self.soc-total*dt/(3600*p['capacity_Ah']))
         self.current=currents
-        return {'torques_Nm':torques,'motor_current_A':currents,'duty':duties,'winding_C':self.temp.copy(),'driver_C':self.driver_temp.copy(),'battery_C':self.battery_temp,'battery_V':self.voltage,'rail_5V':rail5,'rail_3V3':min(3.3,max(0.,rail5-.3)),'battery_current_A':total,'soc':self.soc,'brownout':self.brownout,'needs_home':self.needs_home,'reset_count':self.resets}
+        return {'torques_Nm':torques,'motor_current_A':currents,'duty':duties,'winding_C':self.temp.copy(),'driver_C':self.driver_temp.copy(),'battery_C':self.battery_temp,'battery_V':self.voltage,'rail_5V':rail5,'rail_3V3':min(3.3,max(0.,rail5-.3)),'battery_current_A':total,'soc':self.soc,'brownout':self.brownout,'needs_home':self.needs_home,'reset_count':self.resets,'torque_boost_factor':boosts}

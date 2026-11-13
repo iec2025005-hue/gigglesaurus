@@ -62,6 +62,7 @@ def resolve_schema(path):
     for key in ('hold_capture_speed_rad_s','hold_position_gain_s_inv','hold_speed_limit_rad_s'):
         if not math.isfinite(result['control_safety'][key]) or result['control_safety'][key]<=0:raise ValueError('Invalid hold control setting: '+key)
     if not .05<=result['control_safety']['trajectory_horizon_s']<=.2:raise ValueError('Unsupported position trajectory horizon')
+    if not 0 <= result['drive'].get('peak_boost_fraction', 0.) <= .25:raise ValueError('Peak torque boost outside the reviewed range')
     s = result['suspension']
     for key, lo, hi in [('stiffness_N_m', 500, 4000), ('damping_Ns_m', 20, 180),
                         ('force_cap_N', 0, 150)]:
@@ -69,7 +70,7 @@ def resolve_schema(path):
             raise ValueError('Suspension setting outside existing safety bounds: ' + key)
     if s['lower_m'] < -.01 or s['upper_m'] > .03:
         raise ValueError('Suspension travel may not exceed the existing mechanism bounds')
-    for section,key,limit in [('drive','output_torque_limit_Nm',.5),('steering','output_torque_limit_Nm',.7),('steering','output_speed_limit_rad_s',1.)]:
+    for section,key,limit in [('drive','output_torque_limit_Nm',.5),('steering','output_torque_limit_Nm',.7),('steering','output_speed_limit_rad_s',3.2)]:
         if not 0 < result[section][key] <= limit:
             raise ValueError('Actuator setting exceeds existing limit: '+section+'.'+key)
     if not s['lower_m'] < s['bump_lower_m'] < 0 < s['bump_upper_m'] < s['upper_m']:

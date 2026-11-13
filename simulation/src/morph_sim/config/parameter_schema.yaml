@@ -307,6 +307,18 @@ parameters:
       status: assumed
       uncertainty: null
       source: Imported existing design assumption; no physical measurement
+    peak_boost_fraction:
+      default: 0.2
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: 'V2 brief: 20 % short-duration peak torque and current, requested by the controller and governed by the winding and driver temperatures'
+    peak_boost_derate_C:
+      default: 60.0
+      units: C
+      status: assumed
+      uncertainty: null
+      source: Boost fades linearly from this temperature to none at derate_C; assumed
   steering:
     motor_holding_torque_Nm:
       default: 0.45
@@ -333,11 +345,11 @@ parameters:
       uncertainty: null
       source: Imported existing design assumption; no physical measurement
     output_speed_limit_rad_s:
-      default: 1.0
+      default: 3.2
       units: rad/s
       status: assumed
       uncertainty: null
-      source: Imported existing design assumption; no physical measurement
+      source: 'V2 brief: NEMA 17 stepper limit, 183 deg/s at the steering output; not measured on hardware'
     pullout_speed_rad_s:
       default: 5.0
       units: rad/s
@@ -3167,3 +3179,48 @@ parameters:
           status: assumed
           uncertainty: null
           source: 'Typical shear deformation modulus for this soil class (Wong: about 1 cm firm sand, 2.5 cm loose sand, 0.6 cm clay); assumed'
+  motion:
+    implemented_in: morph_sim/control.py
+    scope: Command shaping; values from the V2 brief unless stated
+    jerk_limit_m_s3:
+      default: 6.0
+      units: m/s^3
+      status: assumed
+      uncertainty: null
+      source: 'V2 brief: S-curve jerk filter J_max'
+    yaw_jerk_limit_rad_s3:
+      default: 6.0
+      units: rad/s^3
+      status: assumed
+      uncertainty: null
+      source: Same numeric value as the linear limit; assumed
+    acceleration_limit_m_s2:
+      default: 1.2
+      units: m/s^2
+      status: assumed
+      uncertainty: null
+      source: Existing ramp rate; used when the surface friction is unknown
+    yaw_acceleration_limit_rad_s2:
+      default: 1.2
+      units: rad/s^2
+      status: assumed
+      uncertainty: null
+      source: Existing ramp rate
+    friction_acceleration_fraction:
+      default: 0.35
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: Acceleration limit = fraction * mu * g when the surface friction is known; assumed
+    acceleration_floor_m_s2:
+      default: 0.4
+      units: m/s^2
+      status: assumed
+      uncertainty: null
+      source: Lower bound of the friction-linked limit; assumed
+    acceleration_ceiling_m_s2:
+      default: 2.2
+      units: m/s^2
+      status: assumed
+      uncertainty: null
+      source: Torque-limited acceleration 2.67 m/s^2 less rolling resistance and margin (Phase 0 audit S7)

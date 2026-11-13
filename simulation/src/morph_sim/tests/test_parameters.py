@@ -120,7 +120,7 @@ def test_generated_trajectory_controllers_retain_position_interfaces_and_joint_l
     assert float(native.findtext('timeout'))<=.2
     root=ET.parse(tmp_path/'morph.urdf').getroot()
     assert float(root.find("joint[@name='telR1_joint']/limit").get('velocity'))==.006
-    assert float(root.find("joint[@name='fl_steer_joint']/limit").get('velocity'))==1.
+    assert float(root.find("joint[@name='fl_steer_joint']/limit").get('velocity'))==3.2   # V2 brief steering rate
     assert float(root.find("joint[@name='fl_height_joint']/limit").get('effort'))==100.
 
 

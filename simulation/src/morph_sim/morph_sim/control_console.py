@@ -5,7 +5,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from .timing import TimedVelocityPublisher
 from std_msgs.msg import String,Bool
-EVENTS={'e':'expand','x':'compact','n':'normal','h':'raise','l':'lower','1':'track','2':'rocky','3':'climb','4':'sand','k':'estop','space':'estop','u':'reset','v':'perception_toggle','f':'flip'}
+EVENTS={'z':'expand','x':'compact','n':'normal','h':'raise','l':'lower','1':'track','2':'rocky','3':'climb','4':'sand','k':'estop','space':'estop','u':'reset','v':'perception_toggle','f':'flip'}
 
 def main(test_hook=None):
  rclpy.init();node=Node('morph_control_console');pub=TimedVelocityPublisher(node,'console');ev=node.create_publisher(String,'/morph/event',10);cam=node.create_publisher(Bool,'/morph/camera/show',1)
@@ -18,7 +18,7 @@ def main(test_hook=None):
  node.create_subscription(String,'/morph/suspension/telemetry',lambda m:data(thermal,m),1)
  tk.Label(root,text='MORPH  /  RESEARCH CONSOLE',font=('DejaVu Sans',23,'bold'),fg='#59d6d2',bg='#101820').pack(pady=16)
  info=tk.StringVar();tk.Label(root,textvariable=info,justify='left',anchor='w',font=('DejaVu Sans Mono',12),fg='#edf3f7',bg='#101820').pack(fill='x',padx=24)
- tk.Label(root,text='Hold W/S + Q/C + A/D together to drive, strafe and turn.\nPress E / X / N while driving to expand / compact / centre.\nH / L ride height     1–4 terrain mode     Shift precision\nB brake     Space / K emergency stop     U reset     P camera     V sensor adaptation\nControls work while this window has focus. Release keys to stop.',justify='left',font=('DejaVu Sans',12),fg='#a8baca',bg='#101820').pack(padx=24,pady=15,anchor='w')
+ tk.Label(root,text='W/S drive   A/D strafe sideways (no turning)   Q/E or Left/Right rotate in place. Hold together to combine.\nPress Z / X / N while driving to expand / compact / centre.\nH / L ride height     1–4 terrain mode     Shift precision\nB brake     Space / K emergency stop     U reset     P camera     V sensor adaptation\nControls work while this window has focus. Release keys to stop.',justify='left',font=('DejaVu Sans',12),fg='#a8baca',bg='#101820').pack(padx=24,pady=15,anchor='w')
  row=tk.Frame(root,bg='#101820');row.pack(fill='x',padx=24)
  def event(name):ev.publish(String(data=name))
  for label,name in [('EXPAND','expand'),('COMPACT','compact'),('NORMAL','normal'),('RAISE','raise'),('LOWER','lower'),('SENSOR AUTO','perception_toggle'),('RESET','reset'),('STOP','estop')]:
@@ -49,7 +49,7 @@ def main(test_hook=None):
   if not active[0] or not rclpy.ok():return
   msg=Twist();speed=.12 if 'shift_l' in keys or 'shift_r' in keys else .30
   if focused[0] and 'b' not in keys and 'space' not in keys and 'k' not in keys:
-   msg.linear.x=speed*(int('w' in keys or 'up' in keys)-int('s' in keys or 'down' in keys));msg.linear.y=speed*(int('q' in keys)-int('c' in keys));msg.angular.z=.5*(int('a' in keys or 'left' in keys)-int('d' in keys or 'right' in keys))
+   msg.linear.x=speed*(int('w' in keys or 'up' in keys)-int('s' in keys or 'down' in keys));msg.linear.y=speed*(int('a' in keys)-int('d' in keys));msg.angular.z=.5*(int('q' in keys or 'left' in keys)-int('e' in keys or 'right' in keys))
   pub.publish(msg)
  last_draw=[0.];display_timing=node.create_publisher(String,'/morph/console/display_timing',1)
  def tick():

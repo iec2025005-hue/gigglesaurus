@@ -14,11 +14,17 @@ MORPH_BASELINE_MODE=slip  launch with sector:=mud|snow|sand; full-speed step and
 MORPH_BASELINE_MODE=fixture  V2 arena fixture run: take MORPH_BASELINE_SHAPE, then drive +x at MORPH_BASELINE_SPEED
                           with a heading/lateral hold on y = MORPH_BASELINE_Y until x >= MORPH_BASELINE_GOAL_X,
                           e-stop, or a 6 s stall. Logs soil-model and motor telemetry.
+                          MORPH_BASELINE_EVENTS: comma list of /morph/event names sent before driving.
+                          MORPH_BASELINE_YAW: body heading in degrees held while travelling along +x (oblique/crab).
+                          MORPH_BASELINE_STEP=1: lift each wheel over the arena trenches (morph_sim.trench_crossing).
+MORPH_BASELINE_MODE=pivot  from rest with wheels straight: pure strafe, then pure spin, then strafe with the crab tuck; steering angles logged at 100 Hz
+MORPH_BASELINE_MODE=onfly  open-loop pairs of identical drives with and without a shape change (continuous policy):
+                          straight, arc, and straight with a full Normal->Compact change. No pose feedback.
 
 Raw samples are written unfiltered; tools/baseline_v2_report.py derives the metrics.
 Every number is a simulation measurement of an ASSUMED-parameter model.
 """
-import json, math, os, time
+import json, math, os, sys, time
 from pathlib import Path
 import rclpy
 from rclpy.node import Node
@@ -44,7 +50,7 @@ class Baseline(Node):
         self.create_subscription(Odometry, '/morph/ground_truth/odom', self.on_odom, qos_profile_sensor_data)
         self.create_subscription(Imu, '/morph/imu', self.on_imu, qos_profile_sensor_data)
         self.create_subscription(JointState, '/joint_states', self.on_joints, qos_profile_sensor_data)
-        self.wheel_rows = []; self.soil_rows = []; self.power_rows = []
+        self.wheel_rows = []; self.soil_rows = []; self.power_rows = []; self.segments = []; self.steer_rows = []
         self.create_subscription(String, '/morph/terramechanics/status', self.on_soil, 10)
         self.create_subscription(String, '/morph/physics/status', self.on_power, 10)
         self.next_pub = 0.
@@ -72,6 +78,7 @@ class Baseline(Node):
         v = dict(zip(m.name, m.velocity))
         if all(leg + '_wheel_joint' in v for leg in LEGS):
             self.wheel_rows.append([m.header.stamp.sec + m.header.stamp.nanosec * 1e-9] + [v[leg + '_wheel_joint'] for leg in LEGS])
+            q = dict(zip(m.name, m.position)); self.steer_rows.append([self.wheel_rows[-1][0]] + [q.get(leg + '_steer_joint') for leg in LEGS])
 
     def on_soil(self, m):
         try: d = json.loads(m.data)
@@ -151,16 +158,61 @@ def main():
             shape = os.environ.get('MORPH_BASELINE_SHAPE', 'normal'); speed = float(os.environ.get('MORPH_BASELINE_SPEED', '0.3'))
             goal = float(os.environ.get('MORPH_BASELINE_GOAL_X', '5')); lane = float(os.environ.get('MORPH_BASELINE_Y', '0'))
             if shape != 'normal': n.morph('fixture_shape_' + shape, shape)
+            heading = math.radians(float(os.environ.get('MORPH_BASELINE_YAW', '0')))
+            for name in [e for e in os.environ.get('MORPH_BASELINE_EVENTS', '').split(',') if e]: n.send(name)
+            n.run('fixture_events_settle', 3.)
             stalled = {'since': None}; command = [speed, 0., 0.]
+            stepping = os.environ.get('MORPH_BASELINE_STEP', '') == '1'; step = {'event': 'suspension_level', 'hold_until': 0., 'late': 0, 'conflicts': 0, 'lifts': [], 'current': None, 'done': []}
+            if stepping:
+                sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+                from morph_sim.trench_crossing import plan as step_plan
+                arena = json.loads((Path(__file__).resolve().parents[1] / 'config/tetra_arena.json').read_text())
+                trenches = [(t['x'], t['width_m']) for z in arena['zones'] if z['kind'] == 'trench' for t in z['trenches']]
             def finished():
                 x, y, yaw = n.pose; s = n.status
                 # Hold the lane with small body-frame corrections (ground-truth pose; this is a test rig, not the controller).
-                command[1] = max(-.08, min(.08, -1.0 * (y - lane))); command[2] = max(-.3, min(.3, -1.5 * yaw))
+                lateral = max(-.08, min(.08, -1.0 * (y - lane)))            # world-frame correction towards the lane
+                command[0] = speed * math.cos(yaw) + lateral * math.sin(yaw); command[1] = -speed * math.sin(yaw) + lateral * math.cos(yaw)
+                command[2] = max(-.3, min(.3, -1.5 * math.atan2(math.sin(yaw - heading), math.cos(yaw - heading))))
+                if stepping:
+                    p = step_plan(x, s.get('stage_offset') or 0., yaw, trenches, done={tuple(v) for v in step['done']}); wanted = 'lift_' + p['lift'] if p['lift'] else 'suspension_level'
+                    key = [p['lift'], p['trench']] if p['lift'] else None
+                    if key != step['current']:
+                        if step['current'] is not None: step['done'].append(step['current'])      # that wheel has left its window
+                        step['current'] = key
+                    if wanted != step['event']:
+                        n.send(wanted); step['event'] = wanted; step['hold_until'] = n.sim() + (3.0 if p['lift'] else 0.)
+                        if p['lift']: step['lifts'].append([p['lift'], round(x, 3)])
+                        if p['inside']: step['late'] += 1
+                    step['conflicts'] += int(p['conflict'])
+                    if n.sim() < step['hold_until']: command[0] = command[1] = 0.      # wait for the corner heights before the wheel enters
                 if x >= goal or s.get('estop'): return True
+                if stepping and n.sim() < step['hold_until']: stalled['since'] = None; return False
                 slow = (s.get('actual_speed') or 0.) < .01
                 stalled['since'] = (stalled['since'] or n.sim()) if slow else None
                 return stalled['since'] is not None and n.sim() - stalled['since'] > 6.
             n.run('fixture_drive', 0., command, until=finished, timeout=float(os.environ.get('MORPH_BASELINE_TIMEOUT', '120'))); n.run('fixture_stop', 2.)
+            n.segments.append({'name': 'stepping', **step})
+        elif mode == 'pivot':
+            for name, command in (('pivot_forward', (.3, 0., 0.)), ('pivot_strafe', (0., .3, 0.)), ('pivot_forward_2', (.3, 0., 0.)), ('pivot_spin', (0., 0., .5)), ('pivot_forward_3', (.3, 0., 0.)), ('pivot_compound', (.2, .2, .3))):
+                n.run(name, 4., command); n.run(name + '_stop', 2.)
+            n.send('crab_tuck_on'); n.run('pivot_forward_4', 3., (.3, 0., 0.)); n.run('pivot_forward_4_stop', 2.)
+            n.run('pivot_strafe_tucked', 4., (0., .3, 0.)); n.run('pivot_strafe_tucked_stop', 2.); n.send('crab_tuck_off')
+        elif mode == 'onfly':
+            n.send('morph_continuous'); n.run('onfly_settle', 2.)
+            def segment(name, command, duration, events=()):
+                pending = sorted(events); start = n.sim(); n.segments.append({'name': name, 'start_s': start, 'start_pose': list(n.pose), 'command': list(command), 'events': list(events)})
+                def tick():
+                    while pending and n.sim() - start >= pending[0][0]: n.send(pending.pop(0)[1])
+                    return False
+                n.run(name, duration, command, until=tick, timeout=duration); n.segments[-1]['end_s'] = n.sim()
+                n.run(name + '_stop', 2.5)
+            speed = float(os.environ.get('MORPH_BASELINE_SPEED', '0.3')); change = [(2., 'expand'), (8., 'normal')]
+            segment('straight_ref', (speed, 0., 0.), 14.); segment('straight_morph', (speed, 0., 0.), 14., change)
+            segment('straight_long_ref', (speed, 0., 0.), 16.); segment('straight_compact', (speed, 0., 0.), 16., [(2., 'compact')])
+            n.morph('onfly_back_to_normal', 'normal')
+            segment('arc_ref', (speed, 0., .2), 14.); segment('arc_morph', (speed, 0., .2), 14., change)
+            segment('crab_ref', (0., speed, 0.), 14.); segment('crab_morph', (0., speed, 0.), 14., change)
         elif mode == 'slip':
             n.run('slip_step_0p6', 5., (.6, 0., 0.)); n.run('slip_stop', 3.)
             n.run('slip_step_rev_0p6', 5., (-.6, 0., 0.)); n.run('slip_stop_2', 3.)
@@ -192,7 +244,7 @@ def main():
         n.cmd.publish(Twist())
         sim = sum(p['sim_end_s'] - p['sim_start_s'] for p in n.phases); wall_s = sum(p['wall_s'] for p in n.phases)
         result = {'protocol': 'baseline_v2', 'mode': mode, 'error': error, 'sim_s': sim, 'wall_s': wall_s,
-                  'mean_rtf': sim / wall_s if wall_s else None, 'phases': n.phases, 'events': n.events,
+                  'mean_rtf': sim / wall_s if wall_s else None, 'phases': n.phases, 'events': n.events, 'segments': n.segments,
                   'columns': {'odom': ['sim_s', 'wall_s', 'x', 'y', 'z', 'yaw', 'vx_body', 'vy_body', 'vz_body', 'wz'],
                               'imu': ['sim_s', 'ax', 'ay', 'az', 'wx', 'wy', 'wz'], 'wheels': ['sim_s', 'fl', 'fr', 'rl', 'rr'],
                               'soil': ['sim_s'] + [f'{leg}_{key}' for leg in LEGS for key in ('normal_N', 'sinkage_m', 'soil_slip', 'compaction_N', 'thrust_N')] + ['fl_zone'],
@@ -200,7 +252,7 @@ def main():
                               'status': ['sim_s', 'command_speed', 'actual_speed', 'stage_offset', 'target_stage_offset', 'morph_rate_m_s',
                                          'steering_alignment_rad', 'transition_pending', 'estop', 'pitch_deg', 'roll_deg',
                                          'steering_measured_degrees', 'mode']},
-                  'samples': {'odom': n.odom_rows, 'imu': n.imu_rows, 'status': n.status_rows, 'wheels': n.wheel_rows, 'soil': n.soil_rows, 'power': n.power_rows},
+                  'samples': {'odom': n.odom_rows, 'imu': n.imu_rows, 'status': n.status_rows, 'wheels': n.wheel_rows, 'soil': n.soil_rows, 'power': n.power_rows, 'steer': n.steer_rows},
                   'scope': 'Simulation of an assumed-parameter model; not hardware data'}
         out.parent.mkdir(parents=True, exist_ok=True); out.write_text(json.dumps(result))
         n.destroy_node(); rclpy.shutdown()

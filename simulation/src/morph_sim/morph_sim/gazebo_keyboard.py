@@ -8,16 +8,17 @@ from std_msgs.msg import Int32, String, Bool
 
 KEY_EVENTS = {
     ord('1'): 'track', ord('2'): 'rocky', ord('3'): 'climb', ord('4'): 'sand',
-    ord('X'): 'compact', ord('N'): 'normal', ord('E'): 'expand',
+    ord('X'): 'compact', ord('N'): 'normal', ord('Z'): 'expand',
     ord('U'): 'reset', ord('K'): 'estop', ord('F'): 'flip',
     ord('H'): 'raise', ord('L'): 'lower', ord('V'): 'perception_toggle',
 }
 KEY_VELOCITIES = {
     ord('W'): (0.30, 0.0, 0.0), 16777235: (0.30, 0.0, 0.0),
     ord('S'): (-0.30, 0.0, 0.0), 16777237: (-0.30, 0.0, 0.0),
-    ord('A'): (0.0, 0.0, 0.50), 16777234: (0.0, 0.0, 0.50),
-    ord('D'): (0.0, 0.0, -0.50), 16777236: (0.0, 0.0, -0.50),
-    ord('Q'): (0.0, 0.24, 0.0), ord('C'): (0.0, -0.24, 0.0),
+    # Holonomic swerve, not a car: A/D strafe sideways with no heading change, Q/E (and Left/Right) rotate in place.
+    ord('A'): (0.0, 0.24, 0.0), ord('D'): (0.0, -0.24, 0.0),
+    ord('Q'): (0.0, 0.0, 0.50), 16777234: (0.0, 0.0, 0.50),
+    ord('E'): (0.0, 0.0, -0.50), 16777236: (0.0, 0.0, -0.50),
     ord('B'): (0.0, 0.0, 0.0),
 }
 
