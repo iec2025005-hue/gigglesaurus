@@ -1,4 +1,4 @@
-"""Jazzy/Harmonic launch: spawn -> controller activation -> adaptation + teleop."""
+"""Launch (tested on ROS 2 Lyrical / Gazebo Sim 10): spawn -> controller activation -> adaptation + teleop."""
 from pathlib import Path
 import os,tempfile,json,hashlib,subprocess
 from ament_index_python.packages import get_package_share_directory, get_package_prefix

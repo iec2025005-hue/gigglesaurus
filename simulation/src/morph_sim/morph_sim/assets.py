@@ -46,7 +46,8 @@ def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True
    tex='rubber' if rubber or 'coil' in vname else 'encoder' if 'encoder' in vname else 'gold' if 'damper' in vname else 'chrome' if 'piston' in vname else 'cyan' if 'hexarm' in name else 'metal'
    material.find('ambient').text='1 1 1 1'
    material.find('diffuse').text='1 1 1 1'
-   child(metal,'albedo_map',(share/'models/materials/textures'/f'finish_{tex}.png').as_uri())
+   # Plain absolute path: as_uri() percent-encodes spaces and the renderer does not decode texture URIs.
+   child(metal,'albedo_map',str(share/'models/materials/textures'/f'finish_{tex}.png'))
 
    child(metal,'metalness',0.0 if rubber or 'encoder' in vname else .75)
    child(metal,'roughness',.86 if rubber else .22 if 'piston' in vname else .42)
