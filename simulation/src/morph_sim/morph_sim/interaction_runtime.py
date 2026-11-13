@@ -36,7 +36,7 @@ class InteractionRuntime(Node):
         self.scenario=self.get_parameter('scenario').value
         self.env=dict(self.p['environment']['scenarios'][self.scenario])
         self.zone='warehouse' if self.get_parameter('arena').value=='warehouse' else 'marsyard'
-        self.surface='concrete' if self.zone=='warehouse' else self.p['environment']['default_surface']
+        self.surface='concrete' if self.zone=='warehouse' else 'tarmac' if self.get_parameter('arena').value=='tetra' else self.p['environment']['default_surface']
         self.course=Course(get_package_share_directory('morph_sim')) if self.get_parameter('arena').value=='multisector' else None
         self.plant=PowerPlant(self.p,self.env['ambient_C']); self.rng=random.Random(self.p['provenance']['seed'])
         self.actuate=self.get_parameter('actuate').value

@@ -11,6 +11,9 @@ MORPH_BASELINE_MODE=rtf   >=60 s sim-time RTF sample only (20 s driving + idle)
 MORPH_BASELINE_MODE=ramp  launch with sector:=ramps; drive up the 4.9/9.8/14.8/19.7/24.6 deg ramp row
                           in the shape named by MORPH_BASELINE_SHAPE (expand|compact|normal)
 MORPH_BASELINE_MODE=slip  launch with sector:=mud|snow|sand; full-speed step and stop, wheel slip logged
+MORPH_BASELINE_MODE=fixture  V2 arena fixture run: take MORPH_BASELINE_SHAPE, then drive +x at MORPH_BASELINE_SPEED
+                          with a heading/lateral hold on y = MORPH_BASELINE_Y until x >= MORPH_BASELINE_GOAL_X,
+                          e-stop, or a 6 s stall. Logs soil-model and motor telemetry.
 
 Raw samples are written unfiltered; tools/baseline_v2_report.py derives the metrics.
 Every number is a simulation measurement of an ASSUMED-parameter model.
@@ -41,7 +44,9 @@ class Baseline(Node):
         self.create_subscription(Odometry, '/morph/ground_truth/odom', self.on_odom, qos_profile_sensor_data)
         self.create_subscription(Imu, '/morph/imu', self.on_imu, qos_profile_sensor_data)
         self.create_subscription(JointState, '/joint_states', self.on_joints, qos_profile_sensor_data)
-        self.wheel_rows = []
+        self.wheel_rows = []; self.soil_rows = []; self.power_rows = []
+        self.create_subscription(String, '/morph/terramechanics/status', self.on_soil, 10)
+        self.create_subscription(String, '/morph/physics/status', self.on_power, 10)
         self.next_pub = 0.
 
     def sim(self):
@@ -67,6 +72,17 @@ class Baseline(Node):
         v = dict(zip(m.name, m.velocity))
         if all(leg + '_wheel_joint' in v for leg in LEGS):
             self.wheel_rows.append([m.header.stamp.sec + m.header.stamp.nanosec * 1e-9] + [v[leg + '_wheel_joint'] for leg in LEGS])
+
+    def on_soil(self, m):
+        try: d = json.loads(m.data)
+        except ValueError: return
+        w = d['wheels']
+        self.soil_rows.append([d['sim_time_s']] + [w[leg][key] for leg in LEGS for key in ('normal_N', 'sinkage_m', 'soil_slip', 'compaction_N', 'thrust_N')] + [w[LEGS[0]]['zone']])
+
+    def on_power(self, m):
+        try: d = json.loads(m.data); power = d['power']
+        except (ValueError, KeyError): return
+        self.power_rows.append([d['sim_time_s'], power['battery_V'], power['battery_current_A'], max(power['winding_C'])] + list(power['torques_Nm']) + list(power['motor_current_A']))
 
     def on_imu(self, m):
         a = m.linear_acceleration; w = m.angular_velocity
@@ -131,6 +147,20 @@ def main():
                 stalled['since'] = (stalled['since'] or n.sim()) if slow else None
                 return stalled['since'] is not None and n.sim() - stalled['since'] > 6.
             n.run('ramp_drive_0p12', 0., (.12, 0., 0.), until=finished, timeout=150.); n.run('ramp_stop', 2.)
+        elif mode == 'fixture':
+            shape = os.environ.get('MORPH_BASELINE_SHAPE', 'normal'); speed = float(os.environ.get('MORPH_BASELINE_SPEED', '0.3'))
+            goal = float(os.environ.get('MORPH_BASELINE_GOAL_X', '5')); lane = float(os.environ.get('MORPH_BASELINE_Y', '0'))
+            if shape != 'normal': n.morph('fixture_shape_' + shape, shape)
+            stalled = {'since': None}; command = [speed, 0., 0.]
+            def finished():
+                x, y, yaw = n.pose; s = n.status
+                # Hold the lane with small body-frame corrections (ground-truth pose; this is a test rig, not the controller).
+                command[1] = max(-.08, min(.08, -1.0 * (y - lane))); command[2] = max(-.3, min(.3, -1.5 * yaw))
+                if x >= goal or s.get('estop'): return True
+                slow = (s.get('actual_speed') or 0.) < .01
+                stalled['since'] = (stalled['since'] or n.sim()) if slow else None
+                return stalled['since'] is not None and n.sim() - stalled['since'] > 6.
+            n.run('fixture_drive', 0., command, until=finished, timeout=float(os.environ.get('MORPH_BASELINE_TIMEOUT', '120'))); n.run('fixture_stop', 2.)
         elif mode == 'slip':
             n.run('slip_step_0p6', 5., (.6, 0., 0.)); n.run('slip_stop', 3.)
             n.run('slip_step_rev_0p6', 5., (-.6, 0., 0.)); n.run('slip_stop_2', 3.)
@@ -165,10 +195,12 @@ def main():
                   'mean_rtf': sim / wall_s if wall_s else None, 'phases': n.phases, 'events': n.events,
                   'columns': {'odom': ['sim_s', 'wall_s', 'x', 'y', 'z', 'yaw', 'vx_body', 'vy_body', 'vz_body', 'wz'],
                               'imu': ['sim_s', 'ax', 'ay', 'az', 'wx', 'wy', 'wz'], 'wheels': ['sim_s', 'fl', 'fr', 'rl', 'rr'],
+                              'soil': ['sim_s'] + [f'{leg}_{key}' for leg in LEGS for key in ('normal_N', 'sinkage_m', 'soil_slip', 'compaction_N', 'thrust_N')] + ['fl_zone'],
+                              'power': ['sim_s', 'battery_V', 'battery_current_A', 'max_winding_C', 'tq_fl', 'tq_fr', 'tq_rl', 'tq_rr', 'i_fl', 'i_fr', 'i_rl', 'i_rr'],
                               'status': ['sim_s', 'command_speed', 'actual_speed', 'stage_offset', 'target_stage_offset', 'morph_rate_m_s',
                                          'steering_alignment_rad', 'transition_pending', 'estop', 'pitch_deg', 'roll_deg',
                                          'steering_measured_degrees', 'mode']},
-                  'samples': {'odom': n.odom_rows, 'imu': n.imu_rows, 'status': n.status_rows, 'wheels': n.wheel_rows},
+                  'samples': {'odom': n.odom_rows, 'imu': n.imu_rows, 'status': n.status_rows, 'wheels': n.wheel_rows, 'soil': n.soil_rows, 'power': n.power_rows},
                   'scope': 'Simulation of an assumed-parameter model; not hardware data'}
         out.parent.mkdir(parents=True, exist_ok=True); out.write_text(json.dumps(result))
         n.destroy_node(); rclpy.shutdown()

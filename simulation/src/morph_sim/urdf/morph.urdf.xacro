@@ -1,15 +1,32 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="morph">
  <xacro:arg name="controllers_file" default="controllers.yaml"/>
+ <!-- chassis: "trimmed" = V2 simulation model with the longitudinal overhang clipped so the Compact chassis is 330 mm long
+      (tools/trim_chassis_meshes.py); "cad" = original CAD meshes (469 mm long in Compact). -->
+ <xacro:arg name="chassis" default="trimmed"/>
+ <xacro:property name="chassis" value="$(arg chassis)"/>
+ <xacro:property name="trimmed" value="${chassis == 'trimmed'}"/>
+ <xacro:property name="deck_half" value="${0.165 if trimmed else 0.210}"/>
+ <xacro:property name="beam_end" value="${0.3166 if trimmed else 0.386}"/>
+ <!-- stage_effort: force limit of each telescope stage [N]. 25 = V2 brief value (default). 8 = original assumption
+      (back-drivable: the rails are pushed in on slopes and against edges). Speed limit unchanged. -->
+ <xacro:arg name="stage_effort" default="25"/>
+ <xacro:property name="stage_effort" value="$(arg stage_effort)"/>
  <xacro:arg name="wheel_radius" default="0.075"/><xacro:arg name="wheel_width" default="0.045"/>
  <xacro:property name="wheel_radius" value="$(arg wheel_radius)"/><xacro:property name="wheel_width" value="$(arg wheel_width)"/>
  <xacro:include filename="common.xacro"/><xacro:include filename="leg.xacro"/>
- <link name="base_link"><xacro:box_inertia mass="6.33" x="0.28" y="0.70" z="0.15" xyz="0 0 0.02"/><xacro:mesh_visual mesh="fixed" color="0.12 0.17 0.23 1"/><xacro:box_collision name="underbody_collision" xyz="0 0 0.02" size="0.28 0.70 0.06"/></link>
+ <link name="base_link"><xacro:box_inertia mass="6.33" x="0.28" y="0.70" z="0.15" xyz="0 0 0.02"/><xacro:mesh_visual mesh="${'fixed_trim' if trimmed else 'fixed'}" color="0.12 0.17 0.23 1"/><xacro:box_collision name="underbody_collision" xyz="0 0 0.02" size="0.28 0.70 0.06"/>
+  <!-- Envelope collisions of the visible frame (heights above ground: belly 150-325 mm, deck 350-478 mm). -->
+  <xacro:box_collision name="deck_collision" xyz="0 0 0.079" size="${2*deck_half} 0.77 0.128"/><xacro:box_collision name="belly_collision" xyz="0 0 -0.0975" size="0.32 0.52 0.175"/></link>
  <link name="camera_link"><xacro:box_inertia mass="0.02" x="0.03" y="0.04" z="0.025"/><visual name="sensor_glass"><origin xyz="0.015 0 0" rpy="0 ${pi/2} 0"/><geometry><cylinder radius="0.015" length="0.003"/></geometry><material name="glass_blue"><color rgba="0.08 0.42 0.62 1"/></material></visual><visual name="status_led"><origin xyz="0 0.027 0.013"/><geometry><sphere radius="0.006"/></geometry><material name="cyan_led"><color rgba="0.01 0.9 1 1"/></material></visual></link>
  <joint name="camera_mount_joint" type="fixed"><parent link="base_link"/><child link="camera_link"/><origin xyz="0.13 0 0.18"/></joint>
  <xacro:macro name="stage" params="side index parent">
-  <link name="tel${side}${index}"><xacro:box_inertia mass="0.03" x="0.15" y="0.045" z="0.05" xyz="${(1 if side=='R' else -1)*index*0.042} 0 -0.06"/><xacro:mesh_visual mesh="tel${side}${index}" color="0.64 0.72 0.78 1"/></link>
-  <joint name="tel${side}${index}_joint" type="prismatic"><parent link="${parent}"/><child link="tel${side}${index}"/><axis xyz="${1 if side=='R' else -1} 0 0"/><limit lower="-0.0379" upper="0.016511111111" effort="8" velocity="0.006"/><dynamics damping="5" friction="0.05"/></joint>
+  <link name="tel${side}${index}"><xacro:box_inertia mass="0.03" x="0.15" y="0.045" z="0.05" xyz="${(1 if side=='R' else -1)*index*0.042} 0 -0.06"/><xacro:mesh_visual mesh="tel${side}${index}${'_trim' if trimmed and index in (2, 3, 4, 5) else ''}" color="0.64 0.72 0.78 1"/>
+   <xacro:if value="${index == 4}"><!-- Stage 4 carries the wheel modules: low cross beam (137-225 mm) and upper carrier (225-470 mm). -->
+    <xacro:box_collision name="tel${side}4_beam_collision" xyz="${(1 if side=='R' else -1)*(0.217+beam_end)/2} 0 -0.154" size="${beam_end-0.217} 0.69 0.088"/>
+    <xacro:box_collision name="tel${side}4_carrier_collision" xyz="${(1 if side=='R' else -1)*(0.168+beam_end)/2} 0 0.0125" size="${beam_end-0.168} 0.57 0.245"/>
+   </xacro:if></link>
+  <joint name="tel${side}${index}_joint" type="prismatic"><parent link="${parent}"/><child link="tel${side}${index}"/><axis xyz="${1 if side=='R' else -1} 0 0"/><limit lower="-0.0379" upper="0.016511111111" effort="${stage_effort}" velocity="0.006"/><dynamics damping="5" friction="0.05"/></joint>
  </xacro:macro>
  <xacro:macro name="telescope" params="side">
   <xacro:stage side="${side}" index="1" parent="base_link"/><xacro:stage side="${side}" index="2" parent="tel${side}1"/><xacro:stage side="${side}" index="3" parent="tel${side}2"/><xacro:stage side="${side}" index="4" parent="tel${side}3"/><xacro:stage side="${side}" index="5" parent="tel${side}4"/><xacro:stage side="${side}" index="6" parent="tel${side}5"/>

@@ -102,13 +102,19 @@ def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True
    node.text=(share/node.text[len('package://morph_sim/'):]).as_uri()
  return root
 
+# Telescope stage force limit [N]. 'backdrivable' is the original assumption; 'reinforced' is the V2 brief value and the
+# default; 'self_locking' models a lead-screw rail (assumed, not measured). The 6 mm/s stage speed limit is the same for all.
+STAGE_EFFORT_N={'backdrivable':8.,'reinforced':25.,'self_locking':60.}
+
 def resolve_position_backend(physics_profile,requested='auto'):
  if requested=='auto':return 'trajectory' if physics_profile else 'forward'
  if requested not in ('trajectory','forward') or (requested=='trajectory' and not physics_profile):raise ValueError('Position backend conflicts with physics profile')
  return requested
 
 
-def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, camera_rate=10., camera_width=480, range_sensor=True, trace_native=False, camera_enabled=False, position_backend='forward'):
+def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, camera_rate=10., camera_width=480, range_sensor=True, trace_native=False, camera_enabled=False, position_backend='forward', chassis='trimmed', soil_zones=None, stage_hold='reinforced'):
+ if chassis not in ('trimmed','cad'):raise ValueError('chassis must be trimmed or cad')
+ if stage_hold not in STAGE_EFFORT_N:raise ValueError('stage_hold must be one of '+', '.join(STAGE_EFFORT_N))
  if position_backend not in ('forward','trajectory'):raise ValueError('Unknown position backend')
  if position_backend=='trajectory' and not physics_profile:raise ValueError('Trajectory backend currently requires physics_profile true')
  share=Path(share).resolve();out_dir=Path(out_dir);out_dir.mkdir(parents=True,exist_ok=True)
@@ -125,7 +131,7 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
   if not isinstance(value,(int,float)) or not math.isfinite(value) or value<0:
    raise ValueError('Invalid suspension parameter: '+key)
  (out_dir/'params.yaml').write_text(yaml.safe_dump(params,sort_keys=False))
- doc=xacro.process_file(str(share/'urdf/morph.urdf.xacro'),mappings={'controllers_file':str(share/'config/controllers.yaml'),'wheel_radius':str(wheel_radius),'wheel_width':str(params['robot']['wheel_width_m'])})
+ doc=xacro.process_file(str(share/'urdf/morph.urdf.xacro'),mappings={'controllers_file':str(share/'config/controllers.yaml'),'wheel_radius':str(wheel_radius),'wheel_width':str(params['robot']['wheel_width_m']),'chassis':chassis,'stage_effort':str(STAGE_EFFORT_N[stage_hold])})
  tree=ET.fromstring(doc.toxml())
  plugin=tree.find("./gazebo/plugin[@name='morph_sim::SuspensionSystem']")
  if plugin is None:raise ValueError('Missing suspension plugin')
@@ -198,8 +204,18 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
    child(axis,'mass',robot_tree.find("link[@name='"+name+"_height']/inertial/mass").get('value'))
    for tag,attribute in [('lower','lower'),('upper','upper'),('force_limit','effort'),('speed_limit','velocity')]:child(axis,tag,limit.get(attribute))
    child(axis,'damping',dynamics.get('damping'));child(axis,'friction',dynamics.get('friction'))
+ if soil_zones:
+  # Last plugin in the model: it reads the suspension and wheel force commands written earlier in the same PreUpdate.
+  terra=params['terramechanics'];soil_plugin=child(root.find('model'),'plugin',filename='libmorph_terramechanics.so',name='morph_sim::MorphTerramechanics')
+  child(soil_plugin,'wheel_radius',wheel_radius);child(soil_plugin,'wheel_width',params['robot']['wheel_width_m']);child(soil_plugin,'unsprung_weight',params['robot']['unsprung_mass_per_module_kg']*9.81)
+  for tag,key in [('speed_scale','speed_scale_rad_s'),('thrust_filter','thrust_filter_s'),('rut_point_spacing','rut_point_spacing_m'),('rut_capture_radius','rut_capture_radius_m'),('rut_memory_points','rut_memory_points'),('sinkage_limit_radius_fraction','sinkage_limit_radius_fraction'),('reload_resistance_fraction','reload_resistance_fraction'),('slip_sinkage_gain','slip_sinkage_gain'),('slip_drag_enabled','slip_drag_enabled'),('slip_ratio_limit','slip_ratio_limit')]:child(soil_plugin,tag,terra[key])
+  for name in ('fl','fr','rl','rr'):child(soil_plugin,'wheel',name)
+  for zone in soil_zones:
+   soil=terra['soils'][zone['soil']];element=child(soil_plugin,'zone');child(element,'name',zone['id']);child(element,'soil',zone['soil'])
+   for tag,value in zip(('xmin','xmax','ymin','ymax'),zone['bounds']):child(element,tag,value)
+   for tag,key in [('kc','kc'),('kphi','kphi'),('n','n'),('cohesion','cohesion_Pa'),('phi','phi_rad'),('shear_length','shear_length_m')]:child(element,tag,soil[key])
  ET.indent(root);sdf_file=out_dir/'morph.sdf';ET.ElementTree(root).write(sdf_file,encoding='utf-8',xml_declaration=True)
- manifest={'schema_version':1,'parameter_status':'assumed','parameters':params,'metadata':metadata,'overrides':{'robot.wheel_radius_m':wheel_radius},'python_version':platform.python_version(),'ros_distro':os.environ.get('ROS_DISTRO'),'hashes':{}}
+ manifest={'schema_version':1,'parameter_status':'assumed','parameters':params,'metadata':metadata,'overrides':{'robot.wheel_radius_m':wheel_radius},'chassis':chassis,'stage_hold':stage_hold,'stage_effort_N':STAGE_EFFORT_N[stage_hold],'soil_zones':soil_zones or [],'python_version':platform.python_version(),'ros_distro':os.environ.get('ROS_DISTRO'),'hashes':{}}
  for file in [share/'config/parameter_schema.yaml',share/'config/params.yaml',share/'urdf/morph.urdf.xacro',share/'urdf/leg.xacro',urdf_file,sdf_file,out_dir/'params.yaml']:
   manifest['hashes'][str(file)]=hashlib.sha256(file.read_bytes()).hexdigest()
  (out_dir/'resolved_manifest.json').write_text(json.dumps(manifest,indent=2))

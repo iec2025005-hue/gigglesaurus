@@ -3,6 +3,22 @@
 Format: what was wrong, what was fixed, how it was verified. Simulation only; all robot
 parameters are assumed values.
 
+## V2 complete research suite, Commit 1 — chassis, arena, terramechanics (2026-11-13)
+
+Report: `reports/v2_commit1.md`.
+
+- `chassis:=trimmed` robot variant (default): Compact chassis 330 mm long in the crab pose with drive
+  units inward (CAD model 469 mm). `chassis:=cad` keeps the original.
+- Envelope collision shapes so the collision model matches the visible robot.
+- `stage_hold:=self_locking` option (off by default) for rails that hold their length.
+- `arena:=v2`: trenches 100/130/155 mm, loose sand, mud, ramps 12/15/18/20/22 deg, 620 mm corridor,
+  380 mm pinch, rocks, rubble (`tools/build_v2_arena.py`, seed 42).
+- `MorphTerramechanics` Gazebo plugin with a Python reference model and three literature soil sets.
+- Launch arguments `chassis`, `stage_hold`, `spawn_x`, `spawn_y`, `spawn_yaw`.
+- ROS discovery is localhost-only by default: a foreign ROS graph on the shared network corrupted
+  one run with its `/clock`.
+- 20 tests (total 177).
+
 ## V2 Phase 0 — audit and gap fixes (2026-11-13)
 
 Reports: `reports/audit_phase0.md`, `reports/baseline.md`.

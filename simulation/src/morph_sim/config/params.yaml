@@ -620,3 +620,42 @@ control_safety:
 height_servo:
   kp_N_m: 1000.0
   kd_Ns_m: 12.0
+terramechanics:
+  implemented_in: src/terramechanics_system.cpp, morph_sim/terramechanics.py
+  scope: Force-level emulation over rigid contact; soil constants come from surfaces.<name>.bekker;
+    no geometric deformation
+  sinkage_limit_radius_fraction: 0.5
+  reload_resistance_fraction: 0.1
+  slip_sinkage_gain: 0.0
+  slip_drag_enabled: 0.0
+  slip_ratio_limit: 0.9
+  speed_scale_rad_s: 0.3
+  thrust_filter_s: 0.1
+  rut_point_spacing_m: 0.02
+  rut_memory_points: 600
+  rut_capture_radius_m: 0.045
+  soils:
+    firm_sand:
+      label: LETE sand
+      kc: 102000.0
+      kphi: 5301300.0
+      n: 0.79
+      cohesion_Pa: 1300.0
+      phi_rad: 0.5428
+      shear_length_m: 0.01
+    loose_sand:
+      label: Dry sand, Land Locomotion Lab
+      kc: 990.0
+      kphi: 1528430.0
+      n: 1.1
+      cohesion_Pa: 1040.0
+      phi_rad: 0.4887
+      shear_length_m: 0.025
+    soft_clay:
+      label: Clayey soil, 38 % moisture
+      kc: 13190.0
+      kphi: 692150.0
+      n: 0.5
+      cohesion_Pa: 4140.0
+      phi_rad: 0.2269
+      shear_length_m: 0.006
