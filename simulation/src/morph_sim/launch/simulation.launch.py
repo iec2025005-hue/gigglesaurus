@@ -1,6 +1,6 @@
 """Launch (tested on ROS 2 Lyrical / Gazebo Sim 10): spawn -> controller activation -> adaptation + teleop."""
 from pathlib import Path
-import os,tempfile,json,hashlib,subprocess
+import os,tempfile,json,hashlib,subprocess,shlex
 from ament_index_python.packages import get_package_share_directory, get_package_prefix
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction, RegisterEventHandler, SetEnvironmentVariable, EmitEvent, LogError
@@ -98,7 +98,7 @@ def setup(context):
   resolved.setdefault('package_versions',{})[name]=result.stdout.strip() if result.returncode==0 else 'not resolved by dpkg query'
  (generated/'resolved_manifest.json').write_text(json.dumps(resolved,indent=2))
  gazebo_gui=LaunchConfiguration('gazebo_gui').perform(context).lower()=='true'
- gz_args=('-r -s ' if headless or not gazebo_gui else '-r ')+world
+ gz_args=('-r -s ' if headless or not gazebo_gui else '-r ')+shlex.quote(world)
  gz=IncludeLaunchDescription(PythonLaunchDescriptionSource(str(Path(get_package_share_directory('ros_gz_sim'))/'launch/gz_sim.launch.py')),launch_arguments={'gz_args':gz_args,'on_exit_shutdown':'true'}.items())
  # One bridge table serves every world: only the world-scoped contact topics differ.
  bridge_file=str(share/'config'/('bridge.yaml' if arena!='competition' else 'bridge_competition.yaml'))
