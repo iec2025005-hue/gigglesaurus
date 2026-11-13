@@ -1,5 +1,12 @@
 # V2 complete research suite — Commit 2: on-the-fly morphing, rail holding, active suspension
 
+> **Superseded in part (2026-11-13, later the same day).** The measurements below were taken with 60 N rails on the
+> earlier arena (15° tour ramp). They were repeated with the current defaults (25 N rails, Tetra-Arena, 16° ramp) and
+> two results changed: the single 18° climb did **not** repeat (18° now stalls with boost, with and without the
+> nose-down pitch), and a shape change while crabbing now completes after a brief stall instead of failing. The command
+> path also gained an S-curve jerk limit and 3.2 rad/s steering. Current numbers are in `reports/paper_ready_summary.md`
+> (generated) and `reports/v2_status.md`.
+
 Date: 2026-11-13. Branch `v2/complete-research-suite`. Simulation of an assumed-parameter model.
 Every measurement is a single run (n = 1). All V2 runs use `stage_hold:=self_locking` unless stated.
 Data: `reports/baseline_data/v2_commit2_results.json`, raw runs in `validation/performance/v2s2_*`.

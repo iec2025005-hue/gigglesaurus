@@ -21,6 +21,7 @@ KEY_VELOCITIES = {
     ord('E'): (0.0, 0.0, -0.50), 16777236: (0.0, 0.0, -0.50),
     ord('B'): (0.0, 0.0, 0.0),
 }
+HOLD_S = 0.35
 
 
 class GazeboKeyboard(Node):
@@ -31,10 +32,13 @@ class GazeboKeyboard(Node):
         self.camera_pub = self.create_publisher(Bool, '/morph/camera/show', 10)
         self.camera_enabled = True
         self.create_subscription(Int32, '/keyboard/keypress', self.on_key, 10)
-        self.last_key = 0.0
-        self.velocity = (0.0, 0.0, 0.0)
+        # One value and one time stamp per axis (vx, vy, wz), so keys of different axes combine. Gazebo only
+        # reports key presses (no releases, and the OS repeats only the last key held), so a combination lasts
+        # HOLD_S after the earlier key's last event. The control console (controls:=combined) sees real key state.
+        self.axis_value = [0.0, 0.0, 0.0]
+        self.axis_time = [0.0, 0.0, 0.0]
         self.create_timer(0.05, self.tick)
-        self.get_logger().info('Gazebo keyboard active: click Gazebo, W/S/A/D or arrows, Q/C, X/N/E, 1-4, B brake, K stop, U reset.')
+        self.get_logger().info('Gazebo keyboard active: click Gazebo. W/S drive, A/D strafe, Q/E or Left/Right rotate, Z/X/N shape, 1-4 mode, B brake, K stop, U reset.')
 
     def on_key(self, message):
         key = message.data
@@ -46,16 +50,18 @@ class GazeboKeyboard(Node):
             self.camera_pub.publish(Bool(data=self.camera_enabled))
         if event:
             self.event_pub.publish(String(data=event))
-        if key in KEY_VELOCITIES:
-            self.velocity = KEY_VELOCITIES[key]
-            self.last_key = time.monotonic()
-        elif key == ord('K'):
-            self.velocity = (0.0, 0.0, 0.0)
-            self.last_key = 0.0
+        if key in (ord('B'), ord('K')):
+            self.axis_time = [0.0, 0.0, 0.0]
+        elif key in KEY_VELOCITIES:
+            now = time.monotonic()
+            for axis, value in enumerate(KEY_VELOCITIES[key]):
+                if value:
+                    self.axis_value[axis] = value
+                    self.axis_time[axis] = now
 
     def tick(self):
-        active = time.monotonic() - self.last_key < 0.35
-        vx, vy, wz = self.velocity if active else (0.0, 0.0, 0.0)
+        now = time.monotonic()
+        vx, vy, wz = (value if now - stamp < HOLD_S else 0.0 for value, stamp in zip(self.axis_value, self.axis_time))
         cmd = Twist()
         cmd.linear.x, cmd.linear.y, cmd.angular.z = vx, vy, wz
         self.cmd_pub.publish(cmd)

@@ -164,7 +164,9 @@ def explain(zone, best, results, distance=None, speed=None):
     """One human-readable line with the numbers that decided it."""
     label = zone.get('label') or zone.get('id', 'zone'); head = f"[{label.upper()}" + (f" {distance:.1f} m AHEAD]" if distance is not None else ']')
     if best is None:
-        return head + ' no stance can pass: ' + '; '.join(f"{r['shape']}: " + ', '.join(k for k, v in r['terms'].items() if not math.isfinite(v)) for r in results)
+        def why(r): return ', '.join(k for k, v in r['terms'].items() if not math.isfinite(v)) + (f" ({r['clearance_reason']})" if not math.isfinite(r['terms']['clearance']) else '')
+        if len(results) == 1: return head + f" fixed stance {results[0]['shape']} cannot pass: " + why(results[0])
+        return head + ' no stance can pass: ' + '; '.join(f"{r['shape']}: " + why(r) for r in results)
     rejected = [r for r in results if not r['feasible']]
     parts = [f"{best['shape']} ({wheelbase(best['shape']) * 1e3:.0f} mm)", f"tip margin {best['stability_margin_deg']:.0f} deg", f"traction use {best['traction_utilisation'] * 100:.0f} %"]
     if zone.get('kind') in ('passage', 'trench'): parts.append(best['clearance_reason'])

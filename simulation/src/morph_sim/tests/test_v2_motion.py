@@ -273,3 +273,17 @@ def test_auto_level_uses_the_full_actuator_travel():
     assert out.status['auto_level'] and max(abs(h) for h in out.heights) == pytest.approx(HEIGHT_LIMIT)
     assert out.heights[0] > out.heights[2]                       # nose-down pitch: front corners extend, rear retract
     core.event('suspension_level'); assert not core.step(.01, [0., 0., 0.], s, imu_fresh=True).status['auto_level']
+
+
+def test_gazebo_keys_on_different_axes_combine_and_each_axis_times_out():
+    import types
+    from morph_sim import gazebo_keyboard as gk
+    sent = []; fake = types.SimpleNamespace(axis_value=[0., 0., 0.], axis_time=[0., 0., 0.], camera_enabled=True, event_pub=types.SimpleNamespace(publish=lambda m: None),
+                                            camera_pub=types.SimpleNamespace(publish=lambda m: None), cmd_pub=types.SimpleNamespace(publish=sent.append))
+    for key in 'waq': gk.GazeboKeyboard.on_key(fake, types.SimpleNamespace(data=ord(key)))        # lower case, as Gazebo sends it
+    gk.GazeboKeyboard.tick(fake); twist = sent[-1]
+    assert (twist.linear.x, twist.linear.y, twist.angular.z) == (.30, .24, .50)                   # forward + strafe + yaw together
+    fake.axis_time[1] -= gk.HOLD_S + .01; gk.GazeboKeyboard.tick(fake); twist = sent[-1]          # the strafe key was released
+    assert (twist.linear.x, twist.linear.y, twist.angular.z) == (.30, 0., .50)
+    gk.GazeboKeyboard.on_key(fake, types.SimpleNamespace(data=ord('B'))); gk.GazeboKeyboard.tick(fake)
+    assert (sent[-1].linear.x, sent[-1].linear.y, sent[-1].angular.z) == (0., 0., 0.)             # brake clears every axis

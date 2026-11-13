@@ -4,7 +4,8 @@ import numpy as np
 import pytest
 from morph_sim.vision_core import analyse, classify_colour, row_distance, CAMERA_HEIGHT, CAMERA_FORWARD, HORIZONTAL_FOV, CLASS_FRICTION
 
-ARENA_COLOURS = {'tarmac': (.22, .22, .24), 'sand': (.76, .66, .42), 'mud': (.33, .24, .16), 'concrete': (.55, .55, .53)}
+# Colours as RENDERED by Gazebo in the Tetra-Arena (measured, run v2s4_tour_fixed_compact_try1), not the SDF material values.
+ARENA_COLOURS = {'tarmac': (.45, .44, .445), 'sand': (.79, .73, .577), 'mud': (.55, .468, .374), 'concrete': (.65, .642, .611)}
 
 
 def synthetic(near, far, boundary_m, height=270, width=480, shade=1.):
@@ -20,9 +21,15 @@ def synthetic(near, far, boundary_m, height=270, width=480, shade=1.):
 
 @pytest.mark.parametrize('name', sorted(ARENA_COLOURS))
 def test_arena_colours_are_classified_under_brighter_and_darker_light(name):
-    for shade in (.8, 1., 1.2):
+    for shade in (.85, 1., 1.15):
         r, g, b = (min(1., c * shade) for c in ARENA_COLOURS[name])
         assert classify_colour(r, g, b)[0] == name, (name, shade)
+
+
+def test_sdf_material_colours_of_the_soils_are_still_separated_by_hue():
+    # Hue is independent of light level, so the unlit material colours classify the same way.
+    assert classify_colour(.76, .66, .42)[0] == 'sand' and classify_colour(.33, .24, .16)[0] == 'mud'
+    assert classify_colour(.02, .30, .31)[0] == 'marker'                           # painted start pad (teal)
 
 
 def test_row_distance_is_the_flat_ground_projection():

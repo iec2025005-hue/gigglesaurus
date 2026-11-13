@@ -144,7 +144,7 @@ class Tour:
         shape, best, results = self.wanted_shape(leg, state)
         if self.last_decision_leg != leg['id']:
             self.last_decision_leg = leg['id']; self.cost = dc.cost_vector(best if best and best.get('feasible') else None)
-            self.say(now, dc.explain(leg['zone'], best if best and best.get('feasible') else None, results, speed=max(state['speed'], .05)))
+            self.say(now, dc.explain(leg['zone'], best if best and best.get('feasible') else None, results if self.policy in ADAPTIVE else [best], speed=max(state['speed'], .05)))
         # Stance for THIS zone: the reactive policy stops and waits; the proposed one should already have it.
         # A stance already requested ahead for a later zone is left alone (it was checked to be passable here).
         if self.policy in ADAPTIVE and shape != self.sent_shape and self.phase == 'drive' and self.shape_for <= self.index:

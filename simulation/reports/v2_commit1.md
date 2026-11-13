@@ -1,5 +1,11 @@
 # V2 complete research suite — Commit 1: chassis, arena, terramechanics
 
+> **Superseded in part (2026-11-13, later the same day).** This report was written for the previous brief. The code on
+> this branch has since changed: the arena is `arena:=tetra` (`tools/build_tetra_arena.py`, `worlds/tetra_arena.sdf`,
+> `config/tetra_arena.json`), the tour ramp is 16° with 15/18/20/22° test ramps beside it, sand and mud use μ 0.35 / 0.25,
+> and the default rail holding force is 25 N per stage (`stage_hold:=reinforced`; 8 N and 60 N remain as options).
+> Current numbers are in `reports/paper_ready_summary.md` (generated) and `reports/v2_status.md`.
+
 Date: 2026-11-13. Branch `v2/complete-research-suite`. Simulation of an assumed-parameter model.
 
 This commit is infrastructure only. Fixture measurements are reported with Commit 2, because the
@@ -47,8 +53,9 @@ axes are the same in both, only the sign of two steering angles differs.
 - The ground does not deform and tyres do not physically slip. Sinkage and soil slip are computed
   states; the only thing applied to the simulation is a resisting torque on each wheel.
 - The project's own soil constants are placeholders (identical for sand and mud). Three literature
-  sets were added under `terramechanics.soils` and the placeholders left alone. The new values were
-  entered from memory of Wong's Table 2.3 and must be checked against the book before citation.
+  sets were added under `terramechanics.soils` and the placeholders left alone. The new values
+  (k_c, k_phi, n, c, phi) were later checked against Table 1 of NASA/TM-20250006958, which cites Wong (2001), and
+  match; the shear deformation moduli are assumed.
 - Slip sinkage and slip power loss are implemented but off by default: with slip sinkage on, the
   model drives the leading wheels to the slip limit on every soil in the table.
 

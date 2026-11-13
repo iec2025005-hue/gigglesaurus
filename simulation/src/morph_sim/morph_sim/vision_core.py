@@ -22,15 +22,23 @@ CLASSES = ('tarmac', 'concrete', 'sand', 'mud', 'marker', 'unknown')
 CLASS_FRICTION = {'tarmac': .765, 'concrete': .7225, 'sand': .35, 'mud': .25}
 
 
+# Thresholds calibrated on frames rendered by Gazebo in the Tetra-Arena (run v2s4_tour_fixed_compact_try1,
+# 52 frames, 320 x 180). Rendered ground colours, HSV: tarmac (grey, v 0.45), concrete (grey, v 0.65),
+# sand (43 deg, 0.27, 0.79), mud (32 deg, 0.32, 0.55). Rendered values differ from the SDF material values
+# (lighting and tone mapping roughly double the brightness of dark surfaces).
+GREY_SATURATION = .18         # below this the sample is grey
+GREY_SPLIT = .54              # geometric mean of rendered tarmac and concrete brightness
+SOIL_HUE_SPLIT = 37.5         # deg: mud is redder than sand; hue does not change with light level
+
+
 def classify_colour(r, g, b):
     """Colour class of one RGB sample in [0, 1], and a confidence in [0, 1]."""
     h, s, v = colorsys.rgb_to_hsv(float(r), float(g), float(b)); hue = h * 360.
-    if s < .18:                                   # grey: split by brightness
-        return ('tarmac', min(1., (.38 - v) / .20 + .5)) if v < .38 else ('concrete', min(1., (v - .38) / .20 + .5))
-    if 20. <= hue <= 60.:                         # yellow-brown family
-        if v >= .50: return 'sand', min(1., .5 + (v - .50) / .3)
-        return 'mud', min(1., .5 + (.50 - v) / .3)
-    if hue < 20. or hue > 330.: return 'marker', .8      # red walls / orange kerbs
+    if s < GREY_SATURATION:                       # grey: split by brightness (tolerates about +-15 % light change)
+        return ('tarmac', min(1., .5 + (GREY_SPLIT - v) / .18)) if v < GREY_SPLIT else ('concrete', min(1., .5 + (v - GREY_SPLIT) / .22))
+    if 20. <= hue <= 60.:                         # yellow-brown family: split by hue
+        return ('sand', min(1., .5 + (hue - SOIL_HUE_SPLIT) / 11.)) if hue >= SOIL_HUE_SPLIT else ('mud', min(1., .5 + (SOIL_HUE_SPLIT - hue) / 11.))
+    if hue < 20. or hue > 330. or s > .5: return 'marker', .8      # red walls, orange kerbs, painted start pad
     return 'unknown', .3
 
 
