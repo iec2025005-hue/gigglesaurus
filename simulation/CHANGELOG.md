@@ -3,6 +3,42 @@
 Format: what was wrong, what was fixed, how it was verified. Simulation only; all robot
 parameters are assumed values.
 
+## V2 complete research suite, Commits 4-5 — dashboard, ablation, figures, video, paper documents (2026-11-13)
+
+Reports: `reports/v2_status.md`, `reports/paper_ready_summary.md` (generated), `reports/research_paper_proposals.md`.
+
+| What was wrong | What was fixed | Verified by |
+|---|---|---|
+| A tour could not move the robot past a failed zone: the protocol process had no `GZ_PARTITION`, so `gz service set_pose` timed out and every later zone was recorded as failed | `tools/run_benchmark_case.py` gives the protocol the workspace's Gazebo partition | Sim: fixed-Compact tour fails trenches and ramp, is placed past both, passes the other 8 zones |
+| The camera classifier's thresholds were set from the SDF material colours; Gazebo renders them about twice as bright, so tarmac read as concrete and mud as sand | Thresholds calibrated on 52 rendered frames; sand and mud are now separated by hue | Unit tests use the rendered colours |
+| For a fixed policy the explanation said "no stance can pass" and listed stances that were never candidates | "fixed stance X cannot pass: reason" | Unit test |
+| Keys pressed in the Gazebo window replaced each other, so forward + strafe + rotate could not be combined | One value and time-out per axis | Unit test |
+| Dashboard radar showed a ramp as BLOCKED | Raised points that fit a plane of 3-30 deg are reported as SLOPE with the grade | Unit test on synthetic scans; replay of recorded clouds |
+| Soil constants were marked "from memory" | Checked against NASA/TM-20250006958 Table 1 (citing Wong 2001); they match | Source notes in `parameter_schema.yaml` |
+
+Added:
+
+- `dashboard/` — Flask + server-sent events page: camera, chassis twin, LiDAR sectors, explanations, cost
+  terms, motor and battery gauges, whitelisted override buttons. Binds to 127.0.0.1.
+- `benchmarks/run_ablation_suite.py` (four policies, interleaved repeats), `summarise_fixtures.py`,
+  `generate_paper_figures.py` (four IEEE-width figures as PDF and PNG, `reports/table1_ablation.tex`),
+  `generate_paper_summary.py`.
+- `video_pipeline/record_conference_video.py` — 1920x1080, 60 fps, composed in simulation time; three
+  body-mounted cameras enabled with `chase_cameras:=true`.
+- Launch arguments `chase_cameras`, `chase_camera_rate`.
+- 10 tests (`tests/test_v2_tools.py` and additions); total 247.
+
+## V2 complete research suite, Commit 3 — decisions, explanations, camera classifier, autonomous tour (2026-11-13)
+
+- `morph_sim/decision_core.py`: stance cost (tip-over margin, winding temperature rise, traction utilisation,
+  clearance, morph time) and the lead-time trigger `d / v <= t_morph + 1 s`.
+- `decision_synthesizer` node: `/morph/decision_explanation` (text) and `/morph/cost_breakdown` (numbers).
+- `vision_core.py` / `terrain_vision` node: colour class under the robot, next class and its distance.
+- `tour_core.py` / `autonomous_tour` node: ten-zone tour with policies `fixed_compact`, `fixed_extended`,
+  `reactive`, `proposed`; failed zones are recorded and skipped.
+- Arena renamed to `arena:=tetra`; tour ramp 16 deg; sand and mud friction 0.35 / 0.25; default rail holding
+  force 25 N; S-curve jerk limit 6 m/s^3; steering rate 3.2 rad/s; A/D strafe, Q/E rotate.
+
 ## V2 complete research suite, Commit 2 — on-the-fly morphing, rail holding, active suspension (2026-11-13)
 
 Report: `reports/v2_commit2.md`.

@@ -22,7 +22,7 @@ def add_surface(collision, mu):
   if node is None:node=child(ode,key)
   node.text=str(mu)
 
-def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True, camera_enabled=False):
+def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True, camera_enabled=False, chase_cameras=False):
  model=root.find('model')
  if model is None:raise ValueError('gz sdf conversion returned no model')
  links={link.attrib['name']:link for link in model.findall('link')}
@@ -75,6 +75,14 @@ def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True
   image=child(optics,'image');child(image,'width',camera_width);child(image,'height',int(camera_width*9/16));child(image,'format','R8G8B8')
   clip=child(optics,'clip');child(clip,'near',0.05);child(clip,'far',25)
   child(optics,'camera_info_topic','/morph/camera/camera_info')
+ if chase_cameras:
+  # Body-mounted external views for the conference video. The update rate is in SIM time, so the frame count is
+  # deterministic whatever the real-time factor. chase_cameras is the rate in Hz (True means 30).
+  rate=30. if chase_cameras is True else float(chase_cameras)
+  for name,pose in (('chase','-1.55 -1.05 0.85 0 0.36 0.62'),('side','0.15 -1.75 0.25 0 0.06 1.5708'),('top','-0.35 0 2.6 0 1.44 0')):
+   view=child(base,'sensor',name=name+'_camera',type='camera');child(view,'pose',pose);child(view,'topic','/morph/video/'+name);child(view,'always_on','true');child(view,'update_rate',rate)
+   optics=child(view,'camera');child(optics,'horizontal_fov',1.25);image=child(optics,'image');child(image,'width',960);child(image,'height',880);child(image,'format','R8G8B8')
+   clip=child(optics,'clip');child(clip,'near',0.05);child(clip,'far',60)
  if range_sensor:
   lidar=child(base,'sensor',name='terrain_lidar',type='gpu_lidar');child(lidar,'pose','0.22 0 0.12 0 0 0');child(lidar,'topic','/morph/range');child(lidar,'gz_frame_id','perception_link');child(lidar,'always_on','true');child(lidar,'update_rate',10)
   ray=child(lidar,'lidar');scan=child(ray,'scan')
@@ -112,7 +120,7 @@ def resolve_position_backend(physics_profile,requested='auto'):
  return requested
 
 
-def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, camera_rate=10., camera_width=480, range_sensor=True, trace_native=False, camera_enabled=False, position_backend='forward', chassis='trimmed', soil_zones=None, stage_hold='reinforced'):
+def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, camera_rate=10., camera_width=480, range_sensor=True, trace_native=False, camera_enabled=False, position_backend='forward', chassis='trimmed', soil_zones=None, stage_hold='reinforced', chase_cameras=False):
  if chassis not in ('trimmed','cad'):raise ValueError('chassis must be trimmed or cad')
  if stage_hold not in STAGE_EFFORT_N:raise ValueError('stage_hold must be one of '+', '.join(STAGE_EFFORT_N))
  if position_backend not in ('forward','trajectory'):raise ValueError('Unknown position backend')
@@ -184,7 +192,7 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
  model=root.find('model')
  if model is None or not any('gz_ros2_control' in (p.attrib.get('filename','')+' '+p.attrib.get('name','')) for p in model.findall('plugin')):
   raise RuntimeError('gz_ros2_control plugin was lost during URDF to SDF conversion; robot would spawn but not move')
- root=enrich_sdf(root,share,camera_rate,camera_width,range_sensor,camera_enabled)
+ root=enrich_sdf(root,share,camera_rate,camera_width,range_sensor,camera_enabled,chase_cameras)
  if physics_profile:
   watchdog=child(root.find('model'),'plugin',filename='libmorph_watchdog.so',name='morph_sim::DriveWatchdog')
   child(watchdog,'capture_speed',params['control_safety']['hold_capture_speed_rad_s'])
