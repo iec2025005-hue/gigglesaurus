@@ -1,0 +1,666 @@
+MORPH: connected arena is the default. Workspace: /home/diya/kiro/swirl drive new/gigglesaurus/simulation
+[INFO] [launch]: All log files can be found below /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/runtime/2026-11-13-21-09-12-623183-diya-LOQ-15IRX9-93089
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [93125]
+[INFO] [lifecycle_bridge-2]: process started with pid [93126]
+[INFO] [gazebo-3]: process started with pid [93127]
+[INFO] [create-4]: process started with pid [93128]
+[robot_state_publisher-1] [WARN] [1794584353.588158389] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-1] [INFO] [1794584353.588243229] [robot_state_publisher]: Robot initialized
+[lifecycle_bridge-2] [INFO] [1794584354.602132408] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.602931256] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/keyboard/keypress (gz.msgs.Int32) -> /keyboard/keypress (std_msgs/msg/Int32)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.604525253] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/camera/image (gz.msgs.Image) -> /morph/camera/image (sensor_msgs/msg/Image)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.606520381] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/camera/camera_info (gz.msgs.CameraInfo) -> /morph/camera/camera_info (sensor_msgs/msg/CameraInfo)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.606835777] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/imu (gz.msgs.IMU) -> /morph/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.607157182] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/morph_tetra/model/morph/link/fl_wheel/sensor/fl_contact/contact (gz.msgs.Contacts) -> /morph/contacts/fl (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.608490457] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/morph_tetra/model/morph/link/fr_wheel/sensor/fr_contact/contact (gz.msgs.Contacts) -> /morph/contacts/fr (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.608741140] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/morph_tetra/model/morph/link/rl_wheel/sensor/rl_contact/contact (gz.msgs.Contacts) -> /morph/contacts/rl (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.608979779] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/morph_tetra/model/morph/link/rr_wheel/sensor/rr_contact/contact (gz.msgs.Contacts) -> /morph/contacts/rr (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.609169865] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/morph_tetra/model/morph/link/base_link/sensor/underbody_contact/contact (gz.msgs.Contacts) -> /morph/contacts/underbody (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.609330652] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/suspension/stiffness (std_msgs/msg/Float64) -> /morph/suspension/stiffness (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.609729430] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/suspension/damping (std_msgs/msg/Float64) -> /morph/suspension/damping (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.609948921] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/ground_truth/odom (gz.msgs.Odometry) -> /morph/ground_truth/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.610957896] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/suspension/telemetry (gz.msgs.StringMsg) -> /morph/suspension/telemetry (std_msgs/msg/String)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.611190069] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/suspension/ambient (std_msgs/msg/Float64) -> /morph/suspension/ambient (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.611396538] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/range/points (gz.msgs.PointCloudPacked) -> /morph/perception/points (sensor_msgs/msg/PointCloud2)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.611731120] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/actuator/watchdog (std_msgs/msg/Bool) -> /morph/actuator/watchdog (gz.msgs.Boolean)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.612004344] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/watchdog/status (gz.msgs.StringMsg) -> /morph/watchdog/status (std_msgs/msg/String)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.612188859] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/fl/target (std_msgs/msg/Float64) -> /morph/height/fl/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.612373713] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/fr/target (std_msgs/msg/Float64) -> /morph/height/fr/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.612567583] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/rl/target (std_msgs/msg/Float64) -> /morph/height/rl/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.612758142] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/rr/target (std_msgs/msg/Float64) -> /morph/height/rr/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.612928813] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/height/status (gz.msgs.StringMsg) -> /morph/height/status (std_msgs/msg/String)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.613134731] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/gui/frame_timing (gz.msgs.StringMsg) -> /morph/gui/frame_timing (std_msgs/msg/String)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794584354.613295816] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/terramechanics/status (gz.msgs.StringMsg) -> /morph/terramechanics/status (std_msgs/msg/String)] (Lazy 0)
+[create-4] [INFO] [1794584355.863563883] [ros_gz_sim]: Entity creation successful.
+[gazebo-3] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="morph"]/link[@name="base_link"]/sensor[@name="base_imu"]/gz_frame_id:/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/morph.sdf:L149]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-3] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="morph"]/link[@name="base_link"]/sensor[@name="terrain_lidar"]/gz_frame_id:/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/morph.sdf:L196]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-3] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="morph"]/link[@name="base_link"]/sensor[@name="terrain_lidar"]/lidar/noise[@type="gaussian"]:/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/morph.sdf:L219]: XML Attribute[type] in element[noise] not defined in SDF.
+[gazebo-3] [INFO] [1794584355.951310275] [gz_ros_control]: Loading controller_manager
+[gazebo-3] [INFO] [1794584355.959431865] [controller_manager]: Using ROS clock for triggering controller manager cycles.
+[gazebo-3] [WARN] [1794584355.959451268] [controller_manager]: The resource manager is not yet initialized, will wait for the robot description to initialize it..
+[gazebo-3] [INFO] [1794584355.964561790] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
+[gazebo-3] [WARN] [1794584355.964590695] [gz_ros_control]: Waiting RM to load and initialize hardware...
+[INFO] [create-4]: process has finished cleanly [pid 93128]
+[INFO] [spawner-5]: process started with pid [93285]
+[gazebo-3] [INFO] [1794584356.137484690] [controller_manager]: Received robot description from topic.
+[gazebo-3] [INFO] [1794584356.137579831] [controller_manager]: Enforcing command limits is enabled...
+[gazebo-3] [INFO] [1794584356.141561271] [gz_ros_control]: Using JointLimiter for joint 'rr_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141592653] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141629051] [gz_ros_control]: Using JointLimiter for joint 'rr_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [3.2]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141639000] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141652167] [gz_ros_control]: Using JointLimiter for joint 'telL4_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141660186] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL4_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141671476] [gz_ros_control]: Using JointLimiter for joint 'telL2_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141679400] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL2_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141690794] [gz_ros_control]: Using JointLimiter for joint 'fr_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141698663] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141709831] [gz_ros_control]: Using JointLimiter for joint 'telR5_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141721492] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR5_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141732698] [gz_ros_control]: Using JointLimiter for joint 'telR4_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141766698] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR4_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141780643] [gz_ros_control]: Using JointLimiter for joint 'hexarmFR_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141788775] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmFR_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141800031] [gz_ros_control]: Using JointLimiter for joint 'telL6_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141807831] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL6_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141818595] [gz_ros_control]: Using JointLimiter for joint 'rr_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.6]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794584356.141826311] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141837174] [gz_ros_control]: Using JointLimiter for joint 'telR3_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141844854] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR3_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141855896] [gz_ros_control]: Using JointLimiter for joint 'telR6_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141866255] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR6_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141879231] [gz_ros_control]: Using JointLimiter for joint 'telL5_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141886915] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL5_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141899058] [gz_ros_control]: Using JointLimiter for joint 'telR1_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141906715] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR1_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141918088] [gz_ros_control]: Using JointLimiter for joint 'telR2_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141925736] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR2_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141943682] [gz_ros_control]: Using JointLimiter for joint 'hexarmBL_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141951739] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmBL_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141963711] [gz_ros_control]: Using JointLimiter for joint 'rr_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141971417] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.141982625] [gz_ros_control]: Using JointLimiter for joint 'hexarmFL_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.141992479] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmFL_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142004138] [gz_ros_control]: Using JointLimiter for joint 'telL3_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142011825] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL3_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142023075] [gz_ros_control]: Using JointLimiter for joint 'telL1_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [25]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142030739] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL1_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142042967] [gz_ros_control]: Using JointLimiter for joint 'fr_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.6]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794584356.142050451] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142061414] [gz_ros_control]: Using JointLimiter for joint 'hexarmBR_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142069042] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmBR_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142080306] [gz_ros_control]: Using JointLimiter for joint 'fl_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142087950] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142099159] [gz_ros_control]: Using JointLimiter for joint 'fl_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [3.2]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142112972] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142124943] [gz_ros_control]: Using JointLimiter for joint 'fl_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.6]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794584356.142132548] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142143610] [gz_ros_control]: Using JointLimiter for joint 'fr_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142151186] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142162033] [gz_ros_control]: Using JointLimiter for joint 'fl_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142172425] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142183440] [gz_ros_control]: Using JointLimiter for joint 'fr_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [3.2]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142190861] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142201395] [gz_ros_control]: Using JointLimiter for joint 'rl_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142208828] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142220463] [gz_ros_control]: Using JointLimiter for joint 'rl_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.6]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794584356.142228214] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142242032] [gz_ros_control]: Using JointLimiter for joint 'rl_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [3.2]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142249718] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.142260470] [gz_ros_control]: Using JointLimiter for joint 'rl_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794584356.142271831] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.146460232] [gz_ros_control]: The position_proportional_gain has been set to: 0.12
+[gazebo-3] [INFO] [1794584356.146511677] [gz_ros_control]: Loading joint: telR1_joint
+[gazebo-3] [INFO] [1794584356.146516927] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146520754] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146533036] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146537934] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146540324] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146542372] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146544253] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146551548] [gz_ros_control]: Loading joint: telR2_joint
+[gazebo-3] [INFO] [1794584356.146553688] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146555456] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146557327] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146559582] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146561396] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146563230] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146564911] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146570058] [gz_ros_control]: Loading joint: telR3_joint
+[gazebo-3] [INFO] [1794584356.146572124] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146573815] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146575368] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146577413] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146579227] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146582986] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146584650] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146589802] [gz_ros_control]: Loading joint: telR4_joint
+[gazebo-3] [INFO] [1794584356.146591836] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146593649] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146595341] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146597494] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146599302] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146601280] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146603123] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146608864] [gz_ros_control]: Loading joint: telR5_joint
+[gazebo-3] [INFO] [1794584356.146614947] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146617113] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146620556] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146622755] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146624502] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146626218] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146627849] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146632801] [gz_ros_control]: Loading joint: telR6_joint
+[gazebo-3] [INFO] [1794584356.146634742] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146636473] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146638113] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146640465] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146644203] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146666778] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146668413] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146673803] [gz_ros_control]: Loading joint: telL1_joint
+[gazebo-3] [INFO] [1794584356.146675681] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146677376] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146678935] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146680963] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146682835] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146684579] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146686177] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146691666] [gz_ros_control]: Loading joint: telL2_joint
+[gazebo-3] [INFO] [1794584356.146701331] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146703147] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146704720] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146706896] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146708731] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146711867] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146713701] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146718237] [gz_ros_control]: Loading joint: telL3_joint
+[gazebo-3] [INFO] [1794584356.146720171] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146721911] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146723535] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146725534] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146727374] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146729095] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146730728] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146735130] [gz_ros_control]: Loading joint: telL4_joint
+[gazebo-3] [INFO] [1794584356.146737152] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146738857] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146740424] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146742422] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146744149] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146745925] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146748833] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146754131] [gz_ros_control]: Loading joint: telL5_joint
+[gazebo-3] [INFO] [1794584356.146756027] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146757703] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146759274] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146761241] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146763109] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146766478] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146768083] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146772408] [gz_ros_control]: Loading joint: telL6_joint
+[gazebo-3] [INFO] [1794584356.146774262] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146775954] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146777508] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146779546] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146781364] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146783131] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146784745] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146789776] [gz_ros_control]: Loading joint: hexarmFR_joint
+[gazebo-3] [INFO] [1794584356.146791739] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146793415] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146794956] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146797045] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146798867] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146801652] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146803320] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146809725] [gz_ros_control]: Loading joint: hexarmBR_joint
+[gazebo-3] [INFO] [1794584356.146811580] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146813284] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146814836] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146816839] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146818586] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146820345] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146821942] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146826807] [gz_ros_control]: Loading joint: hexarmFL_joint
+[gazebo-3] [INFO] [1794584356.146828654] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146830316] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146831897] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146833909] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146835759] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146837482] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146839092] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146843026] [gz_ros_control]: Loading joint: hexarmBL_joint
+[gazebo-3] [INFO] [1794584356.146846344] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146848030] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146849647] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146851696] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146853558] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146855266] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146856944] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146862165] [gz_ros_control]: Loading joint: fl_height_joint
+[gazebo-3] [INFO] [1794584356.146864194] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146866022] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146869270] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146871345] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146873160] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146875126] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146876789] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146881781] [gz_ros_control]: Loading joint: fl_steer_joint
+[gazebo-3] [INFO] [1794584356.146883788] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146885476] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146887059] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146889172] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146890887] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146892618] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146894224] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146898440] [gz_ros_control]: Loading joint: fl_wheel_joint
+[gazebo-3] [INFO] [1794584356.146900372] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146902070] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146903600] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146905607] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146907311] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146909028] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146910685] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146933846] [gz_ros_control]: Loading joint: fl_spring_joint
+[gazebo-3] [INFO] [1794584356.146935747] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146937435] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146939219] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146940973] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146942747] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146946808] [gz_ros_control]: Loading joint: fr_height_joint
+[gazebo-3] [INFO] [1794584356.146948625] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146950282] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146953261] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146955247] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146956971] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146958638] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146960250] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146964529] [gz_ros_control]: Loading joint: fr_steer_joint
+[gazebo-3] [INFO] [1794584356.146966381] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146968078] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146969642] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146971653] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146973541] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146975430] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146977148] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146981298] [gz_ros_control]: Loading joint: fr_wheel_joint
+[gazebo-3] [INFO] [1794584356.146983147] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.146984900] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.146986555] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.146988569] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.146990276] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146992024] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.146993968] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.146997942] [gz_ros_control]: Loading joint: fr_spring_joint
+[gazebo-3] [INFO] [1794584356.146999827] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147001511] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147003664] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147006758] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147008513] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147013031] [gz_ros_control]: Loading joint: rl_height_joint
+[gazebo-3] [INFO] [1794584356.147014974] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147016680] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147018225] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.147020259] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147021963] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147025613] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147027252] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147031805] [gz_ros_control]: Loading joint: rl_steer_joint
+[gazebo-3] [INFO] [1794584356.147033624] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147035311] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147036833] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.147038871] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147040593] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147042305] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147043924] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147048380] [gz_ros_control]: Loading joint: rl_wheel_joint
+[gazebo-3] [INFO] [1794584356.147050225] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147051950] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147053501] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.147055448] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147057167] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147058871] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147060511] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147064381] [gz_ros_control]: Loading joint: rl_spring_joint
+[gazebo-3] [INFO] [1794584356.147066246] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147067906] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147069591] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147071287] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147072979] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147077358] [gz_ros_control]: Loading joint: rr_height_joint
+[gazebo-3] [INFO] [1794584356.147079255] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147080976] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147082527] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.147084608] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147086305] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147088047] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147089631] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147094392] [gz_ros_control]: Loading joint: rr_steer_joint
+[gazebo-3] [INFO] [1794584356.147096210] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147097904] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147099438] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.147102885] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147104637] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147106368] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147107952] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147112637] [gz_ros_control]: Loading joint: rr_wheel_joint
+[gazebo-3] [INFO] [1794584356.147114475] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147116124] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147117701] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794584356.147119714] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147121454] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147123162] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147124848] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147128875] [gz_ros_control]: Loading joint: rr_spring_joint
+[gazebo-3] [INFO] [1794584356.147130716] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794584356.147132374] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794584356.147134086] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794584356.147135774] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794584356.147137477] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794584356.147211216] [gz_ros_control]: Loading sensor: base_imu
+[gazebo-3] [INFO] [1794584356.147215536] [gz_ros_control]: 	State:
+[gazebo-3] [WARN] [1794584356.147220593] [gz_ros_control]: IMU sensor 'base_imu' not found in hardware_info, skipping.
+[gazebo-3] [INFO] [1794584356.147305892] [gz_ros_control]: Initialize hardware 'MorphSystem' 
+[gazebo-3] [INFO] [1794584356.149705560] [gz_ros_control]: Successful initialization of hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.150020888] [controller_manager]: Activating component 'MorphSystem'.
+[gazebo-3] [INFO] [1794584356.150033424] [resource_manager]: 'configure' hardware 'MorphSystem' 
+[gazebo-3] [INFO] [1794584356.150037336] [gz_ros_control]: System Successfully configured!
+[gazebo-3] [INFO] [1794584356.150040544] [resource_manager]: Successful 'configure' of hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794584356.150057847] [resource_manager]: 'activate' hardware 'MorphSystem' 
+[gazebo-3] [INFO] [1794584356.150068982] [resource_manager]: Successful 'activate' of hardware 'MorphSystem'
+[gazebo-3] [WARN] [1794584356.150129068] [controller_manager]: Component 'MorphSystem' does not have read or write statistics initialized, skipping registration.
+[gazebo-3] [INFO] [1794584356.150136932] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
+[spawner-5] [INFO] [1794584356.293204032] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[gazebo-3] [INFO] [1794584356.546865446] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
+[gazebo-3] [INFO] [1794584356.546894807] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[gazebo-3] [INFO] [1794584356.548682212] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: '--ros-args --param use_sim_time:=true'
+[spawner-5] [INFO] [1794584356.553325500] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[gazebo-3] [INFO] [1794584356.553823966] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
+[gazebo-3] [INFO] [1794584356.553933773] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. Will try to publish all available state interfaces of the URDF joints.
+[spawner-5] [INFO] [1794584356.561753751] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml']" for drive_controller
+[gazebo-3] [INFO] [1794584356.565572577] [controller_manager]: Loading controller : 'drive_controller' of type 'forward_command_controller/ForwardCommandController'
+[gazebo-3] [INFO] [1794584356.565602063] [controller_manager]: Loading controller 'drive_controller'
+[gazebo-3] [INFO] [1794584356.567652638] [controller_manager]: Controller 'drive_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794584356.571621551] [spawner_joint_state_broadcaster]: Loaded drive_controller
+[gazebo-3] [INFO] [1794584356.571753490] [controller_manager]: Configuring controller: 'drive_controller'
+[gazebo-3] [INFO] [1794584356.572167570] [drive_controller]: configure successful
+[spawner-5] [INFO] [1794584356.575082688] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml']" for steering_controller
+[gazebo-3] [INFO] [1794584356.578742870] [controller_manager]: Loading controller : 'steering_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[gazebo-3] [INFO] [1794584356.578770729] [controller_manager]: Loading controller 'steering_controller'
+[gazebo-3] [INFO] [1794584356.583502638] [controller_manager]: Controller 'steering_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794584356.590099190] [spawner_joint_state_broadcaster]: Loaded steering_controller
+[gazebo-3] [INFO] [1794584356.590267654] [controller_manager]: Configuring controller: 'steering_controller'
+[gazebo-3] [INFO] [1794584356.590444473] [steering_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[gazebo-3] [INFO] [1794584356.590474336] [steering_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[gazebo-3] [INFO] [1794584356.590493688] [steering_controller]: Using 'splines' interpolation method.
+[gazebo-3] [INFO] [1794584356.597743042] [steering_controller]: Action status changes will be monitored at 20.00 Hz.
+[gazebo-3] [INFO] [1794584356.601534522] [steering_controller]: Setting initial scaling factor to 1.000000
+[gazebo-3] [INFO] [1794584356.601554474] [steering_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[spawner-5] [INFO] [1794584356.604705411] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml']" for height_controller
+[gazebo-3] [INFO] [1794584356.608412664] [controller_manager]: Loading controller : 'height_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[gazebo-3] [INFO] [1794584356.608429978] [controller_manager]: Loading controller 'height_controller'
+[gazebo-3] [INFO] [1794584356.608501341] [controller_manager]: Controller 'height_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794584356.614315906] [spawner_joint_state_broadcaster]: Loaded height_controller
+[gazebo-3] [INFO] [1794584356.614495844] [controller_manager]: Configuring controller: 'height_controller'
+[gazebo-3] [INFO] [1794584356.614579006] [height_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[gazebo-3] [INFO] [1794584356.614588666] [height_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[gazebo-3] [INFO] [1794584356.614595153] [height_controller]: Using 'splines' interpolation method.
+[gazebo-3] [INFO] [1794584356.615106762] [height_controller]: Action status changes will be monitored at 20.00 Hz.
+[gazebo-3] [INFO] [1794584356.616509008] [height_controller]: Setting initial scaling factor to 1.000000
+[gazebo-3] [INFO] [1794584356.616521935] [height_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[spawner-5] [INFO] [1794584356.619434128] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml']" for shape_controller
+[gazebo-3] [INFO] [1794584356.623126102] [controller_manager]: Loading controller : 'shape_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[gazebo-3] [INFO] [1794584356.623145678] [controller_manager]: Loading controller 'shape_controller'
+[gazebo-3] [INFO] [1794584356.623265193] [controller_manager]: Controller 'shape_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_zge0pt52/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794584356.630646986] [spawner_joint_state_broadcaster]: Loaded shape_controller
+[gazebo-3] [INFO] [1794584356.630784050] [controller_manager]: Configuring controller: 'shape_controller'
+[gazebo-3] [INFO] [1794584356.631119872] [shape_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[gazebo-3] [INFO] [1794584356.631140023] [shape_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[gazebo-3] [INFO] [1794584356.631155455] [shape_controller]: Using 'splines' interpolation method.
+[gazebo-3] [INFO] [1794584356.631947175] [shape_controller]: Action status changes will be monitored at 20.00 Hz.
+[gazebo-3] [INFO] [1794584356.633356902] [shape_controller]: Setting initial scaling factor to 1.000000
+[gazebo-3] [INFO] [1794584356.633367538] [shape_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[gazebo-3] [INFO] [1794584356.634200244] [controller_manager]: Activating controllers: [ joint_state_broadcaster drive_controller steering_controller height_controller shape_controller ]
+[gazebo-3] [WARN] [1794584357.993469089] [gz_ros_control]:  Desired controller update period (0.01 s) is slower than the gazebo simulation period (0.002 s).
+[gazebo-3] [INFO] [1794584357.995423489] [controller_manager]: Requested controller switch from non-realtime loop
+[gazebo-3] [INFO] [1794584357.995679430] [drive_controller]: activate successful
+[gazebo-3] [INFO] [1794584357.996066334] [controller_manager]: Successfully switched controllers!
+[gazebo-3] libEGL warning: pci id for fd 82: 10de:28e1, driver (null)
+[gazebo-3] 
+[gazebo-3] pci id for fd 83: 10de:28e1, driver (null)
+[gazebo-3] pci id for fd 84: 10de:28e1, driver (null)
+[gazebo-3] libEGL warning: egl: failed to create dri2 screen
+[gazebo-3] libEGL warning: pci id for fd 82: 10de:28e1, driver (null)
+[gazebo-3] 
+[gazebo-3] pci id for fd 83: 10de:28e1, driver (null)
+[gazebo-3] pci id for fd 84: 10de:28e1, driver (null)
+[gazebo-3] libEGL warning: egl: failed to create dri2 screen
+[gazebo-3] libEGL warning: pci id for fd 82: 10de:28e1, driver (null)
+[gazebo-3] 
+[spawner-5] [INFO] [1794584358.519538817] [spawner_joint_state_broadcaster]: Configured and activated all the parsed controllers list : ['joint_state_broadcaster', 'drive_controller', 'steering_controller', 'height_controller', 'shape_controller']!
+[INFO] [spawner-5]: process has finished cleanly [pid 93285]
+[INFO] [terrain_manager-6]: process started with pid [93410]
+[INFO] [camera_gate-7]: process started with pid [93411]
+[INFO] [interaction_runtime-8]: process started with pid [93412]
+[INFO] [rviz_state-9]: process started with pid [93413]
+[INFO] [perception_adapter-10]: process started with pid [93414]
+[interaction_runtime-8] [INFO] [1794584359.545945482] [morph_interactions]: ASSUMED design profile; raw data and degraded sensors are separate. Logs: /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/interactions/20261113_210919
+[lifecycle_bridge-2] [INFO] [1794584359.571068509] [ros_gz_bridge]: Passing message from ROS std_msgs/msg/Bool to Gazebo gz.msgs.Boolean (showing msg only once per type)
+[lifecycle_bridge-2] [INFO] [1794584359.571783035] [ros_gz_bridge]: Passing message from ROS std_msgs/msg/Float64 to Gazebo gz.msgs.Double (showing msg only once per type)
+[gazebo-3] [ERROR] [1794584383.581090581] [gz_ros_control]: Command of at least one joint is out of limits (throttled log). Joint: 'telL4_joint', (actual: [Joint: 'telL4_joint', position: 0.015309, velocity: 0.006000, effort: 6.511975], command: [Joint: 'telL4_joint', position: 0.016103], limited: [Joint: 'telL4_joint', position: 0.016105]) with desired period : 0.010000 sec.
+[gazebo-3] [ERROR] [1794584387.971096989] [gz_ros_control]: Command of at least one joint is out of limits (throttled log). Joint: 'telR3_joint', (actual: [Joint: 'telR3_joint', position: 0.015344, velocity: -0.006000, effort: 3.223138], command: [Joint: 'telR3_joint', position: 0.016155], limited: [Joint: 'telR3_joint', position: 0.016155]) with desired period : 0.010000 sec.
+[gazebo-3] [ERROR] [1794584389.700765428] [gz_ros_control]: Command of at least one joint is out of limits (throttled log). Joint: 'telL1_joint', (actual: [Joint: 'telL1_joint', position: 0.015200, velocity: 0.006000, effort: 15.479599], command: [Joint: 'telL1_joint', position: 0.015888], limited: [Joint: 'telL1_joint', position: 0.015892]) with desired period : 0.010000 sec.
+[lifecycle_bridge-2] [INFO] [1794584396.887818871] [ros_gz_bridge]: Bridge transport quiesced before ROS context shutdown
+[INFO] [lifecycle_bridge-2]: process has finished cleanly [pid 93126]
+[gazebo-3] [INFO] [1794584397.285718881] [controller_manager.pal_statistics]: Async messages lost 0
+[gazebo-3] [INFO] [1794584397.285765785] [controller_manager.pal_statistics]: publish_async_failures_ 0
+[gazebo-3] [INFO] [1794584397.286707698] [controller_manager.pal_statistics]: Async messages lost 0
+[gazebo-3] [INFO] [1794584397.286720158] [controller_manager.pal_statistics]: publish_async_failures_ 0
+[INFO] [gazebo-3]: process has finished cleanly [pid 93127]
+[INFO] [launch]: process[gazebo-3] was required: shutting down launched system
+[INFO] [perception_adapter-10]: sending signal 'SIGINT' to process[perception_adapter-10]
+[INFO] [rviz_state-9]: sending signal 'SIGINT' to process[rviz_state-9]
+[INFO] [interaction_runtime-8]: sending signal 'SIGINT' to process[interaction_runtime-8]
+[INFO] [camera_gate-7]: sending signal 'SIGINT' to process[camera_gate-7]
+[INFO] [terrain_manager-6]: sending signal 'SIGINT' to process[terrain_manager-6]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[robot_state_publisher-1] [INFO] [1794584399.248295841] [rclcpp]: signal_handler(signum=2)
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 93125]
+[INFO] [camera_gate-7]: process has finished cleanly [pid 93411]
+[INFO] [rviz_state-9]: process has finished cleanly [pid 93413]
+[INFO] [perception_adapter-10]: process has finished cleanly [pid 93414]
+[INFO] [interaction_runtime-8]: process has finished cleanly [pid 93412]
+[INFO] [terrain_manager-6]: process has finished cleanly [pid 93410]

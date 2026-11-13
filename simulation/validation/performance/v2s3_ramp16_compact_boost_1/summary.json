@@ -1,0 +1,216 @@
+{
+  "protocol": "baseline_v2",
+  "mode": "fixture",
+  "error": null,
+  "sim_s": 48.802,
+  "wall_s": 48.69514011999854,
+  "mean_rtf": 1.0021944670399987,
+  "phases": [
+    {
+      "phase": "settle",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sim_start_s": 1.85,
+      "sim_end_s": 5.8500000000000005,
+      "wall_s": 3.8937600259996543,
+      "rtf": 1.0272846742713864,
+      "timed_out": false
+    },
+    {
+      "phase": "fixture_shape_compact_pre",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sim_start_s": 5.8500000000000005,
+      "sim_end_s": 6.3500000000000005,
+      "wall_s": 0.49990347099810606,
+      "rtf": 1.0001930952823777,
+      "timed_out": false
+    },
+    {
+      "phase": "fixture_shape_compact_latch",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sim_start_s": 6.3500000000000005,
+      "sim_end_s": 6.652,
+      "wall_s": 0.3017962449994229,
+      "rtf": 1.0006751409401302,
+      "timed_out": false
+    },
+    {
+      "phase": "fixture_shape_compact",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sim_start_s": 6.652,
+      "sim_end_s": 17.950000000000003,
+      "wall_s": 11.29897543900006,
+      "rtf": 0.9999136701371444,
+      "timed_out": false
+    },
+    {
+      "phase": "fixture_events_settle",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sim_start_s": 17.950000000000003,
+      "sim_end_s": 20.950000000000003,
+      "wall_s": 2.9989411200003815,
+      "rtf": 1.0003530846246218,
+      "timed_out": false
+    },
+    {
+      "phase": "fixture_drive",
+      "command": [
+        0.1200000003965203,
+        1.727037410802133e-05,
+        -3.20589157305287e-05
+      ],
+      "sim_start_s": 20.950000000000003,
+      "sim_end_s": 48.652,
+      "wall_s": 27.701894005000213,
+      "rtf": 1.0000038262726645,
+      "timed_out": false
+    },
+    {
+      "phase": "fixture_stop",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sim_start_s": 48.652,
+      "sim_end_s": 50.652,
+      "wall_s": 1.9998698140007036,
+      "rtf": 1.0000650972370226,
+      "timed_out": false
+    }
+  ],
+  "events": [
+    {
+      "event": "compact",
+      "sim_s": 6.3500000000000005,
+      "wall_s": 16413.841976584
+    },
+    {
+      "event": "boost_on",
+      "sim_s": 17.950000000000003,
+      "wall_s": 16425.442899722
+    }
+  ],
+  "segments": [
+    {
+      "name": "stepping",
+      "event": "suspension_level",
+      "hold_until": 0.0,
+      "late": 0,
+      "conflicts": 0,
+      "lifts": [],
+      "current": null,
+      "done": []
+    }
+  ],
+  "columns": {
+    "odom": [
+      "sim_s",
+      "wall_s",
+      "x",
+      "y",
+      "z",
+      "yaw",
+      "vx_body",
+      "vy_body",
+      "vz_body",
+      "wz"
+    ],
+    "imu": [
+      "sim_s",
+      "ax",
+      "ay",
+      "az",
+      "wx",
+      "wy",
+      "wz"
+    ],
+    "wheels": [
+      "sim_s",
+      "fl",
+      "fr",
+      "rl",
+      "rr"
+    ],
+    "soil": [
+      "sim_s",
+      "fl_normal_N",
+      "fl_sinkage_m",
+      "fl_soil_slip",
+      "fl_compaction_N",
+      "fl_thrust_N",
+      "fr_normal_N",
+      "fr_sinkage_m",
+      "fr_soil_slip",
+      "fr_compaction_N",
+      "fr_thrust_N",
+      "rl_normal_N",
+      "rl_sinkage_m",
+      "rl_soil_slip",
+      "rl_compaction_N",
+      "rl_thrust_N",
+      "rr_normal_N",
+      "rr_sinkage_m",
+      "rr_soil_slip",
+      "rr_compaction_N",
+      "rr_thrust_N",
+      "fl_zone"
+    ],
+    "power": [
+      "sim_s",
+      "battery_V",
+      "battery_current_A",
+      "max_winding_C",
+      "tq_fl",
+      "tq_fr",
+      "tq_rl",
+      "tq_rr",
+      "i_fl",
+      "i_fr",
+      "i_rl",
+      "i_rr"
+    ],
+    "status": [
+      "sim_s",
+      "command_speed",
+      "actual_speed",
+      "stage_offset",
+      "target_stage_offset",
+      "morph_rate_m_s",
+      "steering_alignment_rad",
+      "transition_pending",
+      "estop",
+      "pitch_deg",
+      "roll_deg",
+      "steering_measured_degrees",
+      "mode"
+    ]
+  },
+  "scope": "Simulation of an assumed-parameter model; not hardware data",
+  "name": "v2s3_ramp16_compact_boost_1",
+  "launch_args": [
+    "headless:=true",
+    "rviz:=false",
+    "arena:=tetra",
+    "spawn_x:=18.6"
+  ]
+}
