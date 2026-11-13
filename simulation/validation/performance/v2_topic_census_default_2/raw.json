@@ -1,0 +1,838 @@
+{
+  "passed": true,
+  "wall_s": 8.000495509999382,
+  "sim_s": 8.186,
+  "rtf_during_census": 1.0231866250995036,
+  "expected_topics": {
+    "/morph/vision/telemetry": false,
+    "/morph/perception/decision": true,
+    "/morph/status": true,
+    "/morph/imu": true,
+    "/morph/wheel_speed_mismatch": false,
+    "/morph/decision/explainable": false,
+    "/morph/terrain/sinkage_predicted_mm": false,
+    "/morph/motion/jerk_trace": false,
+    "/morph/shape/history": false,
+    "/morph/arena/seed": false,
+    "/morph/slip/derate_active": false,
+    "/cmd_vel": true,
+    "/joint_states": true,
+    "/tf": true,
+    "/tf_static": true,
+    "/clock": true,
+    "/morph/ground_truth/odom": true,
+    "/morph/perception/points": true,
+    "/morph/camera/image": true,
+    "/morph/physics/status": true,
+    "/morph/encoder/odom": true
+  },
+  "topics": {
+    "/clock": {
+      "type": "rosgraph_msgs/msg/Clock",
+      "publishers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "subscribers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 506.09
+    },
+    "/drive_controller/commands": {
+      "type": "std_msgs/msg/Float64MultiArray",
+      "publishers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 101.87
+    },
+    "/height_controller/commands": {
+      "type": "std_msgs/msg/Float64MultiArray",
+      "publishers": [],
+      "subscribers": [
+        "morph_interactions"
+      ],
+      "publisher_qos": [],
+      "rate_hz_wall": 0.0
+    },
+    "/joint_states": {
+      "type": "sensor_msgs/msg/JointState",
+      "publishers": [],
+      "subscribers": [
+        "morph_interactions",
+        "robot_state_publisher"
+      ],
+      "publisher_qos": [],
+      "rate_hz_wall": 0.0
+    },
+    "/keyboard/keypress": {
+      "type": "std_msgs/msg/Int32",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/actuator/drive_target": {
+      "type": "std_msgs/msg/Float64MultiArray",
+      "publishers": [],
+      "subscribers": [
+        "morph_interactions"
+      ],
+      "publisher_qos": [],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/actuator/watchdog": {
+      "type": "std_msgs/msg/Bool",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1"
+      ],
+      "rate_hz_wall": 101.87
+    },
+    "/morph/camera/camera_info": {
+      "type": "sensor_msgs/msg/CameraInfo",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_camera_gate"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/camera/demo_camera_info": {
+      "type": "sensor_msgs/msg/CameraInfo",
+      "publishers": [
+        "morph_camera_gate"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/camera/demo_image": {
+      "type": "sensor_msgs/msg/Image",
+      "publishers": [
+        "morph_camera_gate"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/camera/demo_image/_buf_cpu": {
+      "type": "sensor_msgs/msg/Image",
+      "publishers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "subscribers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/camera/image": {
+      "type": "sensor_msgs/msg/Image",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_camera_gate"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/camera/image/_buf_cpu": {
+      "type": "sensor_msgs/msg/Image",
+      "publishers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "subscribers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/camera/show": {
+      "type": "std_msgs/msg/Bool",
+      "publishers": [],
+      "subscribers": [
+        "morph_camera_gate"
+      ],
+      "publisher_qos": [],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/contacts/fl": {
+      "type": "ros_gz_interfaces/msg/Contacts",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "_NODE_NAME_UNKNOWN_",
+        "morph_interactions"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 502.09
+    },
+    "/morph/contacts/fr": {
+      "type": "ros_gz_interfaces/msg/Contacts",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_interactions",
+        "terrain_adaptation_manager"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 501.97
+    },
+    "/morph/contacts/rl": {
+      "type": "ros_gz_interfaces/msg/Contacts",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_interactions",
+        "terrain_adaptation_manager"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 501.97
+    },
+    "/morph/contacts/rr": {
+      "type": "ros_gz_interfaces/msg/Contacts",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_interactions",
+        "terrain_adaptation_manager"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 501.97
+    },
+    "/morph/contacts/underbody": {
+      "type": "ros_gz_interfaces/msg/Contacts",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "terrain_adaptation_manager"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/encoder/odom": {
+      "type": "nav_msgs/msg/Odometry",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "frame_id": "world",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 100.12
+    },
+    "/morph/ground_truth/odom": {
+      "type": "nav_msgs/msg/Odometry",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_interactions",
+        "terrain_adaptation_manager"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "world",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 50.12
+    },
+    "/morph/gui/frame_timing": {
+      "type": "std_msgs/msg/String",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/height/fl/target": {
+      "type": "std_msgs/msg/Float64",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1"
+      ],
+      "rate_hz_wall": 100.12
+    },
+    "/morph/height/fr/target": {
+      "type": "std_msgs/msg/Float64",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1"
+      ],
+      "rate_hz_wall": 100.12
+    },
+    "/morph/height/rl/target": {
+      "type": "std_msgs/msg/Float64",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1"
+      ],
+      "rate_hz_wall": 100.12
+    },
+    "/morph/height/rr/target": {
+      "type": "std_msgs/msg/Float64",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1"
+      ],
+      "rate_hz_wall": 100.12
+    },
+    "/morph/height/status": {
+      "type": "std_msgs/msg/String",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 9.87
+    },
+    "/morph/imu": {
+      "type": "sensor_msgs/msg/Imu",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_interactions",
+        "terrain_adaptation_manager"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "base_link",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 100.12
+    },
+    "/morph/perception/points": {
+      "type": "sensor_msgs/msg/PointCloud2",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "perception_link",
+      "stamp_age_sim_s": 0.018000000000000682,
+      "rate_hz_wall": 10.0
+    },
+    "/morph/perception/points/_buf_cpu": {
+      "type": "sensor_msgs/msg/PointCloud2",
+      "publishers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "subscribers": [
+        "_NODE_NAME_UNKNOWN_"
+      ],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "perception_link",
+      "stamp_age_sim_s": 0.018000000000000682,
+      "rate_hz_wall": 10.0
+    },
+    "/morph/physics/event": {
+      "type": "std_msgs/msg/String",
+      "publishers": [],
+      "subscribers": [
+        "morph_interactions"
+      ],
+      "publisher_qos": [],
+      "rate_hz_wall": 0.0
+    },
+    "/morph/physics/status": {
+      "type": "std_msgs/msg/String",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 9.5
+    },
+    "/morph/sensors/imu": {
+      "type": "sensor_msgs/msg/Imu",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "BEST_EFFORT/VOLATILE/depth5"
+      ],
+      "frame_id": "base_link",
+      "stamp_age_sim_s": 0.002000000000000668,
+      "rate_hz_wall": 100.12
+    },
+    "/morph/sensors/joint_states": {
+      "type": "sensor_msgs/msg/JointState",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "frame_id": "",
+      "stamp_age_sim_s": 1.7763568394002505e-15,
+      "rate_hz_wall": 100.12
+    },
+    "/morph/status": {
+      "type": "std_msgs/msg/String",
+      "publishers": [
+        "terrain_adaptation_manager"
+      ],
+      "subscribers": [
+        "morph_interactions"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1"
+      ],
+      "rate_hz_wall": 20.0
+    },
+    "/morph/suspension/ambient": {
+      "type": "std_msgs/msg/Float64",
+      "publishers": [
+        "morph_interactions"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1"
+      ],
+      "rate_hz_wall": 9.5
+    },
+    "/morph/suspension/damping": {
+      "type": "std_msgs/msg/Float64",
+      "publishers": [
+        "terrain_adaptation_manager"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 100.12
+    },
+    "/morph/suspension/stiffness": {
+      "type": "std_msgs/msg/Float64",
+      "publishers": [
+        "terrain_adaptation_manager"
+      ],
+      "subscribers": [
+        "ros_gz_bridge"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 100.12
+    },
+    "/morph/suspension/telemetry": {
+      "type": "std_msgs/msg/String",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [
+        "morph_interactions"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 19.37
+    },
+    "/morph/watchdog/status": {
+      "type": "std_msgs/msg/String",
+      "publishers": [
+        "ros_gz_bridge"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 9.87
+    },
+    "/parameter_events": {
+      "type": "rcl_interfaces/msg/ParameterEvent",
+      "publishers": [
+        "morph_camera_gate",
+        "morph_interactions",
+        "robot_state_publisher",
+        "ros_gz_bridge",
+        "terrain_adaptation_manager",
+        "topic_census"
+      ],
+      "subscribers": [
+        "robot_state_publisher"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1000"
+      ],
+      "rate_hz_wall": 0.0
+    },
+    "/robot_description": {
+      "type": "std_msgs/msg/String",
+      "publishers": [
+        "robot_state_publisher"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/TRANSIENT_LOCAL/depth1"
+      ],
+      "rate_hz_wall": 0.12
+    },
+    "/rosout": {
+      "type": "rcl_interfaces/msg/Log",
+      "publishers": [
+        "morph_camera_gate",
+        "morph_interactions",
+        "robot_state_publisher",
+        "ros_gz_bridge",
+        "terrain_adaptation_manager",
+        "topic_census"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/TRANSIENT_LOCAL/depth1000"
+      ],
+      "rate_hz_wall": 12.0
+    },
+    "/steering_controller/commands": {
+      "type": "std_msgs/msg/Float64MultiArray",
+      "publishers": [
+        "morph_interactions",
+        "terrain_adaptation_manager"
+      ],
+      "subscribers": [
+        "morph_interactions"
+      ],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth1",
+        "RELIABLE/VOLATILE/depth10"
+      ],
+      "rate_hz_wall": 99.99
+    },
+    "/tf": {
+      "type": "tf2_msgs/msg/TFMessage",
+      "publishers": [
+        "robot_state_publisher"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/VOLATILE/depth100"
+      ],
+      "rate_hz_wall": 52.5
+    },
+    "/tf_static": {
+      "type": "tf2_msgs/msg/TFMessage",
+      "publishers": [
+        "robot_state_publisher"
+      ],
+      "subscribers": [],
+      "publisher_qos": [
+        "RELIABLE/TRANSIENT_LOCAL/depth1"
+      ],
+      "rate_hz_wall": 0.12
+    }
+  },
+  "discovered_late_not_measured": {
+    "/cmd_vel": "geometry_msgs/msg/Twist",
+    "/controller_manager/activity": "controller_manager_msgs/msg/ControllerManagerActivity",
+    "/controller_manager/introspection_data/full": "pal_statistics_msgs/msg/Statistics",
+    "/controller_manager/introspection_data/names": "pal_statistics_msgs/msg/StatisticsNames",
+    "/controller_manager/introspection_data/values": "pal_statistics_msgs/msg/StatisticsValues",
+    "/controller_manager/statistics/full": "pal_statistics_msgs/msg/Statistics",
+    "/controller_manager/statistics/names": "pal_statistics_msgs/msg/StatisticsNames",
+    "/controller_manager/statistics/values": "pal_statistics_msgs/msg/StatisticsValues",
+    "/diagnostics": "diagnostic_msgs/msg/DiagnosticArray",
+    "/drive_controller/transition_event": "lifecycle_msgs/msg/TransitionEvent",
+    "/height_controller/controller_state": "control_msgs/msg/JointTrajectoryControllerState",
+    "/height_controller/follow_joint_trajectory/_action/feedback": "control_msgs/action/FollowJointTrajectory_FeedbackMessage",
+    "/height_controller/follow_joint_trajectory/_action/status": "action_msgs/msg/GoalStatusArray",
+    "/height_controller/joint_trajectory": "trajectory_msgs/msg/JointTrajectory",
+    "/height_controller/speed_scaling_input": "control_msgs/msg/SpeedScalingFactor",
+    "/height_controller/transition_event": "lifecycle_msgs/msg/TransitionEvent",
+    "/joint_state_broadcaster/transition_event": "lifecycle_msgs/msg/TransitionEvent",
+    "/morph/arena/markers": "visualization_msgs/msg/MarkerArray",
+    "/morph/camera/demo_image/_buf_cpu/_buf_cpu": "sensor_msgs/msg/Image",
+    "/morph/camera/image/_buf_cpu/_buf_cpu": "sensor_msgs/msg/Image",
+    "/morph/cmd_vel_timed": "std_msgs/msg/String",
+    "/morph/event": "std_msgs/msg/String",
+    "/morph/ground_truth/path": "nav_msgs/msg/Path",
+    "/morph/manual_joint": "std_msgs/msg/String",
+    "/morph/perception/decision": "std_msgs/msg/String",
+    "/morph/perception/marker": "visualization_msgs/msg/Marker",
+    "/morph/perception/marker/_buf_cpu": "visualization_msgs/msg/Marker",
+    "/morph/perception/points/_buf_cpu/_buf_cpu": "sensor_msgs/msg/PointCloud2",
+    "/shape_controller/commands": "std_msgs/msg/Float64MultiArray",
+    "/shape_controller/controller_state": "control_msgs/msg/JointTrajectoryControllerState",
+    "/shape_controller/follow_joint_trajectory/_action/feedback": "control_msgs/action/FollowJointTrajectory_FeedbackMessage",
+    "/shape_controller/follow_joint_trajectory/_action/status": "action_msgs/msg/GoalStatusArray",
+    "/shape_controller/joint_trajectory": "trajectory_msgs/msg/JointTrajectory",
+    "/shape_controller/speed_scaling_input": "control_msgs/msg/SpeedScalingFactor",
+    "/shape_controller/transition_event": "lifecycle_msgs/msg/TransitionEvent",
+    "/steering_controller/controller_state": "control_msgs/msg/JointTrajectoryControllerState",
+    "/steering_controller/follow_joint_trajectory/_action/feedback": "control_msgs/action/FollowJointTrajectory_FeedbackMessage",
+    "/steering_controller/follow_joint_trajectory/_action/status": "action_msgs/msg/GoalStatusArray",
+    "/steering_controller/joint_trajectory": "trajectory_msgs/msg/JointTrajectory",
+    "/steering_controller/speed_scaling_input": "control_msgs/msg/SpeedScalingFactor",
+    "/steering_controller/transition_event": "lifecycle_msgs/msg/TransitionEvent"
+  },
+  "tf_tree": {
+    "base_link": {
+      "parent": "world",
+      "source": "/tf"
+    },
+    "camera_link": {
+      "parent": "base_link",
+      "source": "/tf_static"
+    },
+    "fl_height": {
+      "parent": "fl_mount",
+      "source": "/tf"
+    },
+    "fl_mount": {
+      "parent": "telR4",
+      "source": "/tf_static"
+    },
+    "fl_steering": {
+      "parent": "fl_suspension",
+      "source": "/tf"
+    },
+    "fl_suspension": {
+      "parent": "fl_height",
+      "source": "/tf"
+    },
+    "fl_wheel": {
+      "parent": "fl_steering",
+      "source": "/tf"
+    },
+    "fr_height": {
+      "parent": "fr_mount",
+      "source": "/tf"
+    },
+    "fr_mount": {
+      "parent": "telR4",
+      "source": "/tf_static"
+    },
+    "fr_steering": {
+      "parent": "fr_suspension",
+      "source": "/tf"
+    },
+    "fr_suspension": {
+      "parent": "fr_height",
+      "source": "/tf"
+    },
+    "fr_wheel": {
+      "parent": "fr_steering",
+      "source": "/tf"
+    },
+    "hexarmBL": {
+      "parent": "telL6",
+      "source": "/tf"
+    },
+    "hexarmBR": {
+      "parent": "telR6",
+      "source": "/tf"
+    },
+    "hexarmFL": {
+      "parent": "telL6",
+      "source": "/tf"
+    },
+    "hexarmFR": {
+      "parent": "telR6",
+      "source": "/tf"
+    },
+    "perception_link": {
+      "parent": "base_link",
+      "source": "/tf_static"
+    },
+    "rl_height": {
+      "parent": "rl_mount",
+      "source": "/tf"
+    },
+    "rl_mount": {
+      "parent": "telL4",
+      "source": "/tf_static"
+    },
+    "rl_steering": {
+      "parent": "rl_suspension",
+      "source": "/tf"
+    },
+    "rl_suspension": {
+      "parent": "rl_height",
+      "source": "/tf"
+    },
+    "rl_wheel": {
+      "parent": "rl_steering",
+      "source": "/tf"
+    },
+    "rr_height": {
+      "parent": "rr_mount",
+      "source": "/tf"
+    },
+    "rr_mount": {
+      "parent": "telL4",
+      "source": "/tf_static"
+    },
+    "rr_steering": {
+      "parent": "rr_suspension",
+      "source": "/tf"
+    },
+    "rr_suspension": {
+      "parent": "rr_height",
+      "source": "/tf"
+    },
+    "rr_wheel": {
+      "parent": "rr_steering",
+      "source": "/tf"
+    },
+    "telL1": {
+      "parent": "base_link",
+      "source": "/tf"
+    },
+    "telL2": {
+      "parent": "telL1",
+      "source": "/tf"
+    },
+    "telL3": {
+      "parent": "telL2",
+      "source": "/tf"
+    },
+    "telL4": {
+      "parent": "telL3",
+      "source": "/tf"
+    },
+    "telL5": {
+      "parent": "telL4",
+      "source": "/tf"
+    },
+    "telL6": {
+      "parent": "telL5",
+      "source": "/tf"
+    },
+    "telR1": {
+      "parent": "base_link",
+      "source": "/tf"
+    },
+    "telR2": {
+      "parent": "telR1",
+      "source": "/tf"
+    },
+    "telR3": {
+      "parent": "telR2",
+      "source": "/tf"
+    },
+    "telR4": {
+      "parent": "telR3",
+      "source": "/tf"
+    },
+    "telR5": {
+      "parent": "telR4",
+      "source": "/tf"
+    },
+    "telR6": {
+      "parent": "telR5",
+      "source": "/tf"
+    }
+  },
+  "nodes": [
+    "/controller_manager",
+    "/drive_controller",
+    "/gz_ros_control",
+    "/height_controller",
+    "/joint_state_broadcaster",
+    "/morph_camera_gate",
+    "/morph_interactions",
+    "/morph_local_perception",
+    "/morph_rviz_state",
+    "/morphsystem",
+    "/robot_state_publisher",
+    "/ros_gz_bridge",
+    "/shape_controller",
+    "/steering_controller",
+    "/terrain_adaptation_manager",
+    "/topic_census"
+  ],
+  "use_sim_time": {}
+}

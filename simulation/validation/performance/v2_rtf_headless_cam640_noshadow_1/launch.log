@@ -1,0 +1,843 @@
+MORPH: connected arena is the default. Workspace: /home/diya/kiro/swirl drive new/gigglesaurus/simulation
+[INFO] [launch]: All log files can be found below /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/runtime/2026-11-13-17-16-16-620401-diya-LOQ-15IRX9-20928
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [20963]
+[INFO] [lifecycle_bridge-2]: process started with pid [20964]
+[INFO] [gazebo-3]: process started with pid [20965]
+[INFO] [create-4]: process started with pid [20966]
+[robot_state_publisher-1] [WARN] [1794570377.770694214] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-1] [INFO] [1794570377.770798833] [robot_state_publisher]: Robot initialized
+[lifecycle_bridge-2] [INFO] [1794570378.793951542] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.795504154] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/keyboard/keypress (gz.msgs.Int32) -> /keyboard/keypress (std_msgs/msg/Int32)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.798555108] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/camera/image (gz.msgs.Image) -> /morph/camera/image (sensor_msgs/msg/Image)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.803025624] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/camera/camera_info (gz.msgs.CameraInfo) -> /morph/camera/camera_info (sensor_msgs/msg/CameraInfo)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.803901706] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/imu (gz.msgs.IMU) -> /morph/imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.804844630] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/leo_marsyard/model/morph/link/fl_wheel/sensor/fl_contact/contact (gz.msgs.Contacts) -> /morph/contacts/fl (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.807705323] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/leo_marsyard/model/morph/link/fr_wheel/sensor/fr_contact/contact (gz.msgs.Contacts) -> /morph/contacts/fr (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.808189941] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/leo_marsyard/model/morph/link/rl_wheel/sensor/rl_contact/contact (gz.msgs.Contacts) -> /morph/contacts/rl (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.808431072] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/leo_marsyard/model/morph/link/rr_wheel/sensor/rr_contact/contact (gz.msgs.Contacts) -> /morph/contacts/rr (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.808633957] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/world/leo_marsyard/model/morph/link/base_link/sensor/underbody_contact/contact (gz.msgs.Contacts) -> /morph/contacts/underbody (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.808819381] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/suspension/stiffness (std_msgs/msg/Float64) -> /morph/suspension/stiffness (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.809663107] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/suspension/damping (std_msgs/msg/Float64) -> /morph/suspension/damping (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.810145547] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/ground_truth/odom (gz.msgs.Odometry) -> /morph/ground_truth/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.811456563] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/suspension/telemetry (gz.msgs.StringMsg) -> /morph/suspension/telemetry (std_msgs/msg/String)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.811701991] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/suspension/ambient (std_msgs/msg/Float64) -> /morph/suspension/ambient (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.811913877] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/range/points (gz.msgs.PointCloudPacked) -> /morph/perception/points (sensor_msgs/msg/PointCloud2)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.812275351] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/actuator/watchdog (std_msgs/msg/Bool) -> /morph/actuator/watchdog (gz.msgs.Boolean)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.812582696] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/watchdog/status (gz.msgs.StringMsg) -> /morph/watchdog/status (std_msgs/msg/String)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.812831460] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/fl/target (std_msgs/msg/Float64) -> /morph/height/fl/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.813029083] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/fr/target (std_msgs/msg/Float64) -> /morph/height/fr/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.813212564] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/rl/target (std_msgs/msg/Float64) -> /morph/height/rl/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.813414551] [ros_gz_bridge]: Creating ROS->GZ Bridge: [/morph/height/rr/target (std_msgs/msg/Float64) -> /morph/height/rr/target (gz.msgs.Double)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.813639127] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/height/status (gz.msgs.StringMsg) -> /morph/height/status (std_msgs/msg/String)] (Lazy 0)
+[lifecycle_bridge-2] [INFO] [1794570378.813843386] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/morph/gui/frame_timing (gz.msgs.StringMsg) -> /morph/gui/frame_timing (std_msgs/msg/String)] (Lazy 0)
+[create-4] [INFO] [1794570380.109147633] [ros_gz_sim]: Entity creation successful.
+[gazebo-3] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="morph"]/link[@name="base_link"]/sensor[@name="base_imu"]/gz_frame_id:/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/morph.sdf:L117]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-3] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="morph"]/link[@name="base_link"]/sensor[@name="front_camera"]/gz_frame_id:/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/morph.sdf:L178]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-3] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="morph"]/link[@name="base_link"]/sensor[@name="terrain_lidar"]/gz_frame_id:/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/morph.sdf:L196]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-3] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="morph"]/link[@name="base_link"]/sensor[@name="terrain_lidar"]/lidar/noise[@type="gaussian"]:/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/morph.sdf:L219]: XML Attribute[type] in element[noise] not defined in SDF.
+[gazebo-3] [INFO] [1794570380.206811656] [gz_ros_control]: Loading controller_manager
+[INFO] [create-4]: process has finished cleanly [pid 20966]
+[INFO] [spawner-5]: process started with pid [21105]
+[gazebo-3] [INFO] [1794570380.215710830] [controller_manager]: Using ROS clock for triggering controller manager cycles.
+[gazebo-3] [WARN] [1794570380.215731601] [controller_manager]: The resource manager is not yet initialized, will wait for the robot description to initialize it..
+[gazebo-3] [INFO] [1794570380.221405920] [controller_manager]: Subscribing to '/robot_description' topic for robot description.
+[gazebo-3] [WARN] [1794570380.221442652] [gz_ros_control]: Waiting RM to load and initialize hardware...
+[gazebo-3] [INFO] [1794570380.391318001] [controller_manager]: Received robot description from topic.
+[gazebo-3] [INFO] [1794570380.391391158] [controller_manager]: Enforcing command limits is enabled...
+[gazebo-3] [INFO] [1794570380.394456644] [gz_ros_control]: Using JointLimiter for joint 'rr_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394475248] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394492813] [gz_ros_control]: Using JointLimiter for joint 'rr_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [1]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394496135] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394502045] [gz_ros_control]: Using JointLimiter for joint 'telL4_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394504953] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL4_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394509802] [gz_ros_control]: Using JointLimiter for joint 'telL2_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394512641] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL2_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394519104] [gz_ros_control]: Using JointLimiter for joint 'fr_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394521927] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394526799] [gz_ros_control]: Using JointLimiter for joint 'telR5_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394529607] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR5_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394534323] [gz_ros_control]: Using JointLimiter for joint 'telR4_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394550601] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR4_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394555538] [gz_ros_control]: Using JointLimiter for joint 'hexarmFR_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394558481] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmFR_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394563346] [gz_ros_control]: Using JointLimiter for joint 'telL6_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394566199] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL6_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394571071] [gz_ros_control]: Using JointLimiter for joint 'rr_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.5]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794570380.394573849] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394578623] [gz_ros_control]: Using JointLimiter for joint 'telR3_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394582665] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR3_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394587596] [gz_ros_control]: Using JointLimiter for joint 'telR6_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394590566] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR6_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394595319] [gz_ros_control]: Using JointLimiter for joint 'telL5_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394598164] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL5_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394603643] [gz_ros_control]: Using JointLimiter for joint 'telR1_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394606410] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR1_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394615167] [gz_ros_control]: Using JointLimiter for joint 'telR2_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394618046] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telR2_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394627504] [gz_ros_control]: Using JointLimiter for joint 'hexarmBL_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394630343] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmBL_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394635825] [gz_ros_control]: Using JointLimiter for joint 'rr_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394639751] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rr_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394645296] [gz_ros_control]: Using JointLimiter for joint 'hexarmFL_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394648169] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmFL_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394653485] [gz_ros_control]: Using JointLimiter for joint 'telL3_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394656274] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL3_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394661364] [gz_ros_control]: Using JointLimiter for joint 'telL1_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.0379, 0.0165111]
+[gazebo-3]   has velocity limits: true [0.006]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [8]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394664859] [gz_ros_control]: Creating JointSaturationLimiter for joint 'telL1_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394669919] [gz_ros_control]: Using JointLimiter for joint 'fr_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.5]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794570380.394672678] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394677618] [gz_ros_control]: Using JointLimiter for joint 'hexarmBR_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.25, 0.25]
+[gazebo-3]   has velocity limits: true [0.3]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [1]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394680317] [gz_ros_control]: Creating JointSaturationLimiter for joint 'hexarmBR_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394685160] [gz_ros_control]: Using JointLimiter for joint 'fl_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394688835] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394693726] [gz_ros_control]: Using JointLimiter for joint 'fl_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [1]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394700732] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394705295] [gz_ros_control]: Using JointLimiter for joint 'fl_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.5]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794570380.394708066] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394712774] [gz_ros_control]: Using JointLimiter for joint 'fr_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394715390] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394720027] [gz_ros_control]: Using JointLimiter for joint 'fl_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394722655] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fl_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394727136] [gz_ros_control]: Using JointLimiter for joint 'fr_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [1]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394730231] [gz_ros_control]: Creating JointSaturationLimiter for joint 'fr_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394734807] [gz_ros_control]: Using JointLimiter for joint 'rl_height_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.015, 0.015]
+[gazebo-3]   has velocity limits: true [0.025]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [100]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394738505] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_height_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394743575] [gz_ros_control]: Using JointLimiter for joint 'rl_wheel_joint' in hardware 'MorphSystem' : '  has position limits: false [nan, nan]
+[gazebo-3]   has velocity limits: true [25]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.5]
+[gazebo-3]   angle wraparound: true'
+[gazebo-3] [INFO] [1794570380.394746368] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_wheel_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394751372] [gz_ros_control]: Using JointLimiter for joint 'rl_steer_joint' in hardware 'MorphSystem' : '  has position limits: true [-1.5708, 1.5708]
+[gazebo-3]   has velocity limits: true [1]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [0.7]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394754066] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_steer_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.394758553] [gz_ros_control]: Using JointLimiter for joint 'rl_spring_joint' in hardware 'MorphSystem' : '  has position limits: true [-0.01, 0.03]
+[gazebo-3]   has velocity limits: true [0.4]
+[gazebo-3]   has acceleration limits: false [nan]
+[gazebo-3]   has deceleration limits: false [nan]
+[gazebo-3]   has jerk limits: false [nan]
+[gazebo-3]   has effort limits: true [150]
+[gazebo-3]   angle wraparound: false'
+[gazebo-3] [INFO] [1794570380.394762708] [gz_ros_control]: Creating JointSaturationLimiter for joint 'rl_spring_joint' in hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.398744586] [gz_ros_control]: The position_proportional_gain has been set to: 0.12
+[gazebo-3] [INFO] [1794570380.398790566] [gz_ros_control]: Loading joint: telR1_joint
+[gazebo-3] [INFO] [1794570380.398796894] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398801595] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398815289] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398820537] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398824153] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398827017] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398829327] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398837566] [gz_ros_control]: Loading joint: telR2_joint
+[gazebo-3] [INFO] [1794570380.398840254] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398842406] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398844501] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398847412] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398849851] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398852130] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398854162] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398860454] [gz_ros_control]: Loading joint: telR3_joint
+[gazebo-3] [INFO] [1794570380.398864594] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398866720] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398868613] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398871054] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398873469] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398875881] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398877845] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398883980] [gz_ros_control]: Loading joint: telR4_joint
+[gazebo-3] [INFO] [1794570380.398886502] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398888698] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398890759] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398893255] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398895490] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398897724] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398899794] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398906557] [gz_ros_control]: Loading joint: telR5_joint
+[gazebo-3] [INFO] [1794570380.398908828] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398911343] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398915674] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398918244] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398920369] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398922623] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398924591] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398930171] [gz_ros_control]: Loading joint: telR6_joint
+[gazebo-3] [INFO] [1794570380.398932541] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398934597] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398936482] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398939045] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398941289] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398943525] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398945522] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398952224] [gz_ros_control]: Loading joint: telL1_joint
+[gazebo-3] [INFO] [1794570380.398954480] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398956536] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398958509] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398960883] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398962974] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398965185] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398967206] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398974743] [gz_ros_control]: Loading joint: telL2_joint
+[gazebo-3] [INFO] [1794570380.398986267] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.398989019] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.398990931] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.398993382] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.398995689] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.398997888] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.398999913] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399005190] [gz_ros_control]: Loading joint: telL3_joint
+[gazebo-3] [INFO] [1794570380.399007478] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399009455] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399011320] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399013762] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399015890] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399018041] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399020012] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399025222] [gz_ros_control]: Loading joint: telL4_joint
+[gazebo-3] [INFO] [1794570380.399027579] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399029572] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399031523] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399034013] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399036222] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399038451] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399042088] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399048291] [gz_ros_control]: Loading joint: telL5_joint
+[gazebo-3] [INFO] [1794570380.399050618] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399052698] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399054555] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399056967] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399059151] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399061595] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399063583] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399068720] [gz_ros_control]: Loading joint: telL6_joint
+[gazebo-3] [INFO] [1794570380.399071158] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399073189] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399075034] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399077399] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399079575] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399081837] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399083897] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399090448] [gz_ros_control]: Loading joint: hexarmFR_joint
+[gazebo-3] [INFO] [1794570380.399092942] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399094941] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399096794] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399099221] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399101391] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399103684] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399105665] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399112440] [gz_ros_control]: Loading joint: hexarmBR_joint
+[gazebo-3] [INFO] [1794570380.399114737] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399116818] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399118658] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399121172] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399123406] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399125721] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399127715] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399132629] [gz_ros_control]: Loading joint: hexarmFL_joint
+[gazebo-3] [INFO] [1794570380.399134880] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399136875] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399138694] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399141120] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399143253] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399145409] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399147374] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399152065] [gz_ros_control]: Loading joint: hexarmBL_joint
+[gazebo-3] [INFO] [1794570380.399156136] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399158154] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399160048] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399162562] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399164757] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399166937] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399168958] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399173595] [gz_ros_control]: Loading joint: fl_height_joint
+[gazebo-3] [INFO] [1794570380.399175946] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399177965] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399181657] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399184224] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399186399] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399189084] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399191164] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399197318] [gz_ros_control]: Loading joint: fl_steer_joint
+[gazebo-3] [INFO] [1794570380.399199699] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399201777] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399203768] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399206364] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399208518] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399210743] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399212736] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399217808] [gz_ros_control]: Loading joint: fl_wheel_joint
+[gazebo-3] [INFO] [1794570380.399220202] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399222250] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399224121] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399226584] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399228677] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399230868] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399232951] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399238159] [gz_ros_control]: Loading joint: fl_spring_joint
+[gazebo-3] [INFO] [1794570380.399240490] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399242508] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399244684] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399246858] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399249061] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399253961] [gz_ros_control]: Loading joint: fr_height_joint
+[gazebo-3] [INFO] [1794570380.399256342] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399258469] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399261928] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399264355] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399266569] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399268790] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399270765] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399275480] [gz_ros_control]: Loading joint: fr_steer_joint
+[gazebo-3] [INFO] [1794570380.399277679] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399279741] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399281589] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399284001] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399286436] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399288889] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399290947] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399295715] [gz_ros_control]: Loading joint: fr_wheel_joint
+[gazebo-3] [INFO] [1794570380.399298007] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399300032] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399301901] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399304278] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399306384] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399308573] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399310593] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399315337] [gz_ros_control]: Loading joint: fr_spring_joint
+[gazebo-3] [INFO] [1794570380.399317594] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399319615] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399322262] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399326070] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399328331] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399332984] [gz_ros_control]: Loading joint: rl_height_joint
+[gazebo-3] [INFO] [1794570380.399335204] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399337225] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399339104] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399341507] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399343650] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399347896] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399349942] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399354801] [gz_ros_control]: Loading joint: rl_steer_joint
+[gazebo-3] [INFO] [1794570380.399356958] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399359037] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399360888] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399363353] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399365486] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399367680] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399369681] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399374366] [gz_ros_control]: Loading joint: rl_wheel_joint
+[gazebo-3] [INFO] [1794570380.399376551] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399378593] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399380454] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399382835] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399384948] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399387122] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399389128] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399393635] [gz_ros_control]: Loading joint: rl_spring_joint
+[gazebo-3] [INFO] [1794570380.399395890] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399397896] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399399938] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399402035] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399404213] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399408918] [gz_ros_control]: Loading joint: rr_height_joint
+[gazebo-3] [INFO] [1794570380.399411111] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399413156] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399414999] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399417376] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399419453] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399421646] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399423640] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399429158] [gz_ros_control]: Loading joint: rr_steer_joint
+[gazebo-3] [INFO] [1794570380.399431354] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399433410] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399435320] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399439528] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399441737] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399443927] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399445956] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399450846] [gz_ros_control]: Loading joint: rr_wheel_joint
+[gazebo-3] [INFO] [1794570380.399453139] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399455146] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399456985] [gz_ros_control]: 			 found initial value: 0.000000
+[gazebo-3] [INFO] [1794570380.399459445] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399461558] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399463733] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399465757] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399470499] [gz_ros_control]: Loading joint: rr_spring_joint
+[gazebo-3] [INFO] [1794570380.399472734] [gz_ros_control]: 	State:
+[gazebo-3] [INFO] [1794570380.399474768] [gz_ros_control]: 		 position
+[gazebo-3] [INFO] [1794570380.399476806] [gz_ros_control]: 		 velocity
+[gazebo-3] [INFO] [1794570380.399478973] [gz_ros_control]: 		 effort
+[gazebo-3] [INFO] [1794570380.399481107] [gz_ros_control]: 	Command:
+[gazebo-3] [INFO] [1794570380.399587177] [gz_ros_control]: Loading sensor: base_imu
+[gazebo-3] [INFO] [1794570380.399592022] [gz_ros_control]: 	State:
+[gazebo-3] [WARN] [1794570380.399595361] [gz_ros_control]: IMU sensor 'base_imu' not found in hardware_info, skipping.
+[gazebo-3] [INFO] [1794570380.399714794] [gz_ros_control]: Initialize hardware 'MorphSystem' 
+[gazebo-3] [INFO] [1794570380.402448441] [gz_ros_control]: Successful initialization of hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.402812173] [controller_manager]: Activating component 'MorphSystem'.
+[gazebo-3] [INFO] [1794570380.402826288] [resource_manager]: 'configure' hardware 'MorphSystem' 
+[gazebo-3] [INFO] [1794570380.402830868] [gz_ros_control]: System Successfully configured!
+[gazebo-3] [INFO] [1794570380.402835080] [resource_manager]: Successful 'configure' of hardware 'MorphSystem'
+[gazebo-3] [INFO] [1794570380.402854463] [resource_manager]: 'activate' hardware 'MorphSystem' 
+[gazebo-3] [INFO] [1794570380.402866853] [resource_manager]: Successful 'activate' of hardware 'MorphSystem'
+[gazebo-3] [WARN] [1794570380.402934477] [controller_manager]: Component 'MorphSystem' does not have read or write statistics initialized, skipping registration.
+[gazebo-3] [INFO] [1794570380.402943638] [controller_manager]: Resource Manager has been successfully initialized. Starting Controller Manager services...
+[spawner-5] [INFO] [1794570380.587085489] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[gazebo-3] [INFO] [1794570380.844919464] [controller_manager]: Loading controller : 'joint_state_broadcaster' of type 'joint_state_broadcaster/JointStateBroadcaster'
+[gazebo-3] [INFO] [1794570380.844964823] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[gazebo-3] [INFO] [1794570380.849973001] [controller_manager]: Controller 'joint_state_broadcaster' node arguments: '--ros-args --param use_sim_time:=true'
+[spawner-5] [INFO] [1794570380.861603879] [spawner_joint_state_broadcaster]: Loaded joint_state_broadcaster
+[gazebo-3] [INFO] [1794570380.862851343] [controller_manager]: Configuring controller: 'joint_state_broadcaster'
+[gazebo-3] [INFO] [1794570380.863269564] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. Will try to publish all available state interfaces of the URDF joints.
+[spawner-5] [INFO] [1794570380.876868600] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml']" for drive_controller
+[gazebo-3] [INFO] [1794570380.882714313] [controller_manager]: Loading controller : 'drive_controller' of type 'forward_command_controller/ForwardCommandController'
+[gazebo-3] [INFO] [1794570380.882736271] [controller_manager]: Loading controller 'drive_controller'
+[gazebo-3] [INFO] [1794570380.884604463] [controller_manager]: Controller 'drive_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794570380.889276014] [spawner_joint_state_broadcaster]: Loaded drive_controller
+[gazebo-3] [INFO] [1794570380.889452177] [controller_manager]: Configuring controller: 'drive_controller'
+[gazebo-3] [INFO] [1794570380.890400833] [drive_controller]: configure successful
+[spawner-5] [INFO] [1794570380.895229128] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml']" for steering_controller
+[gazebo-3] [INFO] [1794570380.901981988] [controller_manager]: Loading controller : 'steering_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[gazebo-3] [INFO] [1794570380.902024692] [controller_manager]: Loading controller 'steering_controller'
+[gazebo-3] [INFO] [1794570380.907200845] [controller_manager]: Controller 'steering_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794570380.915091144] [spawner_joint_state_broadcaster]: Loaded steering_controller
+[gazebo-3] [INFO] [1794570380.915377038] [controller_manager]: Configuring controller: 'steering_controller'
+[gazebo-3] [INFO] [1794570380.915480585] [steering_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[gazebo-3] [INFO] [1794570380.915494204] [steering_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[gazebo-3] [INFO] [1794570380.915512436] [steering_controller]: Using 'splines' interpolation method.
+[gazebo-3] [INFO] [1794570380.923621522] [steering_controller]: Action status changes will be monitored at 20.00 Hz.
+[gazebo-3] [INFO] [1794570380.928257574] [steering_controller]: Setting initial scaling factor to 1.000000
+[gazebo-3] [INFO] [1794570380.928283836] [steering_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[spawner-5] [INFO] [1794570380.931902659] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml']" for height_controller
+[gazebo-3] [INFO] [1794570380.936345061] [controller_manager]: Loading controller : 'height_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[gazebo-3] [INFO] [1794570380.936367275] [controller_manager]: Loading controller 'height_controller'
+[gazebo-3] [INFO] [1794570380.936457016] [controller_manager]: Controller 'height_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794570380.943409761] [spawner_joint_state_broadcaster]: Loaded height_controller
+[gazebo-3] [INFO] [1794570380.943656094] [controller_manager]: Configuring controller: 'height_controller'
+[gazebo-3] [INFO] [1794570380.943808846] [height_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[gazebo-3] [INFO] [1794570380.943829906] [height_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[gazebo-3] [INFO] [1794570380.943842857] [height_controller]: Using 'splines' interpolation method.
+[gazebo-3] [INFO] [1794570380.944746236] [height_controller]: Action status changes will be monitored at 20.00 Hz.
+[gazebo-3] [INFO] [1794570380.946874152] [height_controller]: Setting initial scaling factor to 1.000000
+[gazebo-3] [INFO] [1794570380.946887085] [height_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[spawner-5] [INFO] [1794570380.950422955] [spawner_joint_state_broadcaster]: Setting controller param "params_file" to "['/home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml']" for shape_controller
+[gazebo-3] [INFO] [1794570380.954661968] [controller_manager]: Loading controller : 'shape_controller' of type 'joint_trajectory_controller/JointTrajectoryController'
+[gazebo-3] [INFO] [1794570380.954688847] [controller_manager]: Loading controller 'shape_controller'
+[gazebo-3] [INFO] [1794570380.954849835] [controller_manager]: Controller 'shape_controller' node arguments: '--ros-args --params-file /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/run_hmn4946y/controllers.yaml --param use_sim_time:=true'
+[spawner-5] [INFO] [1794570380.963709142] [spawner_joint_state_broadcaster]: Loaded shape_controller
+[gazebo-3] [INFO] [1794570380.963930250] [controller_manager]: Configuring controller: 'shape_controller'
+[gazebo-3] [INFO] [1794570380.964312807] [shape_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[gazebo-3] [INFO] [1794570380.964337087] [shape_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[gazebo-3] [INFO] [1794570380.964353612] [shape_controller]: Using 'splines' interpolation method.
+[gazebo-3] [INFO] [1794570380.965503142] [shape_controller]: Action status changes will be monitored at 20.00 Hz.
+[gazebo-3] [INFO] [1794570380.967290757] [shape_controller]: Setting initial scaling factor to 1.000000
+[gazebo-3] [INFO] [1794570380.967302903] [shape_controller]: No scaling interface set. This controller will not read speed scaling from the hardware.
+[gazebo-3] [INFO] [1794570380.968377963] [controller_manager]: Activating controllers: [ joint_state_broadcaster drive_controller steering_controller height_controller shape_controller ]
+[gazebo-3] [WARN] [1794570382.690869298] [gz_ros_control]:  Desired controller update period (0.01 s) is slower than the gazebo simulation period (0.002 s).
+[gazebo-3] [INFO] [1794570382.692352813] [controller_manager]: Requested controller switch from non-realtime loop
+[gazebo-3] [INFO] [1794570382.692605623] [drive_controller]: activate successful
+[gazebo-3] [INFO] [1794570382.693045584] [controller_manager]: Successfully switched controllers!
+[gazebo-3] libEGL warning: pci id for fd 82: 10de:28e1, driver (null)
+[gazebo-3] 
+[gazebo-3] pci id for fd 83: 10de:28e1, driver (null)
+[gazebo-3] pci id for fd 84: 10de:28e1, driver (null)
+[gazebo-3] libEGL warning: egl: failed to create dri2 screen
+[gazebo-3] libEGL warning: pci id for fd 82: 10de:28e1, driver (null)
+[gazebo-3] 
+[gazebo-3] pci id for fd 83: 10de:28e1, driver (null)
+[gazebo-3] pci id for fd 84: 10de:28e1, driver (null)
+[gazebo-3] libEGL warning: egl: failed to create dri2 screen
+[gazebo-3] libEGL warning: pci id for fd 82: 10de:28e1, driver (null)
+[gazebo-3] 
+[gazebo-3] (2026-11-13 17:16:24.189) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.189) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.189) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.190) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.190) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.190) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.191) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.191) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.191) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.192) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.192) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.192) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.203) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.203) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.203) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.219) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.219) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.219) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.232) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.232) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.232) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.317) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.317) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.317) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.318) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.318) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.318) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.318) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.318) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.318) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.319) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.319) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.319) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.324) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.324) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.324) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.325) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.325) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.325) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.326) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.326) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.326) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.327) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.327) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.327) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.327) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.327) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.327) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.329) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.329) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.329) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.330) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.330) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.330) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.331) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.331) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.331) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.332) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.333) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.334) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.334) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.334) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.334) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.334) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.334) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.343) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.343) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.343) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.345) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.345) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.345) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.346) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.346) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.346) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.347) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.347) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.347) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.360) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.360) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.360) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.377) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.377) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.377) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.391) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.391) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.391) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.478) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.478) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.478) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.479) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.479) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.479) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.479) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.479) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.479) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.480) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.481) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.482) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_gold.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.483) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_chrome.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.484) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_encoder.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_rubber.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.485) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.495) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.495) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.495) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.498) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.498) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.498) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_metal.png]
+[gazebo-3] (2026-11-13 17:16:24.499) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.499) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.499) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.500) [error] [SystemPaths.cc:356] Unable to find file with URI [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.500) [error] [SystemPaths.cc:456] Could not resolve file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[gazebo-3] (2026-11-13 17:16:24.500) [error] [SceneManager.cc:913] Unable to find file [file:///home/diya/kiro/swirl%20drive%20new/gigglesaurus/simulation/install/morph_sim/share/morph_sim/models/materials/textures/finish_cyan.png]
+[spawner-5] [INFO] [1794570384.905328247] [spawner_joint_state_broadcaster]: Configured and activated all the parsed controllers list : ['joint_state_broadcaster', 'drive_controller', 'steering_controller', 'height_controller', 'shape_controller']!
+[INFO] [spawner-5]: process has finished cleanly [pid 21105]
+[INFO] [terrain_manager-6]: process started with pid [21200]
+[INFO] [camera_gate-7]: process started with pid [21201]
+[INFO] [interaction_runtime-8]: process started with pid [21202]
+[INFO] [rviz_state-9]: process started with pid [21203]
+[INFO] [perception_adapter-10]: process started with pid [21204]
+[interaction_runtime-8] [INFO] [1794570385.924467871] [morph_interactions]: ASSUMED design profile; raw data and degraded sensors are separate. Logs: /home/diya/kiro/swirl drive new/gigglesaurus/simulation/log/interactions/20261113_171625
+[lifecycle_bridge-2] [INFO] [1794570385.932306057] [ros_gz_bridge]: Passing message from ROS std_msgs/msg/Bool to Gazebo gz.msgs.Boolean (showing msg only once per type)
+[lifecycle_bridge-2] [INFO] [1794570385.933379040] [ros_gz_bridge]: Passing message from ROS std_msgs/msg/Float64 to Gazebo gz.msgs.Double (showing msg only once per type)
+[lifecycle_bridge-2] [INFO] [1794570454.866788051] [ros_gz_bridge]: Bridge transport quiesced before ROS context shutdown
+[INFO] [lifecycle_bridge-2]: process has finished cleanly [pid 20964]
+[gazebo-3] [INFO] [1794570455.416235202] [controller_manager.pal_statistics]: Async messages lost 0
+[gazebo-3] [INFO] [1794570455.416283502] [controller_manager.pal_statistics]: publish_async_failures_ 0
+[gazebo-3] [INFO] [1794570455.417644913] [controller_manager.pal_statistics]: Async messages lost 0
+[gazebo-3] [INFO] [1794570455.417656988] [controller_manager.pal_statistics]: publish_async_failures_ 0
+[INFO] [gazebo-3]: process has finished cleanly [pid 20965]
+[INFO] [launch]: process[gazebo-3] was required: shutting down launched system
+[INFO] [perception_adapter-10]: sending signal 'SIGINT' to process[perception_adapter-10]
+[INFO] [rviz_state-9]: sending signal 'SIGINT' to process[rviz_state-9]
+[INFO] [interaction_runtime-8]: sending signal 'SIGINT' to process[interaction_runtime-8]
+[INFO] [camera_gate-7]: sending signal 'SIGINT' to process[camera_gate-7]
+[INFO] [terrain_manager-6]: sending signal 'SIGINT' to process[terrain_manager-6]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[robot_state_publisher-1] [INFO] [1794570457.439312503] [rclcpp]: signal_handler(signum=2)
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 20963]
+[INFO] [perception_adapter-10]: process has finished cleanly [pid 21204]
+[INFO] [interaction_runtime-8]: process has finished cleanly [pid 21202]
+[INFO] [camera_gate-7]: process has finished cleanly [pid 21201]
+[INFO] [terrain_manager-6]: process has finished cleanly [pid 21200]
+[INFO] [rviz_state-9]: process has finished cleanly [pid 21203]
