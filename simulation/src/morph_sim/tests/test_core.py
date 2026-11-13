@@ -58,7 +58,7 @@ def test_gazebo_keyboard_bridge_and_controlled_shape(robot):
 
 @pytest.mark.parametrize('vx,vy',[(-1.,0.),(0.,1.),(0.,-1.),(.3,.2),(-.4,-.1),(0.,0.)])
 def test_swerve_reconstructs_command(vx,vy):
- a,w=optimized_wheel(vx,vy);assert -math.pi/2<=a<=math.pi/2;assert w*.04*math.cos(a)==pytest.approx(vx,abs=1e-8);assert w*.04*math.sin(a)==pytest.approx(vy,abs=1e-8)
+ a,w=optimized_wheel(vx,vy,.04);assert -math.pi/2<=a<=math.pi/2;assert w*.04*math.cos(a)==pytest.approx(vx,abs=1e-8);assert w*.04*math.sin(a)==pytest.approx(vy,abs=1e-8)
 
 def test_command_does_not_drive_without_feedback():
  c=AdaptationCore()

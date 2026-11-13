@@ -307,6 +307,18 @@ parameters:
       status: assumed
       uncertainty: null
       source: Imported existing design assumption; no physical measurement
+    peak_boost_fraction:
+      default: 0.2
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: 'V2 brief: 20 % short-duration peak torque and current, requested by the controller and governed by the winding and driver temperatures'
+    peak_boost_derate_C:
+      default: 60.0
+      units: C
+      status: assumed
+      uncertainty: null
+      source: Boost fades linearly from this temperature to none at derate_C; assumed
   steering:
     motor_holding_torque_Nm:
       default: 0.45
@@ -333,11 +345,11 @@ parameters:
       uncertainty: null
       source: Imported existing design assumption; no physical measurement
     output_speed_limit_rad_s:
-      default: 1.0
+      default: 3.2
       units: rad/s
       status: assumed
       uncertainty: null
-      source: Imported existing design assumption; no physical measurement
+      source: 'V2 brief: NEMA 17 stepper limit, 183 deg/s at the steering output; not measured on hardware'
     pullout_speed_rad_s:
       default: 5.0
       units: rad/s
@@ -2989,3 +3001,226 @@ parameters:
       status: assumed
       uncertainty: null
       source: Simulation-only control tuning; not identified motor characteristics
+  terramechanics:
+    implemented_in: src/terramechanics_system.cpp, morph_sim/terramechanics.py
+    scope: Force-level emulation over rigid contact; soil constants come from surfaces.<name>.bekker; no geometric deformation
+    sinkage_limit_radius_fraction:
+      default: 0.5
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: Model bound - the rigid-wheel sinkage formula is not used beyond half the wheel radius
+    reload_resistance_fraction:
+      default: 0.1
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: Assumed hysteresis loss when a wheel reloads soil already compacted by a leading wheel (Wong repetitive loading); not measured
+    slip_sinkage_gain:
+      default: 0.0
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: Scale on the Lyasko slip-sinkage ratio (1+s)/(1-0.5 s). 0 (default) reports slip without slip sinkage - with gain 1 the coupled solution runs to the slip limit for the leading wheels on every soil in this table (uncalibrated wheel-soil pair)
+    slip_drag_enabled:
+      default: 0.0
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: 1 applies the slip power-loss equivalent resistance T s/(1-s); 0 (default) reports soil slip without charging it as torque
+    slip_ratio_limit:
+      default: 0.9
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: Upper bound on the Janosi-Hanamoto slip estimate
+    speed_scale_rad_s:
+      default: 0.3
+      units: rad/s
+      status: assumed
+      uncertainty: null
+      source: Wheel speed over which the resisting torque is blended in (tanh); avoids chatter at rest
+    thrust_filter_s:
+      default: 0.1
+      units: s
+      status: assumed
+      uncertainty: null
+      source: Low-pass on the wheel torque used as soil thrust demand
+    rut_point_spacing_m:
+      default: 0.02
+      units: m
+      status: assumed
+      uncertainty: null
+      source: Spacing of stored rut samples
+    rut_memory_points:
+      default: 600
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: Stored rut samples per wheel (12 m at the default spacing)
+    rut_capture_radius_m:
+      default: 0.045
+      units: m
+      status: assumed
+      uncertainty: null
+      source: A wheel is in a rut when a stored sample of another wheel lies within this planar distance (one wheel width)
+    soils:
+      firm_sand:
+        label: LETE sand
+        kc:
+          default: 102000.0
+          units: N/m^(n+1)
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        kphi:
+          default: 5301300.0
+          units: N/m^(n+2)
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        n:
+          default: 0.79
+          units: '1'
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        cohesion_Pa:
+          default: 1300.0
+          units: Pa
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        phi_rad:
+          default: 0.5428
+          units: rad
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        shear_length_m:
+          default: 0.01
+          units: m
+          status: assumed
+          uncertainty: null
+          source: 'Typical shear deformation modulus for this soil class (Wong: about 1 cm firm sand, 2.5 cm loose sand, 0.6 cm clay); assumed'
+      loose_sand:
+        label: Dry sand, Land Locomotion Lab
+        kc:
+          default: 990.0
+          units: N/m^(n+1)
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        kphi:
+          default: 1528430.0
+          units: N/m^(n+2)
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        n:
+          default: 1.1
+          units: '1'
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        cohesion_Pa:
+          default: 1040.0
+          units: Pa
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        phi_rad:
+          default: 0.4887
+          units: rad
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        shear_length_m:
+          default: 0.025
+          units: m
+          status: assumed
+          uncertainty: null
+          source: 'Typical shear deformation modulus for this soil class (Wong: about 1 cm firm sand, 2.5 cm loose sand, 0.6 cm clay); assumed'
+      soft_clay:
+        label: Clayey soil, 38 % moisture
+        kc:
+          default: 13190.0
+          units: N/m^(n+1)
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        kphi:
+          default: 692150.0
+          units: N/m^(n+2)
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        n:
+          default: 0.5
+          units: '1'
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        cohesion_Pa:
+          default: 4140.0
+          units: Pa
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        phi_rad:
+          default: 0.2269
+          units: rad
+          status: assumed
+          uncertainty: null
+          source: NASA/TM-20250006958 Table 1, which cites Wong, Theory of Ground Vehicles (2001); value checked against that table on 2026-11-13
+        shear_length_m:
+          default: 0.006
+          units: m
+          status: assumed
+          uncertainty: null
+          source: 'Typical shear deformation modulus for this soil class (Wong: about 1 cm firm sand, 2.5 cm loose sand, 0.6 cm clay); assumed'
+  motion:
+    implemented_in: morph_sim/control.py
+    scope: Command shaping; values from the V2 brief unless stated
+    jerk_limit_m_s3:
+      default: 6.0
+      units: m/s^3
+      status: assumed
+      uncertainty: null
+      source: 'V2 brief: S-curve jerk filter J_max'
+    yaw_jerk_limit_rad_s3:
+      default: 6.0
+      units: rad/s^3
+      status: assumed
+      uncertainty: null
+      source: Same numeric value as the linear limit; assumed
+    acceleration_limit_m_s2:
+      default: 1.2
+      units: m/s^2
+      status: assumed
+      uncertainty: null
+      source: Existing ramp rate; used when the surface friction is unknown
+    yaw_acceleration_limit_rad_s2:
+      default: 1.2
+      units: rad/s^2
+      status: assumed
+      uncertainty: null
+      source: Existing ramp rate
+    friction_acceleration_fraction:
+      default: 0.35
+      units: '1'
+      status: assumed
+      uncertainty: null
+      source: Acceleration limit = fraction * mu * g when the surface friction is known; assumed
+    acceleration_floor_m_s2:
+      default: 0.4
+      units: m/s^2
+      status: assumed
+      uncertainty: null
+      source: Lower bound of the friction-linked limit; assumed
+    acceleration_ceiling_m_s2:
+      default: 2.2
+      units: m/s^2
+      status: assumed
+      uncertainty: null
+      source: Torque-limited acceleration 2.67 m/s^2 less rolling resistance and margin (Phase 0 audit S7)

@@ -14,6 +14,7 @@ def main():
     if directory.exists():raise RuntimeError('Refusing to overwrite previous experiment evidence: '+str(directory))
     directory.mkdir(parents=True)
     previous=set((ws/'log').glob('run_*'));log=(directory/'launch.log').open('w')
+    os.environ.setdefault('ROS_AUTOMATIC_DISCOVERY_RANGE','LOCALHOST')
     process=subprocess.Popen(['bash','run_gazebo.sh','controls:=none','teleop:=false']+args.launch_args,stdout=log,stderr=subprocess.STDOUT,start_new_session=True,env=dict(os.environ,MORPH_SUPERVISOR_DIAGNOSTIC_FILE=str(directory/'shutdown.json')))
     try:
         deadline=time.monotonic()+120
@@ -30,6 +31,11 @@ def main():
         generated=directory/'generated';generated.mkdir(exist_ok=True)
         for file in run.iterdir():
             if file.is_file():shutil.copyfile(file,generated/file.name)
+        # Same discovery scope as transport_env.sh gives the launch: never talk to other ROS graphs on the network,
+        # and reach THIS workspace's Gazebo server (the protocol may call gz services, e.g. set_pose).
+        os.environ.setdefault('ROS_AUTOMATIC_DISCOVERY_RANGE','LOCALHOST')
+        import hashlib
+        os.environ.setdefault('GZ_PARTITION',os.environ.get('MORPH_GZ_PARTITION') or 'morph_'+hashlib.sha256(str(ws).encode()).hexdigest()[:12]);os.environ.setdefault('GZ_IP','127.0.0.1')
         env=dict(os.environ,MORPH_BENCH_OUTPUT=str(directory/'raw.json'),ROS_LOG_DIR=str(ws/'log/benchmark_ros'),MORPH_RUN_MANIFEST_FILE=str(directory/'resolved_manifest.json'))
         Path(env['ROS_LOG_DIR']).mkdir(parents=True,exist_ok=True)
         with (directory/'benchmark.log').open('w') as output:

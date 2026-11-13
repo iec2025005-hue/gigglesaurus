@@ -36,7 +36,7 @@ class InteractionRuntime(Node):
         self.scenario=self.get_parameter('scenario').value
         self.env=dict(self.p['environment']['scenarios'][self.scenario])
         self.zone='warehouse' if self.get_parameter('arena').value=='warehouse' else 'marsyard'
-        self.surface='concrete' if self.zone=='warehouse' else self.p['environment']['default_surface']
+        self.surface='concrete' if self.zone=='warehouse' else 'tarmac' if self.get_parameter('arena').value=='tetra' else self.p['environment']['default_surface']
         self.course=Course(get_package_share_directory('morph_sim')) if self.get_parameter('arena').value=='multisector' else None
         self.plant=PowerPlant(self.p,self.env['ambient_C']); self.rng=random.Random(self.p['provenance']['seed'])
         self.actuate=self.get_parameter('actuate').value
@@ -161,7 +161,7 @@ class InteractionRuntime(Node):
             if old is None and new is not None:
                 # Do not carry braking PI integral into captured-position holding.
                 self.plant.integral[i]=0.;self.plant.previous_targets[i]=target[i]
-        power=self.plant.step(dt,target,omega,enabled=ready)
+        power=self.plant.step(dt,target,omega,enabled=ready,boost=bool(self.status.get('torque_boost',False)))
         power['controlled_stop_braking']=bool(braking)
         self.last_power=power
         r=self.p['robot'];st=self.p['steering'];surface=self.p['surfaces'][self.surface]

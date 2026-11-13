@@ -1,0 +1,495 @@
+{
+ "passed": true,
+ "protocol": "autonomous_tour",
+ "policy": "fixed_compact",
+ "pose_source": "ground-truth odometry",
+ "scope": "Simulation of an assumed-parameter model; single run",
+ "mission_time_s": 249.4,
+ "distance_m": 45.45333343640956,
+ "energy_J": 4061.6399571534234,
+ "cost_of_transport": 0.910891557054561,
+ "min_stability_margin_deg": -8.082776930159374,
+ "peak_winding_C": 27.269882905989668,
+ "rms_longitudinal_slip_percent": 14.512094954665237,
+ "rms_lateral_slip_percent": 12.472719661996464,
+ "max_soil_slip_percent": 90.0,
+ "zones": [
+  {
+   "zone": "start",
+   "kind": "flat",
+   "success": true,
+   "reason": "completed",
+   "time_s": 14.500000000000004,
+   "t_start": 2.226,
+   "t_end": 16.726000000000003,
+   "x_end": 3.0056245574018714
+  },
+  {
+   "zone": "trenches",
+   "kind": "trench",
+   "success": false,
+   "reason": "stalled",
+   "time_s": 29.980000000000004,
+   "t_start": 16.746000000000002,
+   "t_end": 46.726000000000006,
+   "x_end": 7.360022884799941
+  },
+  {
+   "zone": "sand",
+   "kind": "soil",
+   "success": true,
+   "reason": "completed",
+   "time_s": 29.300000000000004,
+   "t_start": 49.726000000000006,
+   "t_end": 79.02600000000001,
+   "x_end": 14.504871120031252
+  },
+  {
+   "zone": "mud",
+   "kind": "soil",
+   "success": true,
+   "reason": "completed",
+   "time_s": 11.480000000000004,
+   "t_start": 79.046,
+   "t_end": 90.52600000000001,
+   "x_end": 17.50369018205033
+  },
+  {
+   "zone": "ramps",
+   "kind": "ramp",
+   "success": false,
+   "reason": "stalled",
+   "time_s": 29.5,
+   "t_start": 90.546,
+   "t_end": 120.046,
+   "x_end": 20.02108629680457
+  },
+  {
+   "zone": "corridor",
+   "kind": "passage",
+   "success": true,
+   "reason": "completed",
+   "time_s": 36.82000000000001,
+   "t_start": 123.046,
+   "t_end": 159.866,
+   "x_end": 31.90076444429359
+  },
+  {
+   "zone": "pinch",
+   "kind": "passage",
+   "success": true,
+   "reason": "completed",
+   "time_s": 32.059999999999974,
+   "t_start": 159.88600000000002,
+   "t_end": 191.946,
+   "x_end": 35.40343923511265
+  },
+  {
+   "zone": "rocks",
+   "kind": "rough",
+   "success": true,
+   "reason": "completed",
+   "time_s": 27.680000000000007,
+   "t_start": 191.966,
+   "t_end": 219.64600000000002,
+   "x_end": 39.50101475625119
+  },
+  {
+   "zone": "rubble",
+   "kind": "rough",
+   "success": true,
+   "reason": "completed",
+   "time_s": 29.75999999999999,
+   "t_start": 219.66600000000003,
+   "t_end": 249.42600000000002,
+   "x_end": 44.00103675955837
+  },
+  {
+   "zone": "finish",
+   "kind": "flat",
+   "success": true,
+   "reason": "completed",
+   "time_s": 2.1799999999999784,
+   "t_start": 249.44600000000003,
+   "t_end": 251.626,
+   "x_end": 45.00501022046331
+  }
+ ],
+ "zones_passed": 8,
+ "zones_total": 10,
+ "success_rate_percent": 80.0,
+ "task_success": false,
+ "teleports": [
+  {
+   "t": 46.726000000000006,
+   "x": 9.100000000000001,
+   "ok": true
+  },
+  {
+   "t": 120.046,
+   "x": 25.538672999456818,
+   "ok": true
+  }
+ ],
+ "decisions": [
+  {
+   "t": 2.226,
+   "text": "[START] -> COMPACT (237 mm); tip margin 22 deg; traction use 8 %; shape change 11.8 s, start within 0.6 m at 0.05 m/s"
+  },
+  {
+   "t": 16.746000000000002,
+   "text": "[TRENCHES 100/130/155 MM] no stance can pass: NORMAL: ; EXTENDED: ; COMPACT: clearance"
+  },
+  {
+   "t": 46.726000000000006,
+   "text": "[TRENCHES 100/130/155 MM] FAILED (stalled) at x = 7.36 m in COMPACT; repositioning past the zone"
+  },
+  {
+   "t": 49.726000000000006,
+   "text": "[SAND] -> COMPACT (237 mm); tip margin 22 deg; traction use 8 %"
+  },
+  {
+   "t": 79.046,
+   "text": "[MUD] -> COMPACT (237 mm); tip margin 22 deg; traction use 39 %"
+  },
+  {
+   "t": 90.546,
+   "text": "[RAMP 16 DEG] no stance can pass: NORMAL: slip; EXTENDED: slip; COMPACT: slip"
+  },
+  {
+   "t": 106.926,
+   "text": "[RAMP 16 deg] IMU pitch 8.3 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 106.96600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 8.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.02600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 8.8 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.066,
+   "text": "[RAMP 16 deg] IMU pitch 9.1 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.126,
+   "text": "[RAMP 16 deg] IMU pitch 9.4 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.16600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 9.8 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.22600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 10.1 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.266,
+   "text": "[RAMP 16 deg] IMU pitch 10.4 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.32600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 10.8 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.366,
+   "text": "[RAMP 16 deg] IMU pitch 11.2 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.426,
+   "text": "[RAMP 16 deg] IMU pitch 11.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.46600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 12.0 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.52600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 12.4 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.566,
+   "text": "[RAMP 16 deg] IMU pitch 12.8 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.626,
+   "text": "[RAMP 16 deg] IMU pitch 13.2 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.66600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 13.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.72600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 14.1 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.766,
+   "text": "[RAMP 16 deg] IMU pitch 14.5 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.82600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 14.9 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.866,
+   "text": "[RAMP 16 deg] IMU pitch 15.4 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.926,
+   "text": "[RAMP 16 deg] IMU pitch 15.9 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 107.96600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 16.3 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.02600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 16.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.066,
+   "text": "[RAMP 16 deg] IMU pitch 17.1 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.126,
+   "text": "[RAMP 16 deg] IMU pitch 17.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.16600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 18.1 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.22600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 18.5 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.266,
+   "text": "[RAMP 16 deg] IMU pitch 19.0 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.32600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 18.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.366,
+   "text": "[RAMP 16 deg] IMU pitch 18.8 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.426,
+   "text": "[RAMP 16 deg] IMU pitch 19.1 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.46600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.5 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.52600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.8 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.566,
+   "text": "[RAMP 16 deg] IMU pitch 19.9 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.626,
+   "text": "[RAMP 16 deg] IMU pitch 19.8 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 108.66600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 109.766,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 109.82600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 110.766,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 110.82600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 112.32600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 112.426,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 113.36600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 113.566,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 113.626,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 113.766,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 113.82600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 114.126,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 114.16600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 114.426,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 114.52600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.22600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.52600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.5 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.566,
+   "text": "[RAMP 16 deg] IMU pitch 19.4 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.626,
+   "text": "[RAMP 16 deg] IMU pitch 19.5 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.66600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.766,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.82600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 116.926,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 117.766,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 118.066,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 118.16600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 118.266,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 118.82600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 118.926,
+   "text": "[RAMP 16 deg] IMU pitch 19.5 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 118.96600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 119.02600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 119.126,
+   "text": "[RAMP 16 deg] IMU pitch 19.6 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 119.16600000000001,
+   "text": "[RAMP 16 deg] IMU pitch 19.7 deg > 8 deg -> front -15 mm / rear +15 mm, torque boost on; COMPACT keeps 14 N on the front axle"
+  },
+  {
+   "t": 120.046,
+   "text": "[RAMP 16 DEG] FAILED (stalled) at x = 20.02 m in COMPACT; repositioning past the zone"
+  },
+  {
+   "t": 123.046,
+   "text": "[CORRIDOR 620 MM] -> COMPACT (237 mm); tip margin 22 deg; traction use 8 %; tyres 586 mm fit 620 mm kerbs with 17 mm per side; shape change 2.4 s, start within 0.2 m at 0.06 m/s"
+  },
+  {
+   "t": 159.88600000000002,
+   "text": "[PINCH 380 MM] -> COMPACT (237 mm); tip margin 22 deg; traction use 8 %; COMPACT is 330 mm long: fits sideways with 25 mm per side; rejected NORMAL (clearance), EXTENDED (clearance)"
+  },
+  {
+   "t": 160.04600000000002,
+   "text": "[PINCH ZONE 380mm] body 701 mm > gap 380 mm -> COMPACT is 330 mm long: yawing 90 deg for a sideways crab-walk with 25 mm per side"
+  },
+  {
+   "t": 191.966,
+   "text": "[ROCKS] -> COMPACT (237 mm); tip margin 22 deg; traction use 8 %"
+  },
+  {
+   "t": 219.66600000000003,
+   "text": "[RUBBLE] -> COMPACT (237 mm); tip margin 22 deg; traction use 8 %"
+  },
+  {
+   "t": 249.44600000000003,
+   "text": "[FINISH] -> COMPACT (237 mm); tip margin 22 deg; traction use 8 %"
+  }
+ ],
+ "columns": [
+  "t",
+  "x",
+  "y",
+  "yaw",
+  "speed",
+  "wheelbase_m",
+  "pitch_deg",
+  "roll_deg",
+  "stability_margin_deg",
+  "winding_max_C",
+  "battery_V",
+  "battery_A",
+  "torque_max_Nm",
+  "slip_long",
+  "slip_lat",
+  "soil_slip_max",
+  "soil_resistance_N",
+  "leg",
+  "phase",
+  "shape",
+  "cost_total",
+  "cost_stability",
+  "cost_thermal",
+  "cost_slip",
+  "cost_clearance",
+  "cost_time",
+  "camera_class",
+  "camera_boundary_m",
+  "lidar_slope_deg"
+ ]
+}

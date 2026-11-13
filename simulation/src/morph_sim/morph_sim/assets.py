@@ -22,7 +22,7 @@ def add_surface(collision, mu):
   if node is None:node=child(ode,key)
   node.text=str(mu)
 
-def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True, camera_enabled=False):
+def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True, camera_enabled=False, chase_cameras=False):
  model=root.find('model')
  if model is None:raise ValueError('gz sdf conversion returned no model')
  links={link.attrib['name']:link for link in model.findall('link')}
@@ -46,7 +46,8 @@ def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True
    tex='rubber' if rubber or 'coil' in vname else 'encoder' if 'encoder' in vname else 'gold' if 'damper' in vname else 'chrome' if 'piston' in vname else 'cyan' if 'hexarm' in name else 'metal'
    material.find('ambient').text='1 1 1 1'
    material.find('diffuse').text='1 1 1 1'
-   child(metal,'albedo_map',(share/'models/materials/textures'/f'finish_{tex}.png').as_uri())
+   # Plain absolute path: as_uri() percent-encodes spaces and the renderer does not decode texture URIs.
+   child(metal,'albedo_map',str(share/'models/materials/textures'/f'finish_{tex}.png'))
 
    child(metal,'metalness',0.0 if rubber or 'encoder' in vname else .75)
    child(metal,'roughness',.86 if rubber else .22 if 'piston' in vname else .42)
@@ -74,6 +75,14 @@ def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True
   image=child(optics,'image');child(image,'width',camera_width);child(image,'height',int(camera_width*9/16));child(image,'format','R8G8B8')
   clip=child(optics,'clip');child(clip,'near',0.05);child(clip,'far',25)
   child(optics,'camera_info_topic','/morph/camera/camera_info')
+ if chase_cameras:
+  # Body-mounted external views for the conference video. The update rate is in SIM time, so the frame count is
+  # deterministic whatever the real-time factor. chase_cameras is the rate in Hz (True means 30).
+  rate=30. if chase_cameras is True else float(chase_cameras)
+  for name,pose in (('chase','-1.55 -1.05 0.85 0 0.36 0.62'),('side','0.15 -1.75 0.25 0 0.06 1.5708'),('top','-0.35 0 2.6 0 1.44 0')):
+   view=child(base,'sensor',name=name+'_camera',type='camera');child(view,'pose',pose);child(view,'topic','/morph/video/'+name);child(view,'always_on','true');child(view,'update_rate',rate)
+   optics=child(view,'camera');child(optics,'horizontal_fov',1.25);image=child(optics,'image');child(image,'width',960);child(image,'height',880);child(image,'format','R8G8B8')
+   clip=child(optics,'clip');child(clip,'near',0.05);child(clip,'far',60)
  if range_sensor:
   lidar=child(base,'sensor',name='terrain_lidar',type='gpu_lidar');child(lidar,'pose','0.22 0 0.12 0 0 0');child(lidar,'topic','/morph/range');child(lidar,'gz_frame_id','perception_link');child(lidar,'always_on','true');child(lidar,'update_rate',10)
   ray=child(lidar,'lidar');scan=child(ray,'scan')
@@ -101,13 +110,19 @@ def enrich_sdf(root, share, camera_rate=10., camera_width=480, range_sensor=True
    node.text=(share/node.text[len('package://morph_sim/'):]).as_uri()
  return root
 
+# Telescope stage force limit [N]. 'backdrivable' is the original assumption; 'reinforced' is the V2 brief value and the
+# default; 'self_locking' models a lead-screw rail (assumed, not measured). The 6 mm/s stage speed limit is the same for all.
+STAGE_EFFORT_N={'backdrivable':8.,'reinforced':25.,'self_locking':60.}
+
 def resolve_position_backend(physics_profile,requested='auto'):
  if requested=='auto':return 'trajectory' if physics_profile else 'forward'
  if requested not in ('trajectory','forward') or (requested=='trajectory' and not physics_profile):raise ValueError('Position backend conflicts with physics profile')
  return requested
 
 
-def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, camera_rate=10., camera_width=480, range_sensor=True, trace_native=False, camera_enabled=False, position_backend='forward'):
+def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, camera_rate=10., camera_width=480, range_sensor=True, trace_native=False, camera_enabled=False, position_backend='forward', chassis='trimmed', soil_zones=None, stage_hold='reinforced', chase_cameras=False):
+ if chassis not in ('trimmed','cad'):raise ValueError('chassis must be trimmed or cad')
+ if stage_hold not in STAGE_EFFORT_N:raise ValueError('stage_hold must be one of '+', '.join(STAGE_EFFORT_N))
  if position_backend not in ('forward','trajectory'):raise ValueError('Unknown position backend')
  if position_backend=='trajectory' and not physics_profile:raise ValueError('Trajectory backend currently requires physics_profile true')
  share=Path(share).resolve();out_dir=Path(out_dir);out_dir.mkdir(parents=True,exist_ok=True)
@@ -124,7 +139,7 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
   if not isinstance(value,(int,float)) or not math.isfinite(value) or value<0:
    raise ValueError('Invalid suspension parameter: '+key)
  (out_dir/'params.yaml').write_text(yaml.safe_dump(params,sort_keys=False))
- doc=xacro.process_file(str(share/'urdf/morph.urdf.xacro'),mappings={'controllers_file':str(share/'config/controllers.yaml'),'wheel_radius':str(wheel_radius),'wheel_width':str(params['robot']['wheel_width_m'])})
+ doc=xacro.process_file(str(share/'urdf/morph.urdf.xacro'),mappings={'controllers_file':str(share/'config/controllers.yaml'),'wheel_radius':str(wheel_radius),'wheel_width':str(params['robot']['wheel_width_m']),'chassis':chassis,'stage_effort':str(STAGE_EFFORT_N[stage_hold])})
  tree=ET.fromstring(doc.toxml())
  plugin=tree.find("./gazebo/plugin[@name='morph_sim::SuspensionSystem']")
  if plugin is None:raise ValueError('Missing suspension plugin')
@@ -137,7 +152,7 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
   limit=joint.find('limit')
   name=joint.get('name','')
   if limit is not None and name.endswith('_wheel_joint'):
-   limit.set('effort',str(params['drive']['output_torque_limit_Nm']))
+   limit.set('effort',str(params['drive']['output_torque_limit_Nm']*(1+params['drive'].get('peak_boost_fraction',0.))))
   if limit is not None and name.endswith('_steer_joint'):
    limit.set('effort',str(params['steering']['output_torque_limit_Nm']));limit.set('velocity',str(params['steering']['output_speed_limit_rad_s']))
   if limit is not None and name.endswith('_spring_joint'):
@@ -177,7 +192,7 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
  model=root.find('model')
  if model is None or not any('gz_ros2_control' in (p.attrib.get('filename','')+' '+p.attrib.get('name','')) for p in model.findall('plugin')):
   raise RuntimeError('gz_ros2_control plugin was lost during URDF to SDF conversion; robot would spawn but not move')
- root=enrich_sdf(root,share,camera_rate,camera_width,range_sensor,camera_enabled)
+ root=enrich_sdf(root,share,camera_rate,camera_width,range_sensor,camera_enabled,chase_cameras)
  if physics_profile:
   watchdog=child(root.find('model'),'plugin',filename='libmorph_watchdog.so',name='morph_sim::DriveWatchdog')
   child(watchdog,'capture_speed',params['control_safety']['hold_capture_speed_rad_s'])
@@ -197,8 +212,18 @@ def prepare_robot(share, out_dir, wheel_radius=None, physics_profile=False, came
    child(axis,'mass',robot_tree.find("link[@name='"+name+"_height']/inertial/mass").get('value'))
    for tag,attribute in [('lower','lower'),('upper','upper'),('force_limit','effort'),('speed_limit','velocity')]:child(axis,tag,limit.get(attribute))
    child(axis,'damping',dynamics.get('damping'));child(axis,'friction',dynamics.get('friction'))
+ if soil_zones:
+  # Last plugin in the model: it reads the suspension and wheel force commands written earlier in the same PreUpdate.
+  terra=params['terramechanics'];soil_plugin=child(root.find('model'),'plugin',filename='libmorph_terramechanics.so',name='morph_sim::MorphTerramechanics')
+  child(soil_plugin,'wheel_radius',wheel_radius);child(soil_plugin,'wheel_width',params['robot']['wheel_width_m']);child(soil_plugin,'unsprung_weight',params['robot']['unsprung_mass_per_module_kg']*9.81)
+  for tag,key in [('speed_scale','speed_scale_rad_s'),('thrust_filter','thrust_filter_s'),('rut_point_spacing','rut_point_spacing_m'),('rut_capture_radius','rut_capture_radius_m'),('rut_memory_points','rut_memory_points'),('sinkage_limit_radius_fraction','sinkage_limit_radius_fraction'),('reload_resistance_fraction','reload_resistance_fraction'),('slip_sinkage_gain','slip_sinkage_gain'),('slip_drag_enabled','slip_drag_enabled'),('slip_ratio_limit','slip_ratio_limit')]:child(soil_plugin,tag,terra[key])
+  for name in ('fl','fr','rl','rr'):child(soil_plugin,'wheel',name)
+  for zone in soil_zones:
+   soil=terra['soils'][zone['soil']];element=child(soil_plugin,'zone');child(element,'name',zone['id']);child(element,'soil',zone['soil'])
+   for tag,value in zip(('xmin','xmax','ymin','ymax'),zone['bounds']):child(element,tag,value)
+   for tag,key in [('kc','kc'),('kphi','kphi'),('n','n'),('cohesion','cohesion_Pa'),('phi','phi_rad'),('shear_length','shear_length_m')]:child(element,tag,soil[key])
  ET.indent(root);sdf_file=out_dir/'morph.sdf';ET.ElementTree(root).write(sdf_file,encoding='utf-8',xml_declaration=True)
- manifest={'schema_version':1,'parameter_status':'assumed','parameters':params,'metadata':metadata,'overrides':{'robot.wheel_radius_m':wheel_radius},'python_version':platform.python_version(),'ros_distro':os.environ.get('ROS_DISTRO'),'hashes':{}}
+ manifest={'schema_version':1,'parameter_status':'assumed','parameters':params,'metadata':metadata,'overrides':{'robot.wheel_radius_m':wheel_radius},'chassis':chassis,'stage_hold':stage_hold,'stage_effort_N':STAGE_EFFORT_N[stage_hold],'soil_zones':soil_zones or [],'python_version':platform.python_version(),'ros_distro':os.environ.get('ROS_DISTRO'),'hashes':{}}
  for file in [share/'config/parameter_schema.yaml',share/'config/params.yaml',share/'urdf/morph.urdf.xacro',share/'urdf/leg.xacro',urdf_file,sdf_file,out_dir/'params.yaml']:
   manifest['hashes'][str(file)]=hashlib.sha256(file.read_bytes()).hexdigest()
  (out_dir/'resolved_manifest.json').write_text(json.dumps(manifest,indent=2))

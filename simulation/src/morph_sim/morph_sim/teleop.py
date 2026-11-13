@@ -5,7 +5,7 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
-EVENTS={pygame.K_1:'track',pygame.K_2:'rocky',pygame.K_3:'climb',pygame.K_4:'sand',pygame.K_x:'compact',pygame.K_n:'normal',pygame.K_e:'expand',pygame.K_PAGEUP:'raise',pygame.K_PAGEDOWN:'lower',pygame.K_TAB:'flip',pygame.K_SPACE:'estop',pygame.K_r:'reset',pygame.K_t:'auto'}
+EVENTS={pygame.K_1:'track',pygame.K_2:'rocky',pygame.K_3:'climb',pygame.K_4:'sand',pygame.K_x:'compact',pygame.K_n:'normal',pygame.K_z:'expand',pygame.K_PAGEUP:'raise',pygame.K_PAGEDOWN:'lower',pygame.K_TAB:'flip',pygame.K_SPACE:'estop',pygame.K_r:'reset',pygame.K_t:'auto'}
 def main():
  rclpy.init();node=Node('morph_teleop');pub=node.create_publisher(Twist,'/cmd_vel',10);ev=node.create_publisher(String,'/morph/event',10);status={}
  def on_status(m):
@@ -24,7 +24,7 @@ def main():
      elif event.key in EVENTS:ev.publish(String(data=EVENTS[event.key]))
    keys=pygame.key.get_pressed();msg=Twist();focused=pygame.key.get_focused()
    if focused:
-    forward=int(keys[pygame.K_w] or keys[pygame.K_UP])-int(keys[pygame.K_s] or keys[pygame.K_DOWN]);turn=int(keys[pygame.K_a] or keys[pygame.K_LEFT])-int(keys[pygame.K_d] or keys[pygame.K_RIGHT]);strafe=int(keys[pygame.K_q])-int(keys[pygame.K_c]);scale=.3 if keys[pygame.K_LSHIFT] else .65
+    forward=int(keys[pygame.K_w] or keys[pygame.K_UP])-int(keys[pygame.K_s] or keys[pygame.K_DOWN]);turn=int(keys[pygame.K_q] or keys[pygame.K_LEFT])-int(keys[pygame.K_e] or keys[pygame.K_RIGHT]);strafe=int(keys[pygame.K_a])-int(keys[pygame.K_d]);scale=.3 if keys[pygame.K_LSHIFT] else .65
     if not keys[pygame.K_b]:msg.linear.x=scale*forward;msg.linear.y=scale*strafe;msg.angular.z=.7*turn
    pub.publish(msg);screen.fill((10,20,31));screen.blit(title.render('MORPH / TERRAIN CONSOLE',True,(49,220,224)),(28,24))
    lines=[f"MODE {status.get('mode','waiting')}    ESTOP {status.get('estop',False)}    AUTO {status.get('auto',False)}",f"Speed cmd {status.get('command_speed',0.):.2f} m/s | actual {status.get('actual_speed')} | feedback {status.get('feedback_ready',False)}",f"Steering deg {str([round(x,1) for x in status.get('steering_degrees',[])])}",f"Stage offset {1000*status.get('stage_offset',0.):.1f} mm | target {1000*status.get('target_stage_offset',0.):.1f} mm",f"Roll {status.get('roll_deg',0.):.1f} deg | Pitch {status.get('pitch_deg',0.):.1f} deg",'WASD / arrows drive + turn | Q/C strafe | SHIFT slow | B brake','1 track  2 rocky  3 climb  4 sand | T tilt-assist heuristic','X compact  N normal  E expand | PgUp/PgDn ride height','TAB stopped 180-degree sweep | SPACE latch stop | R reset','Release keys to brake. Focus loss sends zero. ESC quits.']

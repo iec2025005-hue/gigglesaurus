@@ -61,7 +61,7 @@ def main():
                             record('shutdown_requested')
                             if os.environ.get('MORPH_SUPERVISED_GZ')=='1' and shutil.which('gz'):
                                 try:
-                                    world='morph_arena' if 'arena:=competition' in sys.argv else 'leo_marsyard'
+                                    world='morph_arena' if 'arena:=competition' in sys.argv else 'morph_tetra' if 'arena:=tetra' in sys.argv else 'leo_marsyard'
                                     subprocess.run(['gz','service','-s','/world/'+world+'/control','--reqtype','gz.msgs.WorldControl','--reptype','gz.msgs.Boolean','--timeout','2000','--req','pause: true'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=3)
                                     record('pause_service_complete')
                                     time.sleep(.15)  # Drain sensor deliveries before transport teardown.
