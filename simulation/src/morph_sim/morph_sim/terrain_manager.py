@@ -168,7 +168,7 @@ class TerrainManager(Node):
     if speed>cap:
      command[0]*=cap/speed;command[1]*=cap/speed
    else:command=[0.,0.,0.]
-  out=self.core.step(dt,command,feedback,self.hit,now-self.imu_time<.3);self.hit=False
+  out=self.core.step(dt,command,feedback,self.hit,now-self.imu_time<.3,self.joint_velocities if feedback else None);self.hit=False
   if out.status['feedback_ready']:
    for i in range(4):self.height_cmd[i]=approach(self.height_cmd[i],out.heights[i],.01*dt)
   commands=dict(drive=out.wheels,steering=out.steering,height=self.height_cmd,shape=out.shape)
@@ -227,7 +227,9 @@ class TerrainManager(Node):
   out.status['perception_auto']=self.perception_enabled
   out.status['perception']=dict(self.perception,fresh=now-self.perception_time<.5)
   if self.perception_enabled and now-self.perception_time>=.5:out.status['perception']['reason']='range decision stale; auto drive held'
-  if now-self.last_status>=.05:
+  # 20 Hz: the bound sits just below 5 timer periods (>= .05 rounded up to 6 periods, 16.7 Hz).
+  out.status['sim_time_s']=now
+  if now-self.last_status>=.0495:
    self.last_status=now;self.status.publish(String(data=json.dumps(out.status)))
 
 def main():
