@@ -69,7 +69,8 @@ because another ROS system shares this network.
   the corner-height actuators nor the boost. An ablation that isolates the boost or the suspension is not run.
 - Soil constants k_c, k_φ, n, c, φ match NASA/TM-20250006958 Table 1 (citing Wong 2001); the shear moduli are
   assumed. Slip-sinkage is implemented but off.
-- The MP4 is not committed (`videos/*.mp4` is ignored); its metadata JSON is.
+- The recorded video has one cosmetic flaw: in the wheelbase chart the "672" reference label sits under the chart
+  title. The recorder is fixed; the committed file was not re-recorded.
 
 ## 5. Evidence index
 
